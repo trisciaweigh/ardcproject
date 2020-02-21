@@ -1,0 +1,176 @@
+*{
+    font-family: 'Overpass', sans-serif;
+    
+}
+#headerCompanyName{
+    display: flex;
+    justify-content:  center
+}
+
+#logo{
+    width: 60%
+}
+
+#bodyDetailsDiv{
+    padding: 1% 1% 1% 1%;
+    height: auto;
+}
+
+#employeeTable{
+    table-layout: fixed;
+    width: 100%;
+}
+
+#tableEmployeeDiv{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+td{
+    word-wrap: break-word;
+}
+
+#addEmployeeButton{
+    float: right;
+    margin: 0 0 2% 0;
+    background-color: #32CD32;
+    border-color: #32CD32;
+    color: white;
+    border-radius: 4px;
+    padding: .7% 2% .7% 2%;
+}
+
+.modal-header{
+    display:block
+}
+
+h3{
+    display: inline-block
+}
+.tab-content{
+    padding: 3rem 2rem;
+}
+
+.detailInfo{
+    letter-spacing: 1px;
+    font-size: 16px;
+    margin: 1.5% 0 1.5% 0;  
+    padding: 0% 1% 0% 1%;
+    outline: none;    
+    background-color: transparent;
+    border: none;
+}
+
+.detailInfo.active{
+    border: 1px solid dimgray;
+}
+
+.addEmpClass{
+    border: none;
+}
+.start,.addEmpClass{
+    border-bottom: 2px solid dimgray;
+}
+
+
+.error{
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+#btnCancel,#btnSave{
+    display: none;
+    float: right;
+    margin: 0 1rem;
+    
+}
+
+input.RecInput[type=text],input.RecInput[type=date]{
+    width: 100%
+}
+
+input.addEmpClass[type=text],input.addEmpClass[type=date],input.RecInput[type=text],input.RecInput[type=date]{
+    width: 70%
+}
+
+#btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,.submitAdd,#addEmployeeButton{
+    float: right;
+    border-style: hidden;
+    background-color: #cc3333;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    outline: none;
+    padding: 1% 2% 1% 2%;
+    cursor: pointer;
+
+}
+
+#viewEmpBtn, #delEmpBtn, #editRecBtn,#delRecBtn{
+    border-style: hidden;
+    background-color: #cc3333;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    outline: none;
+    padding: 1% 2% 1% 2%;
+    cursor: pointer;
+    margin-right: 1rem;
+    text-decoration: none
+
+}
+
+#btnSave:hover,#btnEdit:hover,#addRecordButton:hover,.submitAdd:hover,#addEmployeeButton:hover,#viewEmpBtn:hover,#editRecBtn:hover{
+    background-color:#c90202;
+}
+
+#btnCancel,#backBtn,#delEmpBtn,#delRecBtn{
+    background-color: darkgray;
+}
+#btnCancel:hover,#delEmpBtn:hover,#delRecBtn:hover,#backBtn:hover{
+    background-color: dimgrey;
+}
+
+#backBtn{
+    float: right;
+    padding: 1% 1.5%;
+    border-radius: 0;
+}
+
+#addRecordDiv{
+    display: grid;
+}
+
+.addRecInput{
+    display: inline-block;
+    width: 60%;
+}
+
+.addEmpInput{
+    display: inline-block;
+    width: 60%;
+    padding-left: 10%
+}
+
+.lblInputRec{
+    display: inline-block;
+    width: 30%;
+    padding: 1%
+}
+
+.lblInputEmp{
+    display: inline-block;
+    width: 30%;
+    padding: 1% 1% 1% 5%
+}
+
+.submitAdd{
+    margin-right: 3%
+}
+
+#addEmployeeDiv{
+    padding: 2rem 10rem;
+}
