@@ -2,14 +2,14 @@
 
 include 'connect.php';
 
-$empno = $_REQUEST["i"];
+$empno = $_POST["e"];
 
 $select = "SELECT * FROM employeeinfo WHERE `emp_no` = '$empno'";
 $result = mysqli_query($con,$select);
 
 if(mysqli_num_rows($result)>0)
 {
-    echo 'existing';
+    echo 'e';
 
 }
 

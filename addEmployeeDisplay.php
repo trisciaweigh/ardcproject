@@ -28,7 +28,7 @@ include 'connect.php';
                 <label>Employee No.</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off>
+                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off">
                  <span class="error" id="empError">Employee no. already exist!</span>
             </div> 
             
@@ -295,16 +295,17 @@ include 'connect.php';
                         e:e,
                     },
                     function (data) {
-                        if(data === "existing"){
+                        if(data === "e"){
+                            
                             $("#empno").css("border-bottom", "2px solid red");
+                            
+                            document.getElementById("empError").style.display = "inline-block";
                             validEmail = false;
                         }
                         else{
-                            alert("ala");
-                            $("#empno").css("border-bottom", "2px solid #00ff00");
+                            $("#empno").css("border-bottom", "3px solid #00ff00");
                             validEmail = true;
                         }
-
                                         
                     });
 
