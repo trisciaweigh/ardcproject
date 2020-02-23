@@ -94,6 +94,11 @@ input.addEmpClass[type=text],input.addEmpClass[type=date],input.RecInput[type=te
     width: 70%
 }
 
+input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
+    width: 80%;
+    margin-left: 10rem;
+}
+
 #btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,.submitAdd,#addEmployeeButton{
     float: right;
     border-style: hidden;
@@ -167,10 +172,26 @@ input.addEmpClass[type=text],input.addEmpClass[type=date],input.RecInput[type=te
     padding: 1% 1% 1% 5%
 }
 
+.addEmp{
+    font-size: 16px;
+}
+
+.addEmpIndent{
+    text-indent: 2rem;
+    font-size: 16px;
+}
+
 .submitAdd{
     margin-right: 3%
 }
 
 #addEmployeeDiv{
-    padding: 2rem 10rem;
+    padding: 2rem 0 2rem 10rem;
+}
+
+.custom-radio{
+    display: inline-block;
+    font-size: 16px;
+    
+    margin-left: 12rem;
 }
