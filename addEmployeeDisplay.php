@@ -12,7 +12,8 @@ include 'connect.php';
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">     
+    <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
     <title>ARDC Add Employee</title>
 </head>
 <body>
@@ -25,18 +26,19 @@ include 'connect.php';
         <form method="post"  enctype="multipart/form-data" onsubmit="addEmployeeSubmit(event)" id="addEmpForm">
             
             <div class="lblInputEmp addEmp">
-                <label>Employee No.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Employee No.</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off">
-                 <span class="error" id="empError">Employee no. already exist!</span>
+                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off" required> 
+                 <span class="errorAddEmp" id="empError">Employee no. already exist!</span>
             </div> 
             
             <div class="lblInputEmp addEmp">
-                <label>First name</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> First name</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="fname" id="fnameAdd" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="fname" id="fname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" required>
+                 <span class="errorAddEmp" id="fnameError">Letters and white spaces only are allowed.</span>
             </div>             
             
             <div class="lblInputEmp addEmp">
@@ -44,13 +46,15 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="mname" id="mname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="mnameError">Letters and white spaces only are allowed.</span>
             </div> 
             
             <div class="lblInputEmp addEmp">
-                <label>Last name</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Last name</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="lname" id="lname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="lname" id="lname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" required>
+                 <span class="errorAddEmp" id="lnameError">Letters and white spaces only are allowed.</span>
             </div>
             
             <div class="lblInputEmp addEmp">
@@ -86,6 +90,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="civStatus" id="civStatus" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="civStatusError">Letters and white spaces only are allowed.</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
@@ -93,6 +98,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="nationality" id="nationality" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="nationalityError">Letters and white spaces only are allowed.</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
@@ -100,6 +106,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="religion" id="religion" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="religionError">Letters and white spaces only are allowed.</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
@@ -107,20 +114,59 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="placeOfBirth" id="placeOfBirth" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="placeOfBirthError">Letters and white spaces only are allowed.</span>
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Home Address</label>
             </div> 
              <div class="addEmpInput">
+                <select id="selectProvHome" name="selectProvHome" class="custom-select dark-grey-text">
+                    <option disabled selected>Select Province </option>
+                    <?php
+                        $provCode = "";
+                        $select = mysqli_query($con,"SELECT * FROM `refprovince` ");
+                        while($row = mysqli_fetch_array($select))  
+                        {  
+                            $provCode=$row["provCode"];
+                            echo "<option value='".$provCode."'>".$row["provDesc"]."</option>";
+                        }
+                    ?>
+                </select>
+                <select id="selectCMHome" name="selectCMHome" class="custom-select dark-grey-text">
+                    <option disabled selected>Select City/Municipality </option>
+                </select>
+                <select id="selectBrgyHome" name="selectBrgyHome" class="custom-select dark-grey-text">
+                    <option disabled selected>Select Barangay </option>
+                </select>
+                <input type="text" name="detailedAddHome" id="detailedAddHome" class="addEmpClass addEmpIndent" placeholder="Detailed Address" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Permanent Address</label>
             </div> 
             <div class="addEmpInput">
+                <select id="selectProvPerm" name="selectProvPerm" class="custom-select dark-grey-text">
+                    <option disabled selected>Select Province </option>
+                    <?php
+                        $provCode = "";
+                        $select = mysqli_query($con,"SELECT * FROM `refprovince` ");
+                        while($row = mysqli_fetch_array($select))  
+                        {  
+                            $provCode=$row["provCode"];
+                            echo "<option value='".$provCode."'>".$row["provDesc"]."</option>";
+                        }
+                    ?>
+                </select>
+                <select id="selectCMPerm" name="selectCMPerm" class="custom-select dark-grey-text">
+                    <option disabled selected>Select City/Municipality </option>
+                </select>
+                <select id="selectBrgyPerm" name="selectBrgyPerm" class="custom-select dark-grey-text">
+                    <option disabled selected>Select Barangay </option>
+                </select>
+                <input type="text" name="detailedAddPerm" id="detailedAddPerm" class="addEmpClass addEmpIndent" placeholder="Detailed Address" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Mobile number</label>
             </div> 
@@ -148,7 +194,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="educ" id="educ" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Father's Name</label>
             </div> 
@@ -176,7 +222,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="date" name="spouseBday" id="spouseBday" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Height</label>
             </div> 
@@ -197,7 +243,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="blood" id="blood" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>SSS no.</label>
             </div> 
@@ -232,7 +278,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="atm" id="atm" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
-
+            <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Deployed</label>
             </div> 
@@ -275,42 +321,248 @@ include 'connect.php';
     </div>
 
     <script>        
-            $(document).ready(function(){
-                var validEmail = false;
 
+        function isString(name) {
+            var regex = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/;
+            if (!regex.test(name)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
 
+        
+        var validEmpNo = false;
+        var validFName = false;
+        var validMname = false;
+        var validLname = false;
+        var validcivStatus = false;
+        var validNationality = false;
+        var validReligion = false;
+        var validPlaceOfBirth = false;
 
+        $(document).ready(function(){
+            
 
-                // $("input").focus(function(){
-                //     $(this).css("border-bottom", "3px solid #0762f5");
-                // });
-                // $("input").blur(function(){
-                //     $(this).css("border-bottom", "2px solid dimgray");
-                // });
+            var p="";
+            $("#selectProvHome").on("change",function(){
+                p = $(this).val();     
+                $.post("toDisplayCityMunicipality.php", {   
+                    p:p,
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectCMHome');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectCMHome').children('option:not(:first)').remove();  
 
-                $("#empno").on("change",function(){
-                    var e = $(this).val();
-                    
-                    $.post("toValidateEmployeeNo.php", {   
-                        e:e,
-                    },
-                    function (data) {
-                        if(data === "e"){
-                            
-                            $("#empno").css("border-bottom", "2px solid red");
-                            
-                            document.getElementById("empError").style.display = "inline-block";
-                            validEmail = false;
-                        }
-                        else{
-                            $("#empno").css("border-bottom", "3px solid #00ff00");
-                            validEmail = true;
-                        }
-                                        
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
                     });
+                    select.val(selectedOption);    
+                        
+                });
+            })
 
-                })
+            $("#selectCMHome").on("change",function(){
+                var cm = $(this).val(); 
+                $.post("toDisplayBarangay.php", {   
+                    p:p,
+                    cm:cm
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectBrgyHome');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectBrgyHome').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                });
+            })
+
+            var p="";
+            $("#selectProvPerm").on("change",function(){
+                p = $(this).val();     
+                $.post("toDisplayCityMunicipality.php", {   
+                    p:p,
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectCMPerm');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectCMPerm').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                        
+                });
+            })
+
+            $("#selectCMPerm").on("change",function(){
+                var cm = $(this).val(); 
+                $.post("toDisplayBarangay.php", {   
+                    p:p,
+                    cm:cm
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectBrgyPerm');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectBrgyPerm').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                });
+            })
+
+
+
+
+
+            $("input").focus(function(){
+                $(this).css("border-bottom", "3px solid #0762f5");
             });
+            $("input").blur(function(){
+                $(this).css("border-bottom", "2px solid dimgray");
+            });
+
+            $("#empno").on("change",function(){
+                var e = $(this).val();                    
+                $.post("toValidateEmployeeNo.php", {   
+                    e:e,
+                },
+                function (data) {
+                    if(data === "e"){                            
+                        $("#empno").css("border-bottom", "2px solid red");                            
+                        document.getElementById("empError").style.display = "inline-block";
+                        validEmpNo = false;
+                    }
+                    else{
+                        if (e.length >25){
+                            $("#empno").css("border-bottom", "2px solid red");                            
+                            document.getElementById("empError").style.display = "inline-block";
+                            document.getElementById("empError").innerHTML = "Length maximum number is 25."
+                            validEmpNo = false;
+                        }else{
+                            $("#empno").css("border-bottom", "3px solid #0ea300");                                       
+                            document.getElementById("empError").style.display = "none";
+                            validEmpNo = true;
+                        }
+                    }                                        
+                });
+            });
+
+            $("#fname").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#fname").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("fnameError").style.display = "none";
+                    validFName = true;
+                }else{
+                    $("#fname").css("border-bottom", "2px solid red");                            
+                    document.getElementById("fnameError").style.display = "inline-block";
+                    validFName = false;
+                }
+            });
+
+            $("#mname").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#mname").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("mnameError").style.display = "none";
+                    validMname = true;
+                }else{
+                    $("#mname").css("border-bottom", "2px solid red");                            
+                    document.getElementById("mnameError").style.display = "inline-block";
+                    validMname = false;
+                }
+            });
+
+            $("#lname").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#lname").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("lnameError").style.display = "none";
+                    validLname = true;
+                }else{
+                    $("#lname").css("border-bottom", "2px solid red");                            
+                    document.getElementById("lnameError").style.display = "inline-block";
+                    validLname = false;
+                }
+            });
+
+            $("#civStatus").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#civStatus").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("civStatusError").style.display = "none";
+                    validcivStatus = true;
+                }else{
+                    $("#civStatus").css("border-bottom", "2px solid red");                            
+                    document.getElementById("civStatusError").style.display = "inline-block";
+                    validcivStatus = false;
+                }
+            });
+
+            $("#nationality").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#nationality").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("nationalityError").style.display = "none";
+                    validNationality = true;
+                }else{
+                    $("#nationality").css("border-bottom", "2px solid red");                            
+                    document.getElementById("nationalityError").style.display = "inline-block";
+                    validNationality = false;
+                }
+            });
+            
+            $("#religion").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#religion").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("religionError").style.display = "none";
+                    validReligion = true;
+                }else{
+                    $("#religion").css("border-bottom", "2px solid red");                            
+                    document.getElementById("religionError").style.display = "inline-block";
+                    validReligion = false;
+                }
+            });
+            
+            $("#placeOfBirth").on("change",function(){
+                if(isString($(this).val()) == true){       
+                    $("#placeOfBirth").css("border-bottom", "3px solid #0ea300");                                       
+                    document.getElementById("placeOfBirthError").style.display = "none";
+                    validPlaceOfBirth = true;
+                }else{
+                    $("#placeOfBirth").css("border-bottom", "2px solid red");                            
+                    document.getElementById("placeOfBirthError").style.display = "inline-block";
+                    validPlaceOfBirth = false;
+                }
+            });
+        });
      
     </script>
     

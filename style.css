@@ -79,6 +79,14 @@ h3{
     display: none;
 }
 
+.errorAddEmp {
+    font-size: 12px;
+    color: red;
+    display: none;
+    float: right;
+    margin-right: 4%;
+}
+
 #btnCancel,#btnSave{
     display: none;
     float: right;
@@ -97,6 +105,12 @@ input.addEmpClass[type=text],input.addEmpClass[type=date],input.RecInput[type=te
 input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
     width: 80%;
     margin-left: 10rem;
+}
+
+.custom-select{
+    width: 80%;
+    font-size: 16px;
+    margin: 1% 16%;
 }
 
 #btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,.submitAdd,#addEmployeeButton{
@@ -174,6 +188,7 @@ input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
 
 .addEmp{
     font-size: 16px;
+    margin: 1% 0;
 }
 
 .addEmpIndent{
@@ -194,4 +209,14 @@ input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
     font-size: 16px;
     
     margin-left: 12rem;
+}
+
+#line1{
+    border-top: 1px solid #040404;
+    margin-right: 10rem;
+}
+
+#faAsterisk{
+    font-size: 12px;
+    color: red;
 }
