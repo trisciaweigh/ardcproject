@@ -6,7 +6,7 @@ $empno = $_GET["id"];
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="style.css" />
@@ -14,7 +14,7 @@ $empno = $_GET["id"];
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
-    
+
     <title>EMPLOYEE'S Details</title>
 </head>
     <body>
@@ -36,70 +36,473 @@ $empno = $_GET["id"];
 <!--                EMPLOYEE'S INFORMATION TAB-->
                 <div id="empInfo" class="tab-pane fade in active">
                     <?php
-                        $fname = "";
-                        $mname = "";
-                        $lname = "";
-                        $bdate = "";
+                        $fname = ""; $mname = "";   $lname = "";    $suffix = "";   $bdate = "";    $sex = "";  $civilStatus = "";  $nationality = "";
+                        $religion = ""; $placeOfBirth = ""; $homeProvCode = ""; $homeCityMunCode = "";  $homeBrgyCode= "";  $homeDetailedAdd = "";
+                        $perProvCode = "";  $perCityMunCode= "";    $perBrgyCode = "";  $perDetailedAdd = "";   $mobileNo = ""; $telNo = "";    $emailAdd = "";
+                        $educBg = "";   $fathersName = "";  $mothersName = "";  $spouseName = "";   $spouseBdate = "";  $height = "";   $weight = "";   $bloodType = "";
+                        $sssNo = "";    $philNo = "";   $hdmfNo = "";   $tinNo = "";    $atmNo = "";    $deployed = ""; $basic = "";    $rate = ""; $allowance = "";    $gross = "";
+                        
                     
-                    
-                     $select = "SELECT * FROM `employeeinfo` WHERE `emp_no` = '$empno'";
-                     $result = mysqli_query($con,$select);
-                    if(mysqli_num_rows($result)>0)
-                    {
-                        while($row = mysqli_fetch_array($result))  
-                        { 
-                            $fname = $row["emp_fname"];
-                            $mname = $row["emp_mname"];
-                            $lname = $row["emp_lname"];
-                            $bdate = $row["emp_bday"];
-                            echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname).'</h2>';
+                        $select = "SELECT * FROM `employeeinfo` WHERE `emp_no` = '$empno'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $fname = $row["emp_fname"];
+                                $mname = $row["emp_mname"];
+                                $lname = $row["emp_lname"];
+                                $suffix = $row["emp_suffix"];
+                                $bdate = $row["emp_bday"];
+                                $sex = $row["emp_sex"];
+                                $civilStatus = $row["emp_civilStatus"];
+                                $nationality = $row["emp_nationality"];
+                                $religion = $row["emp_religion"];
+                                $placeOfBirth = $row["emp_placeOfBirth"];
+                                $homeProvCode = $row["emp_homeProvCode"];
+                                $homeCityMunCode = $row["emp_homeCityMunCode"];
+                                $homeBrgyCode= $row["emp_homeBrgyCode"];
+                                $homeDetailedAdd = $row["emp_homeDetailedAdd"];
+                                $perProvCode = $row["emp_perProvCode"];
+                                $perCityMunCode= $row["emp_perCityMunCode"];
+                                $perBrgyCode = $row["emp_perBrgyCode"];
+                                $perDetailedAdd = $row["emp_perDetailedAdd"];
+                                $mobileNo = $row["emp_mobileNo"];
+                                $telNo = $row["emp_telNo"];
+                                $emailAdd = $row["emp_emailAdd"];
+                                $educBg = $row["emp_educBg"];
+                                $fathersName = $row["emp_fathersName"];
+                                $mothersName = $row["emp_mothersName"];
+                                $spouseName = $row["emp_spouseName"];
+                                $spouseBdate = $row["emp_spouseBdate"];
+                                $height = $row["emp_height"];
+                                $weight = $row["emp_weight"];
+                                $bloodType = $row["emp_bloodType"];
+                                $sssNo = $row["emp_sssNo"];
+                                $philNo = $row["emp_philNo"];
+                                $hdmfNo = $row["emp_hdmfNo"];
+                                $tinNo = $row["emp_tinNo"];
+                                $atmNo = $row["emp_atmNo"];
+                                $deployed = $row["emp_deployed"];
+                                $basic = $row["emp_basic"];
+                                $rate = $row["emp_rate"];
+                                $allowance = $row["emp_allowance"];
+                                $gross = $row["emp_gross"];
+                                echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';
+                            }
                         }
-                    }
-                    else{
-                        echo mysqli_error($con);
-                    }
+                        else{
+                            echo mysqli_error($con);
+                        }
+                        // HOME ADDRESS
+                        $select = "SELECT * FROM `refprovince` WHERE `provcode` = '$homeProvCode'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $homeProvDesc = strtolower($row["provDesc"]);
+                            }
+                        }
+
+                        $select = "SELECT * FROM `refcitymun` WHERE `citymunCode` = '$homeCityMunCode'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $homeCityMunDesc = strtolower($row["citymunDesc"]);
+                            }
+                        }                       
+
+
+                        // PERMANENT ADDRESS
+                        $select = "SELECT * FROM `refprovince` WHERE `provcode` = '$perProvCode'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $perProvDesc = strtolower($row["provDesc"]);
+                            }
+                        }
+
+                        $select = "SELECT * FROM `refcitymun` WHERE `citymunCode` = '$perCityMunCode'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $perCityMunDesc = strtolower($row["citymunDesc"]);
+                            }
+                        }
+
+                        $select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
+                        $result = mysqli_query($con,$select);
+                        if(mysqli_num_rows($result)>0)
+                        {
+                            while($row = mysqli_fetch_array($result))  
+                            { 
+                                $childsName = $row["empChild_name"];
+                                $childsBday = $row["empChild_bday"];
+                            }
+                        }
+
+
+                        if($spouseBdate=="0000-00-00"){
+                            $spouseBdate="";
+                        }
+
+                        if($bdate=="0000-00-00"){
+                            $bdate="";
+                        }
+
+                        if($childsBday=="0000-00-00"){
+                            $childsBday="";
+                        }
                     ?>
                     
                     
                     
-                    <div>
+                    <div id="infoDetails">
                         <br><br>
                         <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
                             <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
-                            <div class="col-4 col-sm-4 col-md-3">
-                                <label class="detailLabel">First Name</label>
-                            </div> 
-                             <div class="col-8 col-sm-8 col-md-9">
-                                 <input class="detailInfo" type="text" placeholder="<?php echo $fname;?>" value="<?php echo $fname;?>" name="fname" id="fname" autocomplete="off" disabled>
-                                 <span class="error" id="fnameError">Letters and white spaces only!</span>
-                            </div> 
+
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">First Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($fname);?></label>
+                                </div> 
+
+                                <div class="col-2">
+                                    <label class="detailLabel">Middle Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($mname);?></label>
+                                </div> 
+                            </div>
                             
-                            <div class="col-4 col-sm-4 col-md-3">
-                                <label class="detailLabel">Middle Name</label>
-                            </div> 
-                             <div class="col-8 col-sm-8 col-md-9">
-                                 <input class="detailInfo" type="text" placeholder="<?php echo $mname;?>" value="<?php echo $mname;?>" name="mname" id="mname" autocomplete="off" disabled>
-                                 <span class="error"  id="mnameError">Letters and white spaces only!</span>
-                            </div> 
+                            <div class="row">                            
+                                <div class="col-2">
+                                    <label class="detailLabel">Last Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($lname);?></label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailLabel">Suffix</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($suffix);?></label>
+                                </div>
+                            </div>
                             
-                            <div class="col-4 col-sm-4 col-md-3">
-                                <label class="detailLabel">Last Name</label>
-                            </div> 
-                             <div class="col-8 col-sm-8 col-md-9">
-                                 <input class="detailInfo" type="text" placeholder="<?php echo $lname;?>" value="<?php echo $lname;?>" name="lname" id="lname" autocomplete="off" disabled>
-                                 <span class="error"  id="lnameError">Letters and white spaces only!</span>
-                            </div> 
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Birthday</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $bdate;?></label>
+                                </div>  
+                                <div class="col-2">
+                                    <label class="detailLabel">Place of Birth</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($placeOfBirth)?></label>
+                                </div>
+                            </div>
                             
-                            <div class="col-4 col-sm-4 col-md-3">
-                                <label class="detailLabel">Birthday</label>
-                            </div> 
-                             <div class="col-8 col-sm-8 col-md-9">
-                                 <input class="detailInfo" type="date" placeholder="<?php echo $bdate;?>" value="<?php echo $bdate;?>" name="bday" id="bday" disabled>
-                            </div> 
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Sex</label>
+                                </div> 
+                                <div class="col-4">                                    
+                                    <label class="detailInfo"><?php echo ucfirst($sex);?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Civil Status</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($civilStatus)?></label>
+                                </div>   
+                            </div>
                             
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Nationality</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($nationality)?></label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailLabel">Religion</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucfirst($religion)?></label>
+                                </div>                                      
+                            </div>
+                            <hr id="line2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="detailLabel">Home Address</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailLabel">Province</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo ucfirst($homeProvDesc)?></label>
+                                </div>      
+                                <div class="col-2">
+                                    <label class="detailLabel">City/Municipality</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo ucfirst($homeCityMunDesc)?></label>
+                                </div>      
+                                
+                                <div class="col-2">
+                                    <label class="detailLabel">Barangay</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo">
+                                        <?php
+                                            $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$homeBrgyCode'";
+                                            $result = mysqli_query($con,$select);
+                                            if(mysqli_num_rows($result)>0)
+                                            {
+                                                while($row = mysqli_fetch_array($result))  
+                                                { 
+                                                    echo ucfirst($row["brgyDesc"]);
+                                                }
+                                            }                                        
+                                        ?></label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailLabel">Detailed Address</label>
+                                </div> 
+                                <div class="col-8">
+                                    <label class="detailInfo"><?php echo $homeDetailedAdd?></label>
+                                </div>      
+                    </div>                        
+                            <hr id="line2">
+                            <br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="detailLabel">Permanent Address</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailLabel">Province</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo ucfirst($perProvDesc)?></label>
+                                </div>      
+                                <div class="col-2">
+                                    <label class="detailLabel">City/Municipality</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo ucfirst($perCityMunDesc)?></label>
+                                </div>      
+                                <div class="col-2">
+                                    <label class="detailLabel">Barangay</label>
+                                </div> 
+                                
+                                <div class="col-2">
+                                    <label class="detailInfo">
+                                        <?php
+                                            $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$perBrgyCode'";
+                                            $result = mysqli_query($con,$select);
+                                            if(mysqli_num_rows($result)>0)
+                                            {
+                                                while($row = mysqli_fetch_array($result))  
+                                                { 
+                                                    echo ucfirst($row["brgyDesc"]);
+                                                }
+                                            }
+                                        ?></label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailLabel">Detailed Address</label>
+                                </div> 
+                                <div class="col-8">
+                                    <label class="detailInfo"><?php echo $perDetailedAdd?></label>
+                                </div>      
+                            </div>
+                            
+                            <hr id="line2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Mobile no.</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $mobileNo?></label>
+                                </div>   
+                                <div class="col-2">
+                                    <label class="detailLabel">Telephone no.</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $telNo?></label>
+                                </div>   
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Email Address</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $emailAdd?></label>
+                                </div>         
+                                <div class="col-3">
+                                    <label class="detailLabel">Educational Background (Highest Attainment)</label>
+                                </div> 
+                                <div class="col-3">
+                                    <label class="detailInfo"><?php echo $educBg?></label>
+                                </div>  
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Father's Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucwords($fathersName)?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Mother's Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucwords($mothersName)?></label>
+                                </div>   
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Spouse Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucwords($spouseName)?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Spouse Birthday</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $spouseBdate?></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Child's Name</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo ucwords($childsName)?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Child's Birthday</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $childsBday?></label>
+                                </div>
+                            </div>
+                            <hr id="line2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Height</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $height?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Weight</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $weight?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Blood Type</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $bloodType?></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">SSS no.</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $sssNo?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Philhealth no.</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $philNo?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">HDMF no.</label>
+                                </div> 
+                                <div class="col-2">
+                                    <label class="detailInfo"><?php echo $hdmfNo?></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Tin no.</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $tinNo?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">ATM no.</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $atmNo?></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-5">
+                                    <label class="detailLabel">Deployed</label>
+                                </div> 
+                                <div class="col-7">
+                                    <label class="detailInfo"><?php echo $deployed?></label></div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Basic</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $basic?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Rate</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $rate?></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Allowance</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $allowance?></label>
+                                </div>
+                                <div class="col-2">
+                                    <label class="detailLabel">Gross</label>
+                                </div> 
+                                <div class="col-4">
+                                <label class="detailInfo"><?php echo $gross?></label>
+                                </div>
+                            </div>
+
+
                             <button type="button" id="btnEdit" onclick="editInfo()">Edit</button>
-                            <input type="submit" value="Save" id="btnSave">
-                            <button type="button" id="btnCancel" onclick="editCancel()">Cancel</button>
                         </form>
  
                     </div>
@@ -248,9 +651,9 @@ $empno = $_GET["id"];
             var editErr = 0;
             $(document).ready(function(){
                 $(".nav-tabs a").click(function(){
-                    $(this).tab('show');
+                    $(this).tab("show")
                 });
-                
+
                 $("input").focus(function(){
                     $(this).css("border-bottom", "2px solid #2074fa");
                 });
@@ -293,18 +696,21 @@ $empno = $_GET["id"];
                         $(this).focusin();
                     }
                 })
-            });
+
+            })
+
+            
 
             function editInfo(){
-                document.getElementById("btnSave").style.display="inline";
-                document.getElementById("btnCancel").style.display="inline";
-                document.getElementById("btnEdit").style.display="none";
-                var x = document.getElementsByClassName("detailInfo");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                    x[i].disabled=false;
-                    x[i].classList.add("start");
-                } 
+                var xml = new XMLHttpRequest();
+                xml.onreadystatechange = function() {
+                   if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("infoDetails").innerHTML = this.responseText;
+                    }
+                };
+                xml.open("get", "editEmployeeDisplay.php?", true);
+                xml.send();
+               return false;
             }
             
             function editCancel(){
@@ -406,7 +812,6 @@ $empno = $_GET["id"];
                     var xml = new XMLHttpRequest();
                     xml.onreadystatechange = function() {
                         if (xml.readyState == 4 && xml.status == 200) {
-//                            alert(xml.responseText);
                             alert("Record sucessfully deleted.");
                             $( "#tableEmployeeDiv" ).load(window.location.href + " #tableEmployeeDiv" );
                         }

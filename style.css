@@ -30,16 +30,6 @@ td{
     word-wrap: break-word;
 }
 
-#addEmployeeButton{
-    float: right;
-    margin: 0 0 2% 0;
-    background-color: #32CD32;
-    border-color: #32CD32;
-    color: white;
-    border-radius: 4px;
-    padding: .7% 2% .7% 2%;
-}
-
 .modal-header{
     display:block
 }
@@ -51,7 +41,18 @@ h3{
     padding: 3rem 2rem;
 }
 
+.detailLabel{
+    font-size: 16px;
+}
 .detailInfo{
+    letter-spacing: 1px;
+    font-size: 16px;
+    margin: 1.5% 0 1.5% 0;  
+    padding: 0% 1% 0% 1%;
+    font-weight: normal;
+}
+
+.detailInfoEdit{
     letter-spacing: 1px;
     font-size: 16px;
     margin: 1.5% 0 1.5% 0;  
@@ -61,7 +62,7 @@ h3{
     border: none;
 }
 
-.detailInfo.active{
+.detailInfoEdit.active{
     border: 1px solid dimgray;
 }
 
@@ -216,7 +217,16 @@ input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
     margin-right: 10rem;
 }
 
+#line2{
+    border-top: 1px solid dimgray;
+    justify-content: center;
+}
+
 #faAsterisk{
     font-size: 12px;
     color: red;
+}
+
+.row{
+    margin-bottom: 2.5rem;
 }

@@ -41,12 +41,7 @@
         
 <!--        SCRIPTSSSSSSSSSS-->
         
-        <script>            
-////            
-//            function checkEmpNo(no){
-//                
-//            }
-//     
+        <script>  
             function deleteEmployee(id) {
                  if (confirm("Do you want to delete this employee?")) {
                     var xml = new XMLHttpRequest();
@@ -63,56 +58,7 @@
                     return false;
                   }
 
-            }
-            
-//            
-//            $(document).ready(function(){
-//                ("#empno").on("change",function(){
-//                    alert (this.value);
-////                    var i = this.value;
-////                    var xml = new XMLHttpRequest();
-////                    xml.onreadystatechange = function() {
-////                        if (xml.readyState == 4 && xml.status == 200) {
-////                            if(this.responseText=="existing"){
-////                                document.getElementById("empno").style.borderBottom = "2px solid red";
-////
-////                            }
-////                        }
-////                    };
-////                    xml.open("get","toValidateEmployeeNo.php?i=" + no, true);
-////                    xml.send();
-////                    return false;
-//                })
-//              
-//            });    
-//            
-//            function addEmployeeSubmit(event){
-//                
-//                if (confirm("Are you sure you want to save changes?")) {
-//                    event.preventDefault();
-//                    var form = document.forms.addEmpForm;
-//                    var dataInputted = new FormData(form);
-//
-//                         $.ajax({
-//                            url:"toAddEmployee.php",
-//                            type:"POST",
-//                            enctype: "multipart/form-data",
-//                            data: dataInputted,
-//                            contentType: false,
-//                            cache: false,
-//                            processData: false,
-//                            success:function(data)
-//                            {
-//                                alert("Employee added into the database.")
-//                                document.getElementById("closeAdd").click();
-//                                employeeTableDisplay();
-//                            }
-//                        });
-//                }
-//                
-//            }
-            
-            
+            }           
            
         </script>
 	</body>

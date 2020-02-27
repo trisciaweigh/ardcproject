@@ -76,11 +76,11 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                 <div class="col-md-3 custom-control custom-radio male">
-                    <input type="radio" class="custom-control-input" id="sexMaleRadioBtn" name="sexReg" value="Male">
+                    <input type="radio" class="custom-control-input" id="sexMaleRadioBtn" name="sex" value="Male">
                     <label class="custom-control-label dark-grey-text" for="sexMaleRadioBtn">Male</label>
                 </div>
                 <div class="col-md-3 custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="sexFemaleRadioBtn" name="sexReg" value="Female">
+                    <input type="radio" class="custom-control-input" id="sexFemaleRadioBtn" name="sex" value="Female">
                     <label class="custom-control-label dark-grey-text" for="sexFemaleRadioBtn">Female</label>
                 </div>
             </div> 
@@ -186,6 +186,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="email" id="email" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <span class="errorAddEmp" id="emailError">Invalid email format!</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
@@ -222,7 +223,23 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="date" name="spouseBday" id="spouseBday" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
+
+            <div class="lblInputEmp addEmp">
+                <label>Child's Name</label>
+            </div> 
+             <div class="addEmpInput">
+                 <input type="text" name="childsName" id="childsName" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+            </div> 
+
+            <div class="lblInputEmp addEmp">
+                <label>Child's Birthday</label>
+            </div> 
+             <div class="addEmpInput">
+                 <input type="date" name="childsBday" id="childsBday" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+            </div> 
             <hr id="line1">
+
+
             <div class="lblInputEmp addEmp">
                 <label>Height</label>
             </div> 
@@ -331,6 +348,15 @@ include 'connect.php';
             }
         }
 
+        function IsEmail(email) {
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(!regex.test(email)) {
+                return false;
+            }else{
+                return true;
+            }
+        }
+
         
         var validEmpNo = false;
         var validFName = false;
@@ -340,6 +366,8 @@ include 'connect.php';
         var validNationality = false;
         var validReligion = false;
         var validPlaceOfBirth = false;
+        var validemail = false;
+        var validSex = false;
 
         $(document).ready(function(){
             
@@ -562,7 +590,62 @@ include 'connect.php';
                     validPlaceOfBirth = false;
                 }
             });
+
+            $("#email").on("change",function(){
+                if(isEmail($(this).val()) == true){       
+                    alert ("valid");
+                    // $("#email").css("border-bottom", "3px solid #0ea300");                                       
+                    // document.getElementById("emailError").style.display = "none";
+                    // validemail = true;
+                }else{
+
+                    alert("invalid")
+                    // $("#email").css("border-bottom", "2px solid red");                            
+                    // document.getElementById("emailError").style.display = "inline-block";
+                    // validemail = false;
+                }
+                // alert ($(this).val());
+            });
         });
+
+        function addEmployeeSubmit(event){
+
+            var selSex = document.getElementsByName("sex");
+            var checkSex = 0;
+            for(i=0;i<selSex.length;i++){
+                if(selSex[i].checked){
+                    checkSex++;
+                    break;
+                }
+            }
+
+            if(checkSex!=0){
+                validSex = true;
+            }
+
+            // alert(document.getElementById("selectCMHome").value);
+            if (confirm("Are you sure you want to save changes?")) {
+                event.preventDefault();
+                var form = document.forms.addEmpForm;
+                var dataInputted = new FormData(form);
+
+                    $.ajax({
+                        url:"toAddEmployee.php",
+                        type:"POST",
+                        enctype: "multipart/form-data",
+                        data: dataInputted,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success:function(data)
+                        {
+                           alert("Employee added into the database.")
+                           window.location.href="index.php";
+                        }
+                    });
+            }
+               
+           }
      
     </script>
     
