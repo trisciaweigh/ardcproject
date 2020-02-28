@@ -6,14 +6,39 @@ $empno = $_GET["id"];
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+<!--
+    <script src="bootstrap-4.0.0-dist/css/bootstrap-grid.css"></script>
+    <script src="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css"></script>
+    <script src="bootstrap-4.0.0-dist/css/bootstrap-reboot.css"></script>
+    <script src="bootstrap-4.0.0-dist/css/bootstrap-reboot.min.css"></script>
+    <script src="bootstrap-4.0.0-dist/css/bootstrap.css"></script>
+    <script src="bootstrap-4.0.0-dist/css/bootstrap.min.css"></script>
+-->
+    
+<!--    <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+
+        <!-- <link href="stylesheets/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="stylesheets/bootstrap.css">
+
+    <link href="stylesheets/jquery.growl.css" rel="stylesheet" />
+    <link href="stylesheets/jquery-confirm.min.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="mdbootstrap/css/mdb.css" rel="stylesheet">
+    <link href="stylesheets/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.min.css">
+    <link href="stylesheets/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-datepicker.css"> -->
 
     <title>EMPLOYEE'S Details</title>
 </head>
@@ -40,7 +65,7 @@ $empno = $_GET["id"];
                         $religion = ""; $placeOfBirth = ""; $homeProvCode = ""; $homeCityMunCode = "";  $homeBrgyCode= "";  $homeDetailedAdd = "";
                         $perProvCode = "";  $perCityMunCode= "";    $perBrgyCode = "";  $perDetailedAdd = "";   $mobileNo = ""; $telNo = "";    $emailAdd = "";
                         $educBg = "";   $fathersName = "";  $mothersName = "";  $spouseName = "";   $spouseBdate = "";  $height = "";   $weight = "";   $bloodType = "";
-                        $sssNo = "";    $philNo = "";   $hdmfNo = "";   $tinNo = "";    $atmNo = "";    $deployed = ""; $basic = "";    $rate = ""; $allowance = "";    $gross = "";
+                        $sssNo = "";    $philNo = "";   $hdmfNo = "";   $tinNo = "";    $atmNo = "";
                         
                     
                         $select = "SELECT * FROM `employeeinfo` WHERE `emp_no` = '$empno'";
@@ -83,11 +108,6 @@ $empno = $_GET["id"];
                                 $hdmfNo = $row["emp_hdmfNo"];
                                 $tinNo = $row["emp_tinNo"];
                                 $atmNo = $row["emp_atmNo"];
-                                $deployed = $row["emp_deployed"];
-                                $basic = $row["emp_basic"];
-                                $rate = $row["emp_rate"];
-                                $allowance = $row["emp_allowance"];
-                                $gross = $row["emp_gross"];
                                 echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';
                             }
                         }
@@ -166,8 +186,7 @@ $empno = $_GET["id"];
                     
                     <div id="infoDetails">
                         <br><br>
-                        <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
-                            <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
+                            <input type="text" value="<?php echo $empno?>" name="empno" id="empno" style="display:none;">
 
                             <div class="row">
                                 <div class="col-2">
@@ -246,88 +265,51 @@ $empno = $_GET["id"];
                             </div>
                             <hr id="line2">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <label class="detailLabel">Home Address</label>
                                 </div> 
-                                <div class="col-2">
-                                    <label class="detailLabel">Province</label>
-                                </div> 
-                                <div class="col-2">
-                                    <label class="detailInfo"><?php echo ucfirst($homeProvDesc)?></label>
-                                </div>      
-                                <div class="col-2">
-                                    <label class="detailLabel">City/Municipality</label>
-                                </div> 
-                                <div class="col-2">
-                                    <label class="detailInfo"><?php echo ucfirst($homeCityMunDesc)?></label>
-                                </div>      
-                                
-                                <div class="col-2">
-                                    <label class="detailLabel">Barangay</label>
-                                </div> 
-                                <div class="col-2">
-                                    <label class="detailInfo">
-                                        <?php
-                                            $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$homeBrgyCode'";
-                                            $result = mysqli_query($con,$select);
-                                            if(mysqli_num_rows($result)>0)
-                                            {
-                                                while($row = mysqli_fetch_array($result))  
-                                                { 
-                                                    echo ucfirst($row["brgyDesc"]);
-                                                }
-                                            }                                        
-                                        ?></label>
-                                </div> 
-                                <div class="col-4">
-                                    <label class="detailLabel">Detailed Address</label>
-                                </div> 
                                 <div class="col-8">
-                                    <label class="detailInfo"><?php echo $homeDetailedAdd?></label>
+                                    <label class="detailInfo">
+                                    <?php
+
+                                        $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$homeBrgyCode'";
+                                        $result = mysqli_query($con,$select);
+                                        if(mysqli_num_rows($result)>0)
+                                        {
+                                            while($row = mysqli_fetch_array($result))  
+                                            { 
+                                                $homeBrgyDesc =  ucfirst($row["brgyDesc"]);
+                                            }
+                                        }           
+                                        
+                                        echo $homeDetailedAdd . ' '. $homeBrgyDesc .', '. ucfirst($homeCityMunDesc). ', ' .ucfirst($homeProvDesc)
+                                     ?>
+                                     </label>
                                 </div>      
-                    </div>                        
-                            <hr id="line2">
+                            </div>                 
                             <br>
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <label class="detailLabel">Permanent Address</label>
                                 </div> 
-                                <div class="col-2">
-                                    <label class="detailLabel">Province</label>
-                                </div> 
-                                <div class="col-2">
-                                    <label class="detailInfo"><?php echo ucfirst($perProvDesc)?></label>
-                                </div>      
-                                <div class="col-2">
-                                    <label class="detailLabel">City/Municipality</label>
-                                </div> 
-                                <div class="col-2">
-                                    <label class="detailInfo"><?php echo ucfirst($perCityMunDesc)?></label>
-                                </div>      
-                                <div class="col-2">
-                                    <label class="detailLabel">Barangay</label>
-                                </div> 
-                                
-                                <div class="col-2">
-                                    <label class="detailInfo">
-                                        <?php
-                                            $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$perBrgyCode'";
-                                            $result = mysqli_query($con,$select);
-                                            if(mysqli_num_rows($result)>0)
-                                            {
-                                                while($row = mysqli_fetch_array($result))  
-                                                { 
-                                                    echo ucfirst($row["brgyDesc"]);
-                                                }
-                                            }
-                                        ?></label>
-                                </div> 
-                                <div class="col-4">
-                                    <label class="detailLabel">Detailed Address</label>
-                                </div> 
                                 <div class="col-8">
-                                    <label class="detailInfo"><?php echo $perDetailedAdd?></label>
-                                </div>      
+                                    <label class="detailInfo">
+                                    <?php
+
+                                        $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$perBrgyCode'";
+                                        $result = mysqli_query($con,$select);
+                                        if(mysqli_num_rows($result)>0)
+                                        {
+                                            while($row = mysqli_fetch_array($result))  
+                                            { 
+                                                $perBrgyDesc =  ucfirst($row["brgyDesc"]);
+                                            }
+                                        }           
+                                        
+                                        echo $perDetailedAdd . ' '. $perBrgyDesc .', '. ucfirst($perCityMunDesc). ', ' .ucfirst($perProvDesc)
+                                     ?>
+                                     </label>
+                                </div>   
                             </div>
                             
                             <hr id="line2">
@@ -410,19 +392,22 @@ $empno = $_GET["id"];
                                 <div class="col-2">
                                     <label class="detailLabel">Height</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $height?></label>
                                 </div>
                                 <div class="col-2">
                                     <label class="detailLabel">Weight</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $weight?></label>
-                                </div>
+                                </div>                                
+                            </div>
+
+                            <div class="row">
                                 <div class="col-2">
                                     <label class="detailLabel">Blood Type</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $bloodType?></label>
                                 </div>
                             </div>
@@ -431,30 +416,33 @@ $empno = $_GET["id"];
                                 <div class="col-2">
                                     <label class="detailLabel">SSS no.</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $sssNo?></label>
                                 </div>
                                 <div class="col-2">
                                     <label class="detailLabel">Philhealth no.</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $philNo?></label>
-                                </div>
+                                </div>                                
+                            </div>
+
+                            <div class="row">
                                 <div class="col-2">
                                     <label class="detailLabel">HDMF no.</label>
                                 </div> 
-                                <div class="col-2">
+                                <div class="col-4">
                                     <label class="detailInfo"><?php echo $hdmfNo?></label>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
+                                </div>                                
                                 <div class="col-2">
                                     <label class="detailLabel">Tin no.</label>
                                 </div> 
                                 <div class="col-4">
                                     <label class="detailInfo"><?php echo $tinNo?></label>
                                 </div>
+                            </div>
+                            
+                            <div class="row">
                                 <div class="col-2">
                                     <label class="detailLabel">ATM no.</label>
                                 </div> 
@@ -462,48 +450,7 @@ $empno = $_GET["id"];
                                     <label class="detailInfo"><?php echo $atmNo?></label>
                                 </div>
                             </div>
-                            
-                            <div class="row">
-                                <div class="col-5">
-                                    <label class="detailLabel">Deployed</label>
-                                </div> 
-                                <div class="col-7">
-                                    <label class="detailInfo"><?php echo $deployed?></label></div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-2">
-                                    <label class="detailLabel">Basic</label>
-                                </div> 
-                                <div class="col-4">
-                                    <label class="detailInfo"><?php echo $basic?></label>
-                                </div>
-                                <div class="col-2">
-                                    <label class="detailLabel">Rate</label>
-                                </div> 
-                                <div class="col-4">
-                                    <label class="detailInfo"><?php echo $rate?></label>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-2">
-                                    <label class="detailLabel">Allowance</label>
-                                </div> 
-                                <div class="col-4">
-                                    <label class="detailInfo"><?php echo $allowance?></label>
-                                </div>
-                                <div class="col-2">
-                                    <label class="detailLabel">Gross</label>
-                                </div> 
-                                <div class="col-4">
-                                <label class="detailInfo"><?php echo $gross?></label>
-                                </div>
-                            </div>
-
-
                             <button type="button" id="btnEdit" onclick="editInfo()">Edit</button>
-                        </form>
  
                     </div>
                 </div>
@@ -512,10 +459,10 @@ $empno = $_GET["id"];
 <!--                SERVICE RECORD TAB-->
                 <div id="serviceRec" class="tab-pane fade">
                   <?php
-                    echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname).'</h2>';
+                    echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname).' '.ucwords($suffix).'</h2>';
                     
                     ?>
-                    <div id = "tableEmployeeDiv">     
+                    <div id = "tableEmployeeDiv2">     
                         <button id = "addRecordButton" type="button" class="btn" data-toggle="modal" data-target="#addRecordModal" onclick="addRecord()">Add Record</button>
                         <br><br>
                         <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
@@ -523,6 +470,11 @@ $empno = $_GET["id"];
                                   <tr>    
                                       <th>DATE</th> 
                                       <th>POSITION</th>
+                                      <th>DEPLOYED</th>
+                                      <th>BASIC</th>
+                                      <th>RATE</th>
+                                      <th>ALLOWANCE</th>
+                                      <th>GROSS</th>
                                       <th>INFORMATION</th>
                                       <th>YEARS OF SERVICE</th>
                                       <th>ACTION</th>
@@ -530,7 +482,7 @@ $empno = $_GET["id"];
                             </thead>
                             <?php
                                 $serrecno = 0;
-                                echo '<td id="empno" style="display:none;">'. $empno .'</td>';
+                                echo '<td id="empnoSer" style="display:none;">'. $empno .'</td>';
                                 $select = mysqli_query($con,"SELECT * FROM `servicerecord` where `emp_no` = '$empno' order by `serrec_date` desc");
                                 while($row = mysqli_fetch_array($select))  
                                 {  
@@ -538,10 +490,15 @@ $empno = $_GET["id"];
                                     echo '<tr>';
                                     echo '<td>'. $row["serrec_date"] .'</td>';
                                     echo '<td>'. $row["serrec_position"] .'</td>';
+                                    echo '<td>'. $row["serrec_deployed"] .'</td>';
+                                    echo '<td>'. $row["serrec_basic"] .'</td>';
+                                    echo '<td>'. $row["serrec_rate"] .'</td>';
+                                    echo '<td>'. $row["serrec_allowance"] .'</td>';
+                                    echo '<td>'. $row["serrec_gross"] .'</td>';
                                     echo '<td>'. $row["serrec_info"] .'</td>';
                                     echo '<td>'. $row["serrec_yrsOfService"] .'</td>';
-                                    echo '<td><button type="button" id="editRecBtn" data-toggle="modal" data-target="#editRecordModal" onclick="editRecord('.$serrecno.')">Edit</button>
-                                        <button type="button" id="delRecBtn" onclick="deleteRecord('.$serrecno.')">Delete</button></td>';
+                                    echo '<td><button type="button" id="editRecBtn" data-toggle="modal" data-target="#editRecordModal" class="btnsSerRec" onclick="editRecord('.$serrecno.')">Edit</button>
+                                        <button type="button" class="btnsSerRec" id="delRecBtn" onclick="deleteRecord('.$serrecno.')">Delete</button></td>';
                                     echo '</tr>';
                                 }
                             ?>
@@ -555,7 +512,7 @@ $empno = $_GET["id"];
 <!--                MEMO TAB-->
                 <div id="memo" class="tab-pane fade">
                   <?php
-                    echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname).'</h2>';                    
+                    echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';                    
                     ?>
                     
                     <div id = "tableEmployeeDiv">     
@@ -603,8 +560,8 @@ $empno = $_GET["id"];
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Add Record</h4>
                   <button type="button" class="close" id="closeAdd" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Add Record</h4>
                 </div>
                 <div class="modal-body">
                   <div id="addRecordDisp"></div>
@@ -623,8 +580,9 @@ $empno = $_GET["id"];
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Edit Record</h4>
                   <button type="button" class="close" id="closeEdit" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Edit Record</h4>
+                  
                 </div>
                 <div class="modal-body">
                   <div id="editRecordDisp"></div>
@@ -699,34 +657,134 @@ $empno = $_GET["id"];
 
             })
 
-            
+
+            // HOME ADDRESS
+            var prv="";
+            function chooseCMHome(p) {
+                prv = p;
+                document.getElementById("selectCMHome").disabled = false;
+                $.post("toDisplayCityMunicipality.php", {   
+                    p:p,
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectCMHome');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectCMHome').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                        
+                });
+            }
+ 
+            function chooseBrgyHome(c){
+
+                document.getElementById("selectBrgyHome").disabled = false;
+                $.post("toDisplayBarangay.php", {   
+                    p:prv,
+                    cm:c
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectBrgyHome');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectBrgyHome').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                });
+            }
+
+            // PERMANENT ADDRESS
+            var prv="";
+            function chooseCMPerm(p) {
+                prv = p;
+                document.getElementById("selectCMPer").disabled = false;
+                $.post("toDisplayCityMunicipality.php", {   
+                    p:p,
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectCMPer');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectCMPer').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                        
+                });
+            }
+
+            function chooseBrgyPerm(cm){
+
+                document.getElementById("selectBrgyPer").disabled = false;
+                $.post("toDisplayBarangay.php", {   
+                    p:prv,
+                    cm:cm
+                },
+                function (data) {
+                    var dataLength = data.split(",");
+                    var select = $('#selectBrgyPer');
+                    if(select.prop) {
+                    var options = select.prop('options');
+                    }
+                    else {
+                    var options = select.attr('options');
+                    }
+                    $('#selectBrgyPer').children('option:not(:first)').remove();  
+
+                    $.each(dataLength, function(val, text) {
+                        options[options.length] = new Option(text, val);
+                    });
+                    select.val(selectedOption);    
+                });
+            }
 
             function editInfo(){
+                var e = document.getElementById("empno").value;
                 var xml = new XMLHttpRequest();
                 xml.onreadystatechange = function() {
                    if (this.readyState == 4 && this.status == 200) {
                         document.getElementById("infoDetails").innerHTML = this.responseText;
                     }
                 };
-                xml.open("get", "editEmployeeDisplay.php?", true);
+                xml.open("get", "editEmployeeDisplay.php?e="+e, true);
                 xml.send();
                return false;
             }
             
             function editCancel(){
-                document.getElementById("btnSave").style.display="none";
-                document.getElementById("btnCancel").style.display="none";
-                document.getElementById("btnEdit").style.display="inline";
-                var x = document.getElementsByClassName("detailInfo");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                  x[i].disabled=true;
-                    x[i].classList.remove("start");
-                } 
+                $( "#empInfo" ).load(window.location.href + " #empInfo" );
             }
             
             function editEmployeeSubmit(event){
                 if(editErr == 0){
+                    document.getElementById("selectCMHome").disabled = false;                    
+                    document.getElementById("selectBrgyHome").disabled = false;
+                    document.getElementById("selectCMPer").disabled = false;
+                    document.getElementById("selectBrgyPer").disabled = false;
                     if (confirm("Are you sure you want to save changes?")) {
                         event.preventDefault();
                         var form = document.forms.editInfoForm;
@@ -744,6 +802,7 @@ $empno = $_GET["id"];
                                 {
                                     alert("Changes Saved.");
                                     $( "#empInfo" ).load(window.location.href + " #empInfo" );
+//                                    alert(data);
                                 }
                             });
                     }
@@ -759,7 +818,7 @@ $empno = $_GET["id"];
 //           SERVICE RECORD SCRIPTS       
             
             function addRecord(){
-                var empno = document.getElementById("empno").innerHTML;
+                var empno = document.getElementById("empnoSer").innerHTML;
                 xml = new XMLHttpRequest();
                 xml.onreadystatechange = function() {
                     if(xml.readyState==4 && xml.status==200) {
@@ -769,6 +828,7 @@ $empno = $_GET["id"];
 
                 xml.open("GET","modalAddRecord.php?id="+empno,true);
                 xml.send();
+//                alert(empno);
             }
             
             
@@ -799,7 +859,8 @@ $empno = $_GET["id"];
                             {
                                 alert("Record added into the database.")
                                 document.getElementById("closeAdd").click();                                
-                                $( "#tableEmployeeDiv" ).load(window.location.href + " #tableEmployeeDiv" );
+                                $( "#tableEmployeeDiv2" ).load(window.location.href + " #tableEmployeeDiv2" );
+//                                alert (data);
 
                             }
                         });
@@ -813,7 +874,7 @@ $empno = $_GET["id"];
                     xml.onreadystatechange = function() {
                         if (xml.readyState == 4 && xml.status == 200) {
                             alert("Record sucessfully deleted.");
-                            $( "#tableEmployeeDiv" ).load(window.location.href + " #tableEmployeeDiv" );
+                            $( "#tableEmployeeDiv2" ).load(window.location.href + " #tableEmployeeDiv2" );
                         }
                     };
                     xml.open("get", "toRemoveRecord.php?i=" + id, true);
@@ -852,7 +913,7 @@ $empno = $_GET["id"];
                         {
                             alert("Changes Saved.");
                             document.getElementById("closeEdit").click();                                
-                            $( "#tableEmployeeDiv" ).load(window.location.href + " #tableEmployeeDiv" );
+                            $( "#tableEmployeeDiv2" ).load(window.location.href + " #tableEmployeeDiv2" );
 
                         }
                     });

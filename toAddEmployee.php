@@ -39,11 +39,11 @@ $philhealth = $_POST["philhealth"];
 $hdmf = $_POST["hdmf"];
 $tin = $_POST["tin"];
 $atm = $_POST["atm"];
-$deployed = $_POST["deployed"];
-$basic = $_POST["basic"];
-$rate = $_POST["rate"];
-$allowance = $_POST["allowance"];
-$gross = $_POST["gross"];
+//$deployed = $_POST["deployed"];
+//$basic = $_POST["basic"];
+//$rate = $_POST["rate"];
+//$allowance = $_POST["allowance"];
+//$gross = $_POST["gross"];
 
 
 $cmCodeHome = "";
@@ -51,6 +51,7 @@ $brgyCodeHome = "";
 $cmCodePerm = "";
 $brgyCodePerm = "";
 
+// HOME ADDRESS
 $x=0;
 $select = mysqli_query($con,"SELECT * FROM `refcitymun` where `provCode` = '$selectProvHome'");
 while($row = mysqli_fetch_array($select))  
@@ -62,7 +63,6 @@ while($row = mysqli_fetch_array($select))
 }
 
 
-// HOME ADDRESS
 $x=0;
 $select = mysqli_query($con,"SELECT * FROM `refbrgy` where `provCode` = '$selectProvHome' and `citymunCode` = '$cmCodeHome'" );
 while($row = mysqli_fetch_array($select))  
@@ -73,6 +73,7 @@ while($row = mysqli_fetch_array($select))
     $x++;
 }
 
+// PERMANENT ADDRESS
 $x=0;
 $select = mysqli_query($con,"SELECT * FROM `refcitymun` where `provCode` = '$selectProvPerm'");
 while($row = mysqli_fetch_array($select))  
@@ -83,7 +84,6 @@ while($row = mysqli_fetch_array($select))
     $x++;
 }
 
-// PERMANENT ADDRESS
 $x=0;
 $select = mysqli_query($con,"SELECT * FROM `refbrgy` where `provCode` = '$selectProvPerm' and `citymunCode` = '$cmCodePerm'" );
 while($row = mysqli_fetch_array($select))  
@@ -95,7 +95,7 @@ while($row = mysqli_fetch_array($select))
 }
 
 // INSERT
-$insert = "INSERT INTO `employeeinfo` VALUES ('$empno','$fname','$mname','$lname','$suffix','$bdate','$sex','$civStatus','$nationality','$religion','$placeOfBirth','$selectProvHome','$cmCodeHome','$brgyCodeHome','$detailedAddHome','$selectProvPerm','$cmCodePerm','$brgyCodePerm','$detailedAddPerm','$mobNo','$telNo','$email','$educ','$father','$mother','$spouseName','$spouseBday','$height','$weight','$blood','$sss','$philhealth','$hdmf','$tin','$atm','$deployed','$basic','$rate','$allowance','$gross')";      
+$insert = "INSERT INTO `employeeinfo` VALUES ('$empno','$fname','$mname','$lname','$suffix','$bdate','$sex','$civStatus','$nationality','$religion','$placeOfBirth','$selectProvHome','$cmCodeHome','$brgyCodeHome','$detailedAddHome','$selectProvPerm','$cmCodePerm','$brgyCodePerm','$detailedAddPerm','$mobNo','$telNo','$email','$educ','$father','$mother','$spouseName','$spouseBday','$height','$weight','$blood','$sss','$philhealth','$hdmf','$tin','$atm')";      
 if (mysqli_query($con,$insert))
 {            
     $insert2 = "INSERT INTO `employeechildren` (`emp_no`, `empChild_name`, `empChild_bday`) VALUES ('$empno', '$childsName', '$childsBday')";      

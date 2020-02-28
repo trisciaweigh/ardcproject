@@ -4,6 +4,7 @@ session_start();
 
     echo'<div id = "tableEmployeeDiv">     
                 <a href="addEmployeeDisplay.php"><button id = "addEmployeeButton" type="button">Add Employee</button></a>
+                       <input id="searchField" name="searchField" class="searchProduct" type="search" placeholder="Search employee..." autocomplete="on" onkeyup="searchVal(this.value)">
                 <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
                     <thead>  
                           <tr>    

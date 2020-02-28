@@ -32,7 +32,8 @@
 	<body onload="employeeTableDisplay()">
 		<div id="headerCompanyName">
             <img src="logo.jpg" id="logo"/>
-		</div>
+		</div>          
+                                  
         <div id="bodyDetailsDiv" class="container">
             
         </div>
@@ -41,7 +42,18 @@
         
 <!--        SCRIPTSSSSSSSSSS-->
         
-        <script>  
+        <script>              
+            function searchVal(s){
+                var xml = new XMLHttpRequest();
+                xml.onreadystatechange = function() {
+                   if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("employeeTable").innerHTML =  this.responseText;
+                    }
+                };
+                xml.open("get", "searchEmployee.php?s="+s, true);
+                xml.send();
+                return false;
+            }
             function deleteEmployee(id) {
                  if (confirm("Do you want to delete this employee?")) {
                     var xml = new XMLHttpRequest();

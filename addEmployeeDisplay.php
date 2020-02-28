@@ -295,6 +295,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="atm" id="atm" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
+<!--
             <hr id="line1">
             <div class="lblInputEmp addEmp">
                 <label>Deployed</label>
@@ -330,6 +331,7 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="gross" id="gross" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
+-->
 
             <br>
             <input type="submit" value="Submit" class="submitAdd">
