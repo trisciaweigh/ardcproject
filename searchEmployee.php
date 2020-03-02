@@ -3,11 +3,6 @@
 session_start();
 
 $s = $_GET["s"];
-//    echo'<div id = "tableEmployeeDiv">     
-//                <a href="addEmployeeDisplay.php"><button id = "addEmployeeButton" type="button">Add Employee</button></a>
-//                <form id="searchForm" method="post" enctype="multipart/form-data">
-//                       <input id="searchField" name="searchField" class="searchProduct" type="search" placeholder="Search employee..." autocomplete="on">
-//                </form>
 echo'        <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
     <thead>  
     <tr>    

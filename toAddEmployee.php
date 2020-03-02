@@ -2,6 +2,7 @@
 session_start();
 include 'connect.php';
 
+$childLength = $_POST["childLength"];
 $empno = $_POST["empno"];
 $fname = $_POST["fname"];
 $mname = $_POST["mname"];
@@ -29,8 +30,8 @@ $father = $_POST["father"];
 $mother = $_POST["mother"];
 $spouseName = $_POST["spouseName"];
 $spouseBday = $_POST["spouseBday"];
-$childsName = $_POST["childsName"];
-$childsBday = $_POST["childsBday"];
+$childsName = "";
+$childsBday = "";
 $height = $_POST["height"];
 $weight = $_POST["weight"];
 $blood = $_POST["blood"];
@@ -39,17 +40,20 @@ $philhealth = $_POST["philhealth"];
 $hdmf = $_POST["hdmf"];
 $tin = $_POST["tin"];
 $atm = $_POST["atm"];
-//$deployed = $_POST["deployed"];
-//$basic = $_POST["basic"];
-//$rate = $_POST["rate"];
-//$allowance = $_POST["allowance"];
-//$gross = $_POST["gross"];
 
 
 $cmCodeHome = "";
 $brgyCodeHome = "";
 $cmCodePerm = "";
 $brgyCodePerm = "";
+
+for($x=1; $x <= $childLength; $x++){
+    if($_POST["childsName".$x]!=""){
+        
+        $childsName = $childsName . $_POST["childsName".$x]."/";
+        $childsBday = $childsBday . $_POST["childsBday".$x]."/";
+    }
+}
 
 // HOME ADDRESS
 $x=0;

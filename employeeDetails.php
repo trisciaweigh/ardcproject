@@ -378,13 +378,27 @@ $empno = $_GET["id"];
                                     <label class="detailLabel">Child's Name</label>
                                 </div> 
                                 <div class="col-4">
-                                    <label class="detailInfo"><?php echo ucwords($childsName)?></label>
+                                    <label class="detailInfo">
+                                        <?php
+                                            $childArr = explode ("/", $childsName); 
+                                            for ($x=0; $x<count($childArr); $x++){
+                                                echo $childArr[$x] ."<br>";
+                                            }
+                                        ?>
+                                    </label>
                                 </div>
                                 <div class="col-2">
                                     <label class="detailLabel">Child's Birthday</label>
                                 </div> 
                                 <div class="col-4">
-                                    <label class="detailInfo"><?php echo $childsBday?></label>
+                                    <label class="detailInfo">
+                                        <?php
+                                            $childBdayArr = explode ("/", $childsBday); 
+                                            for ($x=0; $x<count($childBdayArr); $x++){
+                                                echo $childBdayArr[$x] ."<br>";
+                                            }
+                                        ?>
+                                    </label>
                                 </div>
                             </div>
                             <hr id="line2">
@@ -762,6 +776,19 @@ $empno = $_GET["id"];
                 });
             }
 
+            var cnt = 0;
+            function addChild(){
+                var a = parseInt(document.getElementById("childCount").value);
+                cnt++;                
+                var c = cnt+a;
+                var table = document.getElementById("childTable");
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = '<input type="text" name="childsName'+c+'" id="childsName'+c+'" class="detailInfoEdit actived cname" placeholder="" autocomplete="off" >';
+                cell2.innerHTML = '<td><input type="date" name="childsBday'+c+'" id="childsBday'+c+'" class="detailInfoEdit actived" placeholder="" autocomplete="off" ></td>';
+            }
+            
             function editInfo(){
                 var e = document.getElementById("empno").value;
                 var xml = new XMLHttpRequest();
@@ -780,38 +807,42 @@ $empno = $_GET["id"];
             }
             
             function editEmployeeSubmit(event){
-                if(editErr == 0){
-                    document.getElementById("selectCMHome").disabled = false;                    
-                    document.getElementById("selectBrgyHome").disabled = false;
-                    document.getElementById("selectCMPer").disabled = false;
-                    document.getElementById("selectBrgyPer").disabled = false;
-                    if (confirm("Are you sure you want to save changes?")) {
-                        event.preventDefault();
-                        var form = document.forms.editInfoForm;
-                        var dataInputted = new FormData(form);
-    
-                             $.ajax({
-                                url:"toEditEmployee.php",
-                                type:"POST",
-                                enctype: "multipart/form-data",
-                                data: dataInputted,
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                success:function(data)
-                                {
-                                    alert("Changes Saved.");
-                                    $( "#empInfo" ).load(window.location.href + " #empInfo" );
-//                                    alert(data);
-                                }
-                            });
-                    }
-                    
-                }
-                else{
-                    event.preventDefault();
-                    alert("Check your inputs");
-                }
+                var childLength = document.querySelectorAll("input.cname").length;
+                document.getElementById("childLength").value=childLength;
+                alert(childLength);
+                
+//                if(editErr == 0){
+//                    document.getElementById("selectCMHome").disabled = false;                    
+//                    document.getElementById("selectBrgyHome").disabled = false;
+//                    document.getElementById("selectCMPer").disabled = false;
+//                    document.getElementById("selectBrgyPer").disabled = false;
+//                    if (confirm("Are you sure you want to save changes?")) {
+//                        event.preventDefault();
+//                        var form = document.forms.editInfoForm;
+//                        var dataInputted = new FormData(form);
+//    
+//                             $.ajax({
+//                                url:"toEditEmployee.php",
+//                                type:"POST",
+//                                enctype: "multipart/form-data",
+//                                data: dataInputted,
+//                                contentType: false,
+//                                cache: false,
+//                                processData: false,
+//                                success:function(data)
+//                                {
+//                                    alert("Changes Saved.");
+//                                    $( "#empInfo" ).load(window.location.href + " #empInfo" );
+////                                    alert(data);
+//                                }
+//                            });
+//                    }
+//                    
+//                }
+//                else{
+//                    event.preventDefault();
+//                    alert("Check your inputs");
+//                }
             }
             
             

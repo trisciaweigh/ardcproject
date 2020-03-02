@@ -1,3 +1,20 @@
+<html>
+<head>
+    <style>
+        th{
+/*            text-align: center;*/
+            font-size: 16px
+        }
+        table{
+            width: 80%
+        }
+        
+        .fa-check-circle{
+            font-size: 18px;
+            color: limegreen;
+            display: none
+        }
+    </style></head>
 <?php
 include 'connect.php';
 
@@ -114,7 +131,6 @@ if(mysqli_num_rows($result)>0)
     }
 }
 ?>
-<html>
   <body>
         <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
             <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
@@ -427,22 +443,38 @@ if(mysqli_num_rows($result)>0)
                 </div>
             </div>
             
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Child's Name</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $childsName;?>" value="<?php echo $childsName;?>" name="childsName" id="childsName" autocomplete="off" >
-                </div>
-            </div>
             
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Child's Birthday</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="date" placeholder="<?php echo $childsBday;?>" value="<?php echo $childsBday;?>" name="childsBday" id="childsBday" >
-                </div>
+            <div>
+                <?php
+                    
+                    $childArr = explode ("/", $childsName); 
+                    $childBdayArr = explode ("/", $childsBday); 
+                    $childLength = count($childArr)-1;
+                ?>
+                
+                <table id="childTable">
+                    <thead>
+                        <tr>
+                            <th><label>Child's Name</label></th>
+                            <th><label>Child's Birthday</label></th>
+                        </tr>
+                    </thead>
+                    <tbody id="childsbody">
+                        <?php
+                        $i=1;
+                            for($x=0; $x<$childLength; $x++){
+                                echo ' <tr>
+                                        <td><input type="text" name="childsName'.$i.'" id="childsName'.$i.'" class="detailInfoEdit actived cname" placeholder="'.$childArr[$x].'" autocomplete="off" ></td>
+                                        <td><input type="date" name="childsBday'.$i.'" id="childsBday'.$i.'" class="detailInfoEdit actived" value="'.$childBdayArr[$x].'" autocomplete="off" ></td>
+                                    </tr>';
+                                $i++;
+                            }
+                        echo '<input type="text" id="childCount" value='.$childLength.' style="display:none">';
+                        ?>
+                    </tbody>
+                    
+                </table>
+                <button type="button" onclick="addChild()">add</button>
             </div>
             
             <div class="row">
@@ -516,53 +548,7 @@ if(mysqli_num_rows($result)>0)
                     <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $atmNo;?>" value="<?php echo $atmNo;?>" name="atmNo" id="atmNo" autocomplete="off" >
                 </div>
             </div>
-            
-<!--
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Deployed</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $deployed;?>" value="<?php echo $deployed;?>" name="deployed" id="deployed" autocomplete="off" >
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Basic</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $basic;?>" value="<?php echo $basic;?>" name="basic" id="basic" autocomplete="off" >
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Rate</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $rate;?>" value="<?php echo $rate;?>" name="rate" id="rate" autocomplete="off" >
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Allowance</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $allowance;?>" value="<?php echo $allowance;?>" name="allowance" id="allowance" autocomplete="off" >
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-5">
-                    <label class="detailLabel">Gross</label>
-                </div> 
-                <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $gross;?>" value="<?php echo $gross;?>" name="gross" id="gross" autocomplete="off" >
-                </div>
-            </div>
--->
+            <input type="text" id="childLength" style="display:none">
             <input type="submit" value="Save" id="btnSave">
             <button type="button" id="btnCancel" onclick="editCancel()">Cancel</button>
         </form>

@@ -25,7 +25,7 @@
                 };
                 xml.open("get", "employeeTable.php?", true);
                 xml.send();
-//                return false;
+                return false;
              }
         </script>
 	</head>
@@ -38,11 +38,114 @@
             
         </div>
         
+        <div class="modal fade" id="filterModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="closeFilter" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">FILTER</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Filter By:</label>
+                            </div>
+                            <div class="col-8">
+                                <form method="post"  enctype="multipart/form-data" onsubmit="#" id="filterForm">
+                                    <select id="filterEmp" name="filterEmp" class="custom-select dark-grey-text">
+                                        <option selected disabled>--Select--</option>
+                                        <option>Birth month</option>
+                                        <option>Deployed</option>
+                                    </select>
+                                </form>
+                            </div>
+                            
+                            <div class="col-12">                                    
+                                <select id="filterBmonth" name="filterBmonth" class="custom-select dark-grey-text" style="display:none">
+                                    <option selected disabled>--Select Month--</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
         
         
 <!--        SCRIPTSSSSSSSSSS-->
         
-        <script>              
+        <script>             
+            
+            $(document).ready(function(){
+                var c ="";
+                $("#filterEmp").on("change", function(){
+                    c = $(this).val();
+                    
+                    if(c=="Deployed"){
+                        var xml = new XMLHttpRequest();
+                        xml.onreadystatechange = function() {
+                           if (this.readyState == 4 && this.status == 200) {
+                                document.getElementById("employeeTable").innerHTML =  this.responseText;                           document.getElementById("filterForm").reset();
+                                document.getElementById("closeFilter").click(); 
+                               
+                                document.getElementById("filterBmonth").style.display="none";
+                            }
+                        };
+                        xml.open("get", "filterEmployee.php?action="+c, true);
+                        xml.send();
+                        return false;
+                    }else{
+                        document.getElementById("filterBmonth").style.display="inline-block";
+                    }
+                })
+                
+                $("#filterBmonth").on("change", function(){
+                    b = $(this).val();
+                    var xml = new XMLHttpRequest();
+                    xml.onreadystatechange = function() {
+                       if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("employeeTable").innerHTML =  this.responseText;       
+                            document.getElementById("filterForm").reset();
+                            document.getElementById("closeFilter").click(); 
+                           
+                            document.getElementById("filterBmonth").style.display="none";
+                        }
+                    };
+                    xml.open("get", "filterEmployee.php?action=Birthmonth & b="+b, true);
+                    xml.send();
+                    return false;
+                })
+            })
+            
+            function tableReset(){
+                var xml = new XMLHttpRequest();
+                xml.onreadystatechange = function() {
+                   if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("bodyDetailsDiv").innerHTML = this.responseText;
+                        document.getElementById("filterForm").reset();
+                        document.getElementById("filterBmonth").style.display="none";
+                    }
+                };
+                xml.open("get", "employeeTable.php?", true);
+                xml.send();
+                return false;
+            }
+                            
             function searchVal(s){
                 var xml = new XMLHttpRequest();
                 xml.onreadystatechange = function() {

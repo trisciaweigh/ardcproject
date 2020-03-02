@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2020 at 07:54 AM
+-- Generation Time: Mar 02, 2020 at 08:46 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -30,8 +30,17 @@ CREATE TABLE IF NOT EXISTS `employeechildren` (
   `empChild_no` int(11) NOT NULL,
   `emp_no` varchar(25) NOT NULL,
   `empChild_name` varchar(255) NOT NULL,
-  `empChild_bday` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `empChild_bday` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employeechildren`
+--
+
+INSERT INTO `employeechildren` (`empChild_no`, `emp_no`, `empChild_name`, `empChild_bday`) VALUES
+(1, 'emp', 'chil', '2020-03-05'),
+(2, 'emp111', 'ayescia leigh', '2016-07-02'),
+(4, 'gfsd', 'te/x/s/d/rtrt/hrhtrh/', '2020-03-10/2020-02-27/2020-03-04/2020-03-20/2020-02-26/2020-04-02/');
 
 -- --------------------------------------------------------
 
@@ -74,23 +83,17 @@ CREATE TABLE IF NOT EXISTS `employeeinfo` (
   `emp_philNo` varchar(50) NOT NULL,
   `emp_hdmfNo` varchar(50) NOT NULL,
   `emp_tinNo` varchar(50) NOT NULL,
-  `emp_atmNo` varchar(50) NOT NULL,
-  `emp_deployed` varchar(50) NOT NULL,
-  `emp_basic` float NOT NULL,
-  `emp_rate` float NOT NULL,
-  `emp_allowance` float NOT NULL,
-  `emp_gross` float NOT NULL
+  `emp_atmNo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employeeinfo`
 --
 
-INSERT INTO `employeeinfo` (`emp_no`, `emp_fname`, `emp_mname`, `emp_lname`, `emp_suffix`, `emp_bday`, `emp_sex`, `emp_civilStatus`, `emp_nationality`, `emp_religion`, `emp_placeOfBirth`, `emp_homeProvCode`, `emp_homeCityMunCode`, `emp_homeBrgyCode`, `emp_homeDetailedAdd`, `emp_perProvCode`, `emp_perCityMunCode`, `emp_perBrgyCode`, `emp_perDetailedAdd`, `emp_mobileNo`, `emp_telNo`, `emp_emailAdd`, `emp_educBg`, `emp_fathersName`, `emp_mothersName`, `emp_spouseName`, `emp_spouseBdate`, `emp_height`, `emp_weight`, `emp_bloodType`, `emp_sssNo`, `emp_philNo`, `emp_hdmfNo`, `emp_tinNo`, `emp_atmNo`, `emp_deployed`, `emp_basic`, `emp_rate`, `emp_allowance`, `emp_gross`) VALUES
-('bb', 'h', 'vhj', 'buj', '', '2020-02-13', '', '', '0', '0', '0', '', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0),
-('emp123', 'juant', 'santos', 'dela cruz', '', '2020-02-03', '', '', '0', '0', '0', '', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0),
-('emp2020123', 'Triscia', 'b', 'sss', '', '1990-02-04', '', '', '0', '0', '0', '', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0),
-('emp2020124', 'maria', 'cruz', 'nicolas', '', '1990-08-11', '', '', '0', '0', '0', '', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0);
+INSERT INTO `employeeinfo` (`emp_no`, `emp_fname`, `emp_mname`, `emp_lname`, `emp_suffix`, `emp_bday`, `emp_sex`, `emp_civilStatus`, `emp_nationality`, `emp_religion`, `emp_placeOfBirth`, `emp_homeProvCode`, `emp_homeCityMunCode`, `emp_homeBrgyCode`, `emp_homeDetailedAdd`, `emp_perProvCode`, `emp_perCityMunCode`, `emp_perBrgyCode`, `emp_perDetailedAdd`, `emp_mobileNo`, `emp_telNo`, `emp_emailAdd`, `emp_educBg`, `emp_fathersName`, `emp_mothersName`, `emp_spouseName`, `emp_spouseBdate`, `emp_height`, `emp_weight`, `emp_bloodType`, `emp_sssNo`, `emp_philNo`, `emp_hdmfNo`, `emp_tinNo`, `emp_atmNo`) VALUES
+('emp', 'firsta', 'mida', 'lasta', 'suffixa', '2020-02-28', 'Female', 'civa', 'a', 'a', 'pbirtha', '0215', '021506', '021506006', 'qqqqqqq', '0133', '013304', '013304005', 'bbbbbbbbbbbbbbbbb', 123, 134, 'emaila', 'educa', 'fathrea', 'motha', 'spoa', '2020-02-28', 'ha', 'wa', 'ba', 'sssa', 'pha', 'hda', 'tina', 'attma'),
+('emp111', 'triscia', 't', 'salonga', '', '1999-07-15', 'Female', 'single', 'filipino', 'catholic', 'bocaue', '0314', '031408', '031408015', 'san agustin st.', '0314', '031408', '031408015', 'san agustin st.', 12345, 12345, 'iyawey@gmail.com', 'college', '', 'citadel', '', '0000-00-00', '', '', '', '', '', '', '', ''),
+('gfsd', 'w', '', 'eg', 'wf', '2020-03-04', 'Female', 'wf', 'fw', 'fw', '', '0209', '020902', '020902008', 'fwf', '0369', '036913', '036913010', 'fw', 1111111111, 0, 'a@v.com', '', '', '', '', '0000-00-00', '', '', '', 'hrth', 'gr', 'gdfs', 'dfs', '');
 
 -- --------------------------------------------------------
 
@@ -44029,8 +44032,13 @@ CREATE TABLE IF NOT EXISTS `servicerecord` (
   `serrec_date` date NOT NULL,
   `serrec_position` varchar(255) NOT NULL,
   `serrec_info` text NOT NULL,
-  `serrec_yrsOfService` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `serrec_yrsOfService` int(11) NOT NULL,
+  `serrec_deployed` varchar(255) NOT NULL,
+  `serrec_basic` float NOT NULL,
+  `serrec_rate` float NOT NULL,
+  `serrec_allowance` float NOT NULL,
+  `serrec_gross` float NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -44092,7 +44100,7 @@ ALTER TABLE `servicerecord`
 -- AUTO_INCREMENT for table `employeechildren`
 --
 ALTER TABLE `employeechildren`
-  MODIFY `empChild_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `empChild_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `memo`
 --
@@ -44122,7 +44130,7 @@ ALTER TABLE `refregion`
 -- AUTO_INCREMENT for table `servicerecord`
 --
 ALTER TABLE `servicerecord`
-  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --

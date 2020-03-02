@@ -15,11 +15,28 @@ include 'connect.php';
     <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">     
     <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
     <title>ARDC Add Employee</title>
+    
+    <style>
+        th{
+            text-align: center;
+            font-size: 16px
+        }
+        table{
+            width: 80%
+        }
+        
+        .fa-check-circle{
+            font-size: 18px;
+            color: limegreen;
+            display: none
+        }
+    </style>
 </head>
 <body>
     <div id="headerCompanyName">
         <img src="logo.jpg" id="logo"/>
     </div>
+    <a href="index.php" class="btn" id="backBtn">Back</a>
     <div id="addEmployeeDiv">
         <h2>ADD EMPLOYEE</h2>
         
@@ -29,7 +46,7 @@ include 'connect.php';
                 <label><i class="fas fa-asterisk" id="faAsterisk"></i> Employee No.</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off" required> 
+                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off" > <i class="far fa-check-circle" id="empCheck"></i>
                  <span class="errorAddEmp" id="empError">Employee no. already exist!</span>
             </div> 
             
@@ -37,7 +54,7 @@ include 'connect.php';
                 <label><i class="fas fa-asterisk" id="faAsterisk"></i> First name</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="fname" id="fname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" required>
+                 <input type="text" name="fname" id="fname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="fnameCheck"></i>
                  <span class="errorAddEmp" id="fnameError">Letters and white spaces only are allowed.</span>
             </div>             
             
@@ -45,7 +62,7 @@ include 'connect.php';
                 <label>Middle name</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="mname" id="mname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="mname" id="mname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="mnameCheck"></i>
                  <span class="errorAddEmp" id="mnameError">Letters and white spaces only are allowed.</span>
             </div> 
             
@@ -53,7 +70,7 @@ include 'connect.php';
                 <label><i class="fas fa-asterisk" id="faAsterisk"></i> Last name</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="lname" id="lname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" required>
+                 <input type="text" name="lname" id="lname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="lnameCheck"></i>
                  <span class="errorAddEmp" id="lnameError">Letters and white spaces only are allowed.</span>
             </div>
             
@@ -65,14 +82,14 @@ include 'connect.php';
             </div> 
             
             <div class="lblInputEmp addEmp">
-                <label>Birthday</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Birthday</label>
             </div> 
              <div class="addEmpInput">
                  <input type="date" name="bdate" id="bdate" class="addEmpClass addEmpIndent" autocomplete="off" >
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Sex</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Sex</label>
             </div> 
              <div class="addEmpInput">
                 <div class="col-md-3 custom-control custom-radio male">
@@ -86,26 +103,26 @@ include 'connect.php';
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Civil Status</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Civil Status</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="civStatus" id="civStatus" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="civStatus" id="civStatus" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="civStatusCheck"></i>
                  <span class="errorAddEmp" id="civStatusError">Letters and white spaces only are allowed.</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Nationality</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Nationality</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="nationality" id="nationality" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="nationality" id="nationality" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="nationalityCheck"></i>
                  <span class="errorAddEmp" id="nationalityError">Letters and white spaces only are allowed.</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Religion</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Religion</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="religion" id="religion" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="religion" id="religion" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="religionCheck"></i>
                  <span class="errorAddEmp" id="religionError">Letters and white spaces only are allowed.</span>
             </div> 
 
@@ -113,12 +130,12 @@ include 'connect.php';
                 <label>Place of Birth</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="placeOfBirth" id="placeOfBirth" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="placeOfBirth" id="placeOfBirth" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="placeOfBirthCheck"></i>
                  <span class="errorAddEmp" id="placeOfBirthError">Letters and white spaces only are allowed.</span>
             </div> 
             <hr id="line1">
             <div class="lblInputEmp addEmp">
-                <label>Home Address</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Home Address</label>
             </div> 
              <div class="addEmpInput">
                 <select id="selectProvHome" name="selectProvHome" class="custom-select dark-grey-text">
@@ -143,7 +160,7 @@ include 'connect.php';
             </div> 
             <hr id="line1">
             <div class="lblInputEmp addEmp">
-                <label>Permanent Address</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Permanent Address</label>
             </div> 
             <div class="addEmpInput">
                 <select id="selectProvPerm" name="selectProvPerm" class="custom-select dark-grey-text">
@@ -168,10 +185,11 @@ include 'connect.php';
             </div> 
             <hr id="line1">
             <div class="lblInputEmp addEmp">
-                <label>Mobile number</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Mobile number</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="mobNo" id="mobNo" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="mobNo" id="mobNo" class="addEmpClass addEmpIndent" autocomplete="off" placeholder="9XXXXXXXXX"><i class="far fa-check-circle" id="mobNoCheck"></i>
+                 <span class="errorAddEmp" id="mobNoError">Invalid number!</span>
             </div> 
 
             <div class="lblInputEmp addEmp">
@@ -182,10 +200,10 @@ include 'connect.php';
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Email Address</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Email Address</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="email" id="email" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
+                 <input type="text" name="email" id="email" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="emailCheck"></i>
                  <span class="errorAddEmp" id="emailError">Invalid email format!</span>
             </div> 
 
@@ -222,21 +240,41 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="date" name="spouseBday" id="spouseBday" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Child's Name</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="childsName" id="childsName" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Child's Birthday</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="date" name="childsBday" id="childsBday" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
+            </div>
+            <div>
+                <table id="childTable">
+                    <thead>
+                        <tr>
+                            <th><label>Child's Name</label></th>
+                            <th><label>Child's Birthday</label></th>
+                        </tr>
+                    </thead>
+                    <tbody id="childsbody">
+                        <tr>
+                            <td><input type="text" name="childsName1" id="childsName1" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" ></td>
+                            <td><input type="date" name="childsBday1" id="childsBday1" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="childsName2" id="childsName2" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" ></td>
+                            <td><input type="date" name="childsBday2" id="childsBday2" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="childsName3" id="childsName3" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" ></td>
+                            <td><input type="date" name="childsBday3" id="childsBday3" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="childsName4" id="childsName4" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" ></td>
+                            <td><input type="date" name="childsBday4" id="childsBday4" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="childsName5" id="childsName5" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" ></td>
+                            <td><input type="date" name="childsBday5" id="childsBday5" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                <button type="button" onclick="addChild()">add</button>
+            </div>
             <hr id="line1">
 
 
@@ -262,28 +300,28 @@ include 'connect.php';
             </div> 
             <hr id="line1">
             <div class="lblInputEmp addEmp">
-                <label>SSS no.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> SSS no.</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="sss" id="sss" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Philhealth no.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Philhealth no.</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="philhealth" id="philhealth" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>HDMF no.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> HDMF no.</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="hdmf" id="hdmf" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Tin no.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Tin no.</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="tin" id="tin" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
@@ -295,44 +333,8 @@ include 'connect.php';
              <div class="addEmpInput">
                  <input type="text" name="atm" id="atm" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
-<!--
-            <hr id="line1">
-            <div class="lblInputEmp addEmp">
-                <label>Deployed</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="deployed" id="deployed" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Basic</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="basic" id="basic" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Rate</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="rate" id="rate" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Allowance</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="allowance" id="allowance" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
-
-            <div class="lblInputEmp addEmp">
-                <label>Gross</label>
-            </div> 
-             <div class="addEmpInput">
-                 <input type="text" name="gross" id="gross" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
-            </div> 
--->
-
+            
+            <input type="text" id="childLength" name="childLength" style="display:none">
             <br>
             <input type="submit" value="Submit" class="submitAdd">
         </form>
@@ -350,9 +352,18 @@ include 'connect.php';
             }
         }
 
-        function IsEmail(email) {
+        function isEmail(email) {
             var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             if(!regex.test(email)) {
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
+        function isNumber(num){
+            var regex = /^[0-9]+$/;
+            if(!regex.test(num)) {
                 return false;
             }else{
                 return true;
@@ -362,7 +373,7 @@ include 'connect.php';
         
         var validEmpNo = false;
         var validFName = false;
-        var validMname = false;
+        var validMname = true;
         var validLname = false;
         var validcivStatus = false;
         var validNationality = false;
@@ -370,6 +381,8 @@ include 'connect.php';
         var validPlaceOfBirth = false;
         var validemail = false;
         var validSex = false;
+        var validnumber = false;
+        var validChild = false;
 
         $(document).ready(function(){
             
@@ -473,9 +486,6 @@ include 'connect.php';
             })
 
 
-
-
-
             $("input").focus(function(){
                 $(this).css("border-bottom", "3px solid #0762f5");
             });
@@ -492,17 +502,18 @@ include 'connect.php';
                     if(data === "e"){                            
                         $("#empno").css("border-bottom", "2px solid red");                            
                         document.getElementById("empError").style.display = "inline-block";
+                            document.getElementById("empCheck").style.display = "none";
                         validEmpNo = false;
                     }
                     else{
-                        if (e.length >25){
-                            $("#empno").css("border-bottom", "2px solid red");                            
+                        if (e.length >25){          
                             document.getElementById("empError").style.display = "inline-block";
+                            document.getElementById("empCheck").style.display = "none";
                             document.getElementById("empError").innerHTML = "Length maximum number is 25."
                             validEmpNo = false;
-                        }else{
-                            $("#empno").css("border-bottom", "3px solid #0ea300");                                       
+                        }else{                                  
                             document.getElementById("empError").style.display = "none";
+                            document.getElementById("empCheck").style.display = "inline-block";
                             validEmpNo = true;
                         }
                     }                                        
@@ -510,108 +521,172 @@ include 'connect.php';
             });
 
             $("#fname").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#fname").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                          
                     document.getElementById("fnameError").style.display = "none";
+                    document.getElementById("fnameCheck").style.display = "inline-block";
                     validFName = true;
-                }else{
-                    $("#fname").css("border-bottom", "2px solid red");                            
+                }else{                                     
+                    document.getElementById("fnameCheck").style.display = "none";
                     document.getElementById("fnameError").style.display = "inline-block";
                     validFName = false;
                 }
             });
 
             $("#mname").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#mname").css("border-bottom", "3px solid #0ea300");                                       
-                    document.getElementById("mnameError").style.display = "none";
-                    validMname = true;
-                }else{
-                    $("#mname").css("border-bottom", "2px solid red");                            
-                    document.getElementById("mnameError").style.display = "inline-block";
-                    validMname = false;
-                }
+                if( $(this).val() !=""){
+                    if(isString($(this).val()) == true){                                             
+                        document.getElementById("mnameError").style.display = "none";
+                        document.getElementById("mnameCheck").style.display = "inline-block";
+                        validMname = true;
+                    }else{                                       
+                        document.getElementById("mnameCheck").style.display = "none";
+                        document.getElementById("mnameError").style.display = "inline-block";
+                        validMname = false;
+                    }
+                }else
+                    {
+                        validMname = true;
+                    }
             });
 
             $("#lname").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#lname").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                    
                     document.getElementById("lnameError").style.display = "none";
+                    document.getElementById("lnameCheck").style.display = "inline-block";
                     validLname = true;
-                }else{
-                    $("#lname").css("border-bottom", "2px solid red");                            
+                }else{                     
                     document.getElementById("lnameError").style.display = "inline-block";
+                    document.getElementById("lnameCheck").style.display = "none";
                     validLname = false;
                 }
             });
 
             $("#civStatus").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#civStatus").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                             
                     document.getElementById("civStatusError").style.display = "none";
+                    document.getElementById("civStatusCheck").style.display = "inline-block";  
                     validcivStatus = true;
-                }else{
-                    $("#civStatus").css("border-bottom", "2px solid red");                            
-                    document.getElementById("civStatusError").style.display = "inline-block";
+                }else{                           
+                    document.getElementById("civStatusError").style.display = "inline-block";            
+                    document.getElementById("civStatusCheck").style.display = "none";
                     validcivStatus = false;
                 }
             });
 
             $("#nationality").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#nationality").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                             
                     document.getElementById("nationalityError").style.display = "none";
+                    document.getElementById("nationalityCheck").style.display = "inline-block";   
                     validNationality = true;
-                }else{
-                    $("#nationality").css("border-bottom", "2px solid red");                            
-                    document.getElementById("nationalityError").style.display = "inline-block";
+                }else{                           
+                    document.getElementById("nationalityError").style.display = "inline-block";     
+                    document.getElementById("nationalityCheck").style.display = "none";
                     validNationality = false;
                 }
             });
             
             $("#religion").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#religion").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                             
                     document.getElementById("religionError").style.display = "none";
+                    document.getElementById("religionCheck").style.display = "inline-block";
                     validReligion = true;
-                }else{
-                    $("#religion").css("border-bottom", "2px solid red");                            
+                }else{                                    
+                    document.getElementById("religionCheck").style.display = "none";
                     document.getElementById("religionError").style.display = "inline-block";
                     validReligion = false;
                 }
             });
             
             $("#placeOfBirth").on("change",function(){
-                if(isString($(this).val()) == true){       
-                    $("#placeOfBirth").css("border-bottom", "3px solid #0ea300");                                       
+                if(isString($(this).val()) == true){                                            
                     document.getElementById("placeOfBirthError").style.display = "none";
+                    document.getElementById("placeOfBirthCheck").style.display = "inline-block";
                     validPlaceOfBirth = true;
-                }else{
-                    $("#placeOfBirth").css("border-bottom", "2px solid red");                            
+                }else{                              
+                    document.getElementById("placeOfBirthCheck").style.display = "none";
                     document.getElementById("placeOfBirthError").style.display = "inline-block";
                     validPlaceOfBirth = false;
                 }
             });
 
             $("#email").on("change",function(){
-                if(isEmail($(this).val()) == true){       
-                    alert ("valid");
-                    // $("#email").css("border-bottom", "3px solid #0ea300");                                       
-                    // document.getElementById("emailError").style.display = "none";
-                    // validemail = true;
-                }else{
-
-                    alert("invalid")
-                    // $("#email").css("border-bottom", "2px solid red");                            
-                    // document.getElementById("emailError").style.display = "inline-block";
-                    // validemail = false;
+                if(isEmail($(this).val()) == true){                                           
+                     document.getElementById("emailError").style.display = "none";
+                     document.getElementById("emailCheck").style.display = "inline-block";
+                     validemail = true;
+                }else{                                 
+                     document.getElementById("emailCheck").style.display = "none";
+                     document.getElementById("emailError").style.display = "inline-block";
+                     validemail = false;
                 }
-                // alert ($(this).val());
+            });
+            
+            $("#mobNo").on("change",function(){
+                if(isNumber($(this).val()) == true){                                           
+                     document.getElementById("mobNoError").style.display = "none";
+                    document.getElementById("mobNoCheck").style.display = "inline-block";
+                    
+                        if(($(this).val().length)==10){        
+                             document.getElementById("mobNoError").style.display = "none";
+                            document.getElementById("mobNoCheck").style.display = "inline-block";
+                            validnumber = true;
+                        }else{
+                            document.getElementById("mobNoError").style.display = "inline-block";
+                            document.getElementById("mobNoCheck").style.display = "none";
+                            validnumber = false;
+                        }
+                     
+                }else{                           
+                     document.getElementById("mobNoError").style.display = "inline-block";
+                    document.getElementById("mobNoCheck").style.display = "none";
+                     validnumber = false;
+                }
             });
         });
 
+        var a = 5;
+        function addChild(){
+            a++;
+            var table = document.getElementById("childTable");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = '<input type="text" name="childsName'+a+'" id="childsName'+a+'" class="addEmpClass addEmpIndent cname" placeholder="" autocomplete="off" >';
+            cell2.innerHTML = '<td><input type="date" name="childsBday'+a+'" id="childsBday'+a+'" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ></td>';
+        }
+        
         function addEmployeeSubmit(event){
+            var bday = document.getElementById("bdate").value;
+            var sss = document.getElementById("sss").value;
+            var philhealth = document.getElementById("philhealth").value;
+            var hdmf = document.getElementById("hdmf").value;
+            var tin = document.getElementById("tin").value;
+            var mname = document.getElementById("mname").value;
+            
+            var ph = document.getElementById("selectProvHome").selectedIndex;
+            var cmh = document.getElementById("selectCMHome").selectedIndex;
+            var bh = document.getElementById("selectBrgyHome").selectedIndex;
+            var dh = document.getElementById("detailedAddHome").value;
+            
+            var pp = document.getElementById("selectProvPerm").selectedIndex;
+            var cmp = document.getElementById("selectCMPerm").selectedIndex;
+            var bp = document.getElementById("selectBrgyPerm").selectedIndex;
+            var dp = document.getElementById("detailedAddPerm").value;
 
+            var childLength = document.querySelectorAll("input.cname").length;
+            document.getElementById("childLength").value=childLength;
+            
+            for(var i=1; i<=childLength;i++){
+                if(document.getElementById("childsName"+i).value!=""){
+                    if(document.getElementById("childsBday"+i).value==""){
+                        validChild=false;
+                    }else{
+                        validChild=true;
+                    }
+                }
+            }
+            
+            
             var selSex = document.getElementsByName("sex");
             var checkSex = 0;
             for(i=0;i<selSex.length;i++){
@@ -624,28 +699,43 @@ include 'connect.php';
             if(checkSex!=0){
                 validSex = true;
             }
-
-            // alert(document.getElementById("selectCMHome").value);
-            if (confirm("Are you sure you want to save changes?")) {
+            
+            
+            if(validEmpNo==false || validFName==false || validLname==false || bday=="" || validSex==false || validcivStatus==false || validNationality==false  || validReligion==false  || validnumber==false || validemail==false || sss=="" || philhealth=="" || hdmf==""  || tin=="" || ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp==""){
+                alert("Please check all your inputs");                
                 event.preventDefault();
-                var form = document.forms.addEmpForm;
-                var dataInputted = new FormData(form);
+            }else{
+                if(validMname==false){
+                    alert("There is an error");
+                     event.preventDefault();
+                }else if(validChild==false){
+                    alert("Please check inputs on child's name or birthday");
+                    event.preventDefault();
+                }else{
+                    if (confirm("Are you sure you want to save changes?")) {
+                        event.preventDefault();
+                        var form = document.forms.addEmpForm;
+                        var dataInputted = new FormData(form);
 
-                    $.ajax({
-                        url:"toAddEmployee.php",
-                        type:"POST",
-                        enctype: "multipart/form-data",
-                        data: dataInputted,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success:function(data)
-                        {
-                           alert("Employee added into the database.")
-                           window.location.href="index.php";
-                        }
-                    });
+                        $.ajax({
+                            url:"toAddEmployee.php",
+                            type:"POST",
+                            enctype: "multipart/form-data",
+                            data: dataInputted,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success:function(data)
+                            {
+//                                alert(data);
+                                alert("Employee added into the database.")
+                                window.location.href="index.php";
+                            }
+                        });
+                    }
+                }
             }
+//   
                
            }
      

@@ -5,6 +5,8 @@ session_start();
     echo'<div id = "tableEmployeeDiv">     
                 <a href="addEmployeeDisplay.php"><button id = "addEmployeeButton" type="button">Add Employee</button></a>
                        <input id="searchField" name="searchField" class="searchProduct" type="search" placeholder="Search employee..." autocomplete="on" onkeyup="searchVal(this.value)">
+                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filterModal">Filter By...</button>
+                       <button type="button" class="btn btn-info" onclick="tableReset()" >RESET</button>
                 <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
                     <thead>  
                           <tr>    
