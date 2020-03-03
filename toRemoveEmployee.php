@@ -57,6 +57,28 @@ if(mysqli_num_rows($result)>0)
                 }
             }
         }
+        
+        $select4 = "SELECT * FROM employeechildren";
+        $result4 = mysqli_query($con,$select4);
+
+        if(mysqli_num_rows($result4)>0)
+        {
+
+            while ($row4 = mysqli_fetch_assoc($result4))
+            {                
+                if ($row4["emp_no"] == $a){
+                   $del4 = "DELETE FROM `employeechildren` WHERE `emp_no` = '". $row4["emp_no"]."'";
+                    if (mysqli_query($con,$del4))
+                        {
+                            $deleted++;
+                        }
+                    else{
+                         echo'Error';
+                    }
+                }
+            }
+        }
+
 
 
         if ($id == $a){

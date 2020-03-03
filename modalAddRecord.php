@@ -12,15 +12,15 @@ $empno = $_GET["id"];
         <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
 
         <div class="form-group">
-            <label for="serdate" class="col-form-label">Service Date</label>
+            <label for="serdate" class="col-form-label"><i class="fas fa-asterisk" id="faAsterisk"></i> Service Date</label>
             <input type="date" name="serdate" id="serdate" class="form-control" autocomplete="off" >
         </div>
         <div class="form-group">
-            <label for="position" class="col-form-label">Position</label>
+            <label for="position" class="col-form-label"><i class="fas fa-asterisk" id="faAsterisk"></i> Position</label>
             <input type="text" name="position" id="position" class="form-control" autocomplete="off" >
         </div>
         <div class="form-group">
-            <label for="deployed" class="col-form-label">Deployed</label>
+            <label for="deployed" class="col-form-label"><i class="fas fa-asterisk" id="faAsterisk"></i> Deployed</label>
             <input type="text" name="deployed" id="deployed" class="form-control" autocomplete="off" >
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@ $empno = $_GET["id"];
             <input type="number" min="0" name="yrsOfService" id="yrsOfService" class="form-control" autocomplete="off" >
         </div>
         <div class="form-group">
-            <input type="submit" value="Submit" class="submitAdd">
+            <input type="submit" value="Add" class="submitAdd">
         </div>
     </form>
     </body>

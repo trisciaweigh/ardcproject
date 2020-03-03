@@ -133,7 +133,7 @@ select.actived{
     background-color: transparent;
 }
 
-#btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,.submitAdd,#addEmployeeButton{
+#btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,#addMemoButton,.submitAdd,#addEmployeeButton{
     float: right;
     border-style: hidden;
     background-color: #cc3333;
@@ -142,9 +142,14 @@ select.actived{
     letter-spacing: 3px;
     font-size: 12px;
     outline: none;
-    padding: 1% 2% 1% 2%;
+    padding: 0.5% 1% 0.5% 1%;
     cursor: pointer;
+    
+    border-radius: 0;
 
+}
+#addEmployeeButton{
+    margin-bottom: 1rem;
 }
 
 #viewEmpBtn, #delEmpBtn, #editRecBtn,#delRecBtn{
@@ -162,7 +167,27 @@ select.actived{
 
 }
 
-#btnSave:hover,#btnEdit:hover,#addRecordButton:hover,.submitAdd:hover,#addEmployeeButton:hover,#viewEmpBtn:hover,#editRecBtn:hover{
+.filt{
+    border-style: hidden;
+    background-color: #cc3333;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    outline: none;
+    padding: 0.5% 1% 0.5% 1%;
+    cursor: pointer;
+    margin: 0 1rem;
+    text-decoration: none
+
+}
+
+.filt:hover{
+    background-color:#c90202;
+    color: white
+}
+
+#btnSave:hover,#btnEdit:hover,#addRecordButton:hover,#addMemoButton:hover,.submitAdd:hover,#addEmployeeButton:hover,#viewEmpBtn:hover,#editRecBtn:hover{
     background-color:#c90202;
 }
 
@@ -175,8 +200,12 @@ select.actived{
 
 #backBtn{
     float: right;
-    padding: 1% 1.5%;
     border-radius: 0;
+}
+
+.bckAdd{
+    margin-right: 10rem;
+    margin-top: 5rem
 }
 
 .addRecInput{

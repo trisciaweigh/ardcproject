@@ -55,26 +55,10 @@ if(mysqli_num_rows($result)>0)
         $curhdmfNo = $row["emp_hdmfNo"];
         $curtinNo = $row["emp_tinNo"];
         $curatmNo = $row["emp_atmNo"];
-        $curdeployed = $row["emp_deployed"];
-        $curbasic = $row["emp_basic"];
-        $currate = $row["emp_rate"];
-        $curallowance = $row["emp_allowance"];
-        $curgross = $row["emp_gross"];
     }
 }
 else{
     echo mysqli_error($con);
-}
-
-$select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
-$result = mysqli_query($con,$select);
-if(mysqli_num_rows($result)>0)
-{
-    while($row = mysqli_fetch_array($result))  
-    { 
-        $curchildsName = $row["empChild_name"];
-        $curchildsBday = $row["empChild_bday"];
-    }
 }
 
 
@@ -97,8 +81,6 @@ $fathersName = $_POST["fathersName"];
 $mothersName = $_POST["mothersName"];
 $spouseName = $_POST["spouseName"];
 $spouseBdate = $_POST["spouseBdate"];
-$childsName = $_POST["childsName"];
-$childsBdate = $_POST["childsBday"];
 $height = $_POST["height"];
 $weight = $_POST["weight"];
 $bloodType = $_POST["bloodType"];
@@ -107,11 +89,7 @@ $philNo = $_POST["philNo"];
 $hdmfNo = $_POST["hdmfNo"];
 $tinNo = $_POST["tinNo"];
 $atmNo = $_POST["atmNo"];
-$deployed = $_POST["deployed"];
-$basic = $_POST["basic"];
-$rate = $_POST["rate"];
-$allowance = $_POST["allowance"];
-$gross = $_POST["gross"];
+$childLength = $_POST["childLength"];
 
 if($fname==""){
     $fname = $curfname;
@@ -255,12 +233,6 @@ if($spouseName==""){
 if($spouseBdate==""){
     $spouseBdate = $curspouseBdate;
 }
-if($childsName==""){
-    $childsName = $curchildsName;
-}
-if($childsBdate==""){
-    $childsBdate = $curchildsBday;
-}
 if($weight==""){
     $weight = $curweight;
 }
@@ -291,7 +263,35 @@ $update = "UPDATE `employeeinfo` SET `emp_fname` = '$fname', `emp_mname` = '$mna
 
 if (mysqli_query($con,$update))
 {
-    echo'saved';
+        $childname="";
+        $childbday="";
+        $d=0;
+
+        for($x=1; $x <= $childLength; $x++){
+            if($_POST["childsName".$x]!=""){
+                $childname=$_POST["childsName".$x];
+                $childbday=$_POST["childsBday".$x];
+                if($d==0){
+                    $del4 = "DELETE FROM `employeechildren` WHERE `emp_no` = '". $empno."'";
+                    if (mysqli_query($con,$del4))
+                    {
+                        $d++;
+                    }
+                }
+                $insert = "INSERT INTO `employeechildren` (`emp_no`, `empChild_name`, `empChild_bday`) VALUES ('$empno', '$childname', '$childbday')";      
+                if (mysqli_query($con,$insert))
+                {            
+                    echo 'added';
+                }
+                else{
+                    echo  mysqli_error($con);
+                }
+            }else{
+                echo "ala";
+            }
+
+        } 
+    echo "updated";
 }
 else{
     echo("Error description: " . mysqli_error($con));

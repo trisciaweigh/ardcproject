@@ -4,8 +4,23 @@ session_start();
 
 $action = $_GET["action"];
 
-if($action=="Deployed"){    
-    echo'        <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
+if($action=="show"){   
+    
+    echo '<select id="filterDep" name="filterDep" class="custom-select dark-grey-text">
+            <option selected disabled>--Select--</option>';
+    
+    $select = "SELECT distinct `serrec_deployed`  FROM `servicerecord`";
+    $result = mysqli_query($con,$select);
+    if(mysqli_num_rows($result)>0)
+    {
+        while($row = mysqli_fetch_array($result))  
+        {  
+            echo '<option>'.$row['serrec_deployed'].'</option>';
+        }
+    }
+    echo '</select>';
+}else if($action=="Deployed"){
+        echo'        <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
                     <thead>  
                     <tr>    
                     <th class="sorting">EMPLOYEE NAME</th> 
@@ -46,6 +61,11 @@ if($action=="Deployed"){
                         }
 
     echo '            </table>';
+
+
+
+
+
 }else{
     $b = $_GET["b"];
     $none=0;

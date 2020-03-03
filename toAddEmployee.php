@@ -47,13 +47,6 @@ $brgyCodeHome = "";
 $cmCodePerm = "";
 $brgyCodePerm = "";
 
-for($x=1; $x <= $childLength; $x++){
-    if($_POST["childsName".$x]!=""){
-        
-        $childsName = $childsName . $_POST["childsName".$x]."/";
-        $childsBday = $childsBday . $_POST["childsBday".$x]."/";
-    }
-}
 
 // HOME ADDRESS
 $x=0;
@@ -102,14 +95,20 @@ while($row = mysqli_fetch_array($select))
 $insert = "INSERT INTO `employeeinfo` VALUES ('$empno','$fname','$mname','$lname','$suffix','$bdate','$sex','$civStatus','$nationality','$religion','$placeOfBirth','$selectProvHome','$cmCodeHome','$brgyCodeHome','$detailedAddHome','$selectProvPerm','$cmCodePerm','$brgyCodePerm','$detailedAddPerm','$mobNo','$telNo','$email','$educ','$father','$mother','$spouseName','$spouseBday','$height','$weight','$blood','$sss','$philhealth','$hdmf','$tin','$atm')";      
 if (mysqli_query($con,$insert))
 {            
-    $insert2 = "INSERT INTO `employeechildren` (`emp_no`, `empChild_name`, `empChild_bday`) VALUES ('$empno', '$childsName', '$childsBday')";      
-    if (mysqli_query($con,$insert2))
-    {            
-        echo 'added';
+    for($x=1; $x <= $childLength; $x++){
+        if($_POST["childsName".$x]!=""){
+            $insert2 = "INSERT INTO `employeechildren` (`emp_no`, `empChild_name`, `empChild_bday`) VALUES ('$empno', '".$_POST["childsName".$x]."', '".$_POST["childsBday".$x]."')";      
+            if (mysqli_query($con,$insert2))
+            {            
+                echo 'added';
+            }
+            else{
+                echo  mysqli_error($con);
+            }
+        }
     }
-    else{
-        echo  mysqli_error($con);
-    }
+
+    
 }
 else{
      echo  mysqli_error($con);

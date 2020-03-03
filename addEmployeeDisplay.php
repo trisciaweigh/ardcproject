@@ -36,7 +36,7 @@ include 'connect.php';
     <div id="headerCompanyName">
         <img src="logo.jpg" id="logo"/>
     </div>
-    <a href="index.php" class="btn" id="backBtn">Back</a>
+    <a href="index.php" class="btn bckAdd" id="backBtn">Back</a>
     <div id="addEmployeeDiv">
         <h2>ADD EMPLOYEE</h2>
         
@@ -382,7 +382,7 @@ include 'connect.php';
         var validemail = false;
         var validSex = false;
         var validnumber = false;
-        var validChild = false;
+        var validChild = true;
 
         $(document).ready(function(){
             
@@ -708,31 +708,35 @@ include 'connect.php';
                 if(validMname==false){
                     alert("There is an error");
                      event.preventDefault();
-                }else if(validChild==false){
-                    alert("Please check inputs on child's name or birthday");
-                    event.preventDefault();
                 }else{
-                    if (confirm("Are you sure you want to save changes?")) {
-                        event.preventDefault();
-                        var form = document.forms.addEmpForm;
-                        var dataInputted = new FormData(form);
+                    
+                    if(validChild==true){
+                        if (confirm("Are you sure you want to save changes?")) {
+                            event.preventDefault();
+                            var form = document.forms.addEmpForm;
+                            var dataInputted = new FormData(form);
 
-                        $.ajax({
-                            url:"toAddEmployee.php",
-                            type:"POST",
-                            enctype: "multipart/form-data",
-                            data: dataInputted,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            success:function(data)
-                            {
-//                                alert(data);
-                                alert("Employee added into the database.")
-                                window.location.href="index.php";
-                            }
-                        });
+                            $.ajax({
+                                url:"toAddEmployee.php",
+                                type:"POST",
+                                enctype: "multipart/form-data",
+                                data: dataInputted,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success:function(data)
+                                {
+    //                                alert(data);
+                                    alert("Employee added into the database.")
+                                    window.location.href="index.php";
+                                }
+                            });
+                        }
+                    }else{
+                        alert("Please check inputs on child's name and birthday");
+                        event.preventDefault();
                     }
+                    
                 }
             }
 //   

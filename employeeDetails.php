@@ -26,6 +26,8 @@ $empno = $_GET["id"];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+    
+    <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
 
         <!-- <link href="stylesheets/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="stylesheets/bootstrap.css">
@@ -157,16 +159,7 @@ $empno = $_GET["id"];
                             }
                         }
 
-                        $select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
-                        $result = mysqli_query($con,$select);
-                        if(mysqli_num_rows($result)>0)
-                        {
-                            while($row = mysqli_fetch_array($result))  
-                            { 
-                                $childsName = $row["empChild_name"];
-                                $childsBday = $row["empChild_bday"];
-                            }
-                        }
+                
 
 
                         if($spouseBdate=="0000-00-00"){
@@ -177,9 +170,7 @@ $empno = $_GET["id"];
                             $bdate="";
                         }
 
-                        if($childsBday=="0000-00-00"){
-                            $childsBday="";
-                        }
+                        
                     ?>
                     
                     
@@ -374,16 +365,29 @@ $empno = $_GET["id"];
                             </div>
                             
                             <div class="row">
+                                <?php
+                                            
+                                            
+                                     
+                                            
+                                             
+                                            
+                                ?>
                                 <div class="col-2">
                                     <label class="detailLabel">Child's Name</label>
                                 </div> 
                                 <div class="col-4">
                                     <label class="detailInfo">
                                         <?php
-                                            $childArr = explode ("/", $childsName); 
-                                            for ($x=0; $x<count($childArr); $x++){
-                                                echo $childArr[$x] ."<br>";
-                                            }
+                                            $select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
+                                            $result = mysqli_query($con,$select);
+                                            if(mysqli_num_rows($result)>0)
+                                            {
+                                                while($row = mysqli_fetch_array($result))  
+                                                {
+                                                    echo $row["empChild_name"]."<br>";
+                                                }
+                                            }  
                                         ?>
                                     </label>
                                 </div>
@@ -393,10 +397,22 @@ $empno = $_GET["id"];
                                 <div class="col-4">
                                     <label class="detailInfo">
                                         <?php
-                                            $childBdayArr = explode ("/", $childsBday); 
-                                            for ($x=0; $x<count($childBdayArr); $x++){
-                                                echo $childBdayArr[$x] ."<br>";
+                                        $select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
+                                            $result = mysqli_query($con,$select);
+                                            if(mysqli_num_rows($result)>0)
+                                            {
+                                                while($row = mysqli_fetch_array($result))  
+                                                {
+                                                    if($row["empChild_bday"]=="0000-00-00"){
+                                                        $childsBday="";
+                                                    }else{
+                                                        $childsBday=$row["empChild_bday"];
+                                                    }
+                                                    echo $childsBday."<br>";
+                                                }
                                             }
+                                            
+                                          
                                         ?>
                                     </label>
                                 </div>
@@ -505,10 +521,30 @@ $empno = $_GET["id"];
                                     echo '<td>'. $row["serrec_date"] .'</td>';
                                     echo '<td>'. $row["serrec_position"] .'</td>';
                                     echo '<td>'. $row["serrec_deployed"] .'</td>';
-                                    echo '<td>'. $row["serrec_basic"] .'</td>';
-                                    echo '<td>'. $row["serrec_rate"] .'</td>';
-                                    echo '<td>'. $row["serrec_allowance"] .'</td>';
-                                    echo '<td>'. $row["serrec_gross"] .'</td>';
+                                    
+                                    if($row["serrec_basic"]==0){
+                                        echo '<td></td>';
+                                    }else{
+                                        echo '<td>₱ '. number_format($row["serrec_basic"],2) .'</td>';
+                                    }
+                                    
+                                    if($row["serrec_rate"]==0){
+                                        echo '<td></td>';
+                                    }else{
+                                        echo '<td>'.$row["serrec_rate"] .'</td>';
+                                    }
+                                    
+                                    if($row["serrec_allowance"]==0){
+                                        echo '<td></td>';
+                                    }else{
+                                        echo '<td>₱ '. number_format($row["serrec_allowance"],2) .'</td>';
+                                    }
+                                    
+                                    if($row["serrec_gross"]==0){
+                                        echo '<td></td>';
+                                    }else{
+                                        echo '<td>'. $row["serrec_gross"] .'</td>';
+                                    }
                                     echo '<td>'. $row["serrec_info"] .'</td>';
                                     echo '<td>'. $row["serrec_yrsOfService"] .'</td>';
                                     echo '<td><button type="button" id="editRecBtn" data-toggle="modal" data-target="#editRecordModal" class="btnsSerRec" onclick="editRecord('.$serrecno.')">Edit</button>
@@ -529,20 +565,21 @@ $empno = $_GET["id"];
                     echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';                    
                     ?>
                     
-                    <div id = "tableEmployeeDiv">     
+                    <div id = "tableEmployeeDiv3">  
+                        <button id = "addMemoButton" type="button" class="btn" data-toggle="modal" data-target="#addMemoModal" onclick="addMemo()">Add Memo</button>
                         <br><br>
                         <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
                             <thead>  
                                   <tr>    
                                       <th>DATE</th> 
                                       <th>MEMO</th>
-                                      <th>SENT BY</th>
+                                      <th>MEMO FROM</th>
                                       <th>ACTION</th>
                                   </tr>  
                             </thead>
                             <?php
                                 $memo_no = 0;
-                                echo '<td id="empno" style="display:none;">'. $empno .'</td>';
+                                echo '<td id="empnoMemo" style="display:none;">'. $empno .'</td>';
                                 $select = mysqli_query($con,"SELECT * FROM `memo` where `emp_no` = '$empno' order by `memo_date` desc");
                                 while($row = mysqli_fetch_array($select))  
                                 {  
@@ -551,7 +588,7 @@ $empno = $_GET["id"];
                                     echo '<td>'. $row["memo_date"] .'</td>';
                                     echo '<td>'. $row["memo_details"] .'</td>';
                                     echo '<td>'. $row["memo_from"] .'</td>';
-                                    echo '<td><button type="button" id="delRecBtn" onclick="deleteRecord('.$memo_no.')">Delete</button></td>';
+                                    echo '<td><button type="button" id="delRecBtn" onclick="deleteMemo('.$memo_no.')">Delete</button></td>';
                                     echo '</tr>';
                                 }
                             ?>
@@ -606,6 +643,24 @@ $empno = $_GET["id"];
             </div>
         </div>
         
+                <div class="modal fade" id="addMemoModal" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Memo</h4>
+                  <button type="button" class="close" id="closeAddM" data-dismiss="modal">&times;</button>
+                  
+                </div>
+                <div class="modal-body">
+                  <div id="addMemoDisp"></div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+        
         
 <!--        SCRIPTS-->
         <script>
@@ -620,56 +675,149 @@ $empno = $_GET["id"];
                 }
             }
             
-            var editErr = 0;
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if(!regex.test(email)) {
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+            function isNumber(num){
+                var regex = /^[0-9]+$/;
+                if(!regex.test(num)) {
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+        
+            var validFName = true;
+            var validMName = true;
+            var validLName = true;
+            var validcivStatus = true;
+            var validNationality = true;
+            var validReligion = true;
+            var validPlaceOfBirth = true;
+            var validemail = true;
+            var validnumber = true;
+            var validChild = true;
+
             $(document).ready(function(){
                 $(".nav-tabs a").click(function(){
                     $(this).tab("show")
                 });
 
                 $("input").focus(function(){
-                    $(this).css("border-bottom", "2px solid #2074fa");
+                    $(this).css("border-bottom", "3px solid #0762f5");
                 });
                 $("input").blur(function(){
                     $(this).css("border-bottom", "2px solid dimgray");
-                });
-                
-                $("#fname").on("change",function(){
-                    if(isString($(this).val()) == true){
-                        document.getElementById("fnameError").style.display = "none";
-                        editErr = 0;
-                    }
-                    else{
-                        document.getElementById("fnameError").style.display = "inline-block";
-                        $(this).focusin();
-                        editErr++;
-                    }
-                })
-                
-                $("#mname").on("change",function(){
-                    if(isString($(this).val()) == true){
-                        document.getElementById("mnameError").style.display = "none";
-                        editErr = 0;
-                    }
-                    else{
-                        document.getElementById("mnameError").style.display = "inline-block";
-                        $(this).focusin();
-                        editErr++;
-                    }
-                })
-                
-                $("#lname").on("change",function(){
-                    if(isString($(this).val()) == true){
-                        document.getElementById("lnameError").style.display = "none";
-                        editErr = 0;
-                    }
-                    else{
-                        editErr++;
-                        document.getElementById("lnameError").style.display = "inline-block";
-                        $(this).focusin();
-                    }
-                })
-
+                });               
             })
+            
+            function fnameValidation(v){
+                if(isString(v) == true){                                          
+                    document.getElementById("fnameError").style.display = "none";
+                    validFName = true;
+                }else{                                     
+                    document.getElementById("fnameError").style.display = "inline-block";
+                    validFName = false;
+                }
+            }
+            
+            function mnameValidation(v){
+                if(v!=""){
+                    if(isString(v) == true){                                          
+                        document.getElementById("mnameError").style.display = "none";
+                        validMName = true;
+                    }else{                                     
+                        document.getElementById("mnameError").style.display = "inline-block";
+                        validMName = false;
+                    }
+                }else{
+                    validMName = true;
+                }                
+            }
+            
+            function lnameValidation(v){
+                if(isString(v) == true){                                          
+                    document.getElementById("lnameError").style.display = "none";
+                    validLName = true;
+                }else{                                     
+                    document.getElementById("lnameError").style.display = "inline-block";
+                    validLName = false;
+                }
+            }
+            
+            function civilStatusValidation(v){
+                if(isString(v) == true){              
+                    document.getElementById("civilStatusError").style.display = "none";
+                    validcivStatus = true;
+                }else{                           
+                    document.getElementById("civilStatusError").style.display = "inline-block";   
+                    validcivStatus = false;
+                }
+            }
+            
+            function nationalityValidation(v){
+                if(isString(v) == true){                                 
+                    document.getElementById("nationalityError").style.display = "none";
+                    validNationality = true;
+                }else{                           
+                    document.getElementById("nationalityError").style.display = "inline-block";     
+                    validNationality = false;
+                }
+            }
+            
+            function religionValidation(v){
+                if(isString(v) == true){                              
+                    document.getElementById("religionError").style.display = "none";
+                    validReligion = true;
+                }else{                                    
+                    document.getElementById("religionError").style.display = "inline-block";
+                    validReligion = false;
+                }
+            }
+            
+            function placeOfBirthValidation(v){
+                if(isString(v) == true){                               
+                    document.getElementById("placeOfBirthError").style.display = "none";
+                    validPlaceOfBirth = true;
+                }else{                              
+                    document.getElementById("placeOfBirthError").style.display = "inline-block";
+                    validPlaceOfBirth = false;
+                }
+            }
+            
+            function emailValidation(v){
+                if(isEmail(v) == true){                                           
+                     document.getElementById("emailError").style.display = "none";
+                     validemail = true;
+                }else{                                 
+                     document.getElementById("emailError").style.display = "inline-block";
+                     validemail = false;
+                }
+            }
+            
+            function mobNoValidation(v){
+                if(isNumber(v) == true){                                           
+                    document.getElementById("mobNoError").style.display = "none";
+                    if((v.length)==10){        
+                        document.getElementById("mobNoError").style.display = "none";
+                        validnumber = true;
+                    }else{
+                        document.getElementById("mobNoError").style.display = "inline-block";
+                        validnumber = false;
+                    }
+
+                }else{                           
+                    document.getElementById("mobNoError").style.display = "inline-block";
+                    validnumber = false;
+                }
+        }
 
 
             // HOME ADDRESS
@@ -778,8 +926,9 @@ $empno = $_GET["id"];
 
             var cnt = 0;
             function addChild(){
-                var a = parseInt(document.getElementById("childCount").value);
-                cnt++;                
+                var a = parseInt(document.getElementById("childCount").value);  
+                
+                cnt++; 
                 var c = cnt+a;
                 var table = document.getElementById("childTable");
                 var row = table.insertRow(-1);
@@ -787,6 +936,7 @@ $empno = $_GET["id"];
                 var cell2 = row.insertCell(1);
                 cell1.innerHTML = '<input type="text" name="childsName'+c+'" id="childsName'+c+'" class="detailInfoEdit actived cname" placeholder="" autocomplete="off" >';
                 cell2.innerHTML = '<td><input type="date" name="childsBday'+c+'" id="childsBday'+c+'" class="detailInfoEdit actived" placeholder="" autocomplete="off" ></td>';
+                
             }
             
             function editInfo(){
@@ -809,40 +959,55 @@ $empno = $_GET["id"];
             function editEmployeeSubmit(event){
                 var childLength = document.querySelectorAll("input.cname").length;
                 document.getElementById("childLength").value=childLength;
-                alert(childLength);
                 
-//                if(editErr == 0){
-//                    document.getElementById("selectCMHome").disabled = false;                    
-//                    document.getElementById("selectBrgyHome").disabled = false;
-//                    document.getElementById("selectCMPer").disabled = false;
-//                    document.getElementById("selectBrgyPer").disabled = false;
-//                    if (confirm("Are you sure you want to save changes?")) {
-//                        event.preventDefault();
-//                        var form = document.forms.editInfoForm;
-//                        var dataInputted = new FormData(form);
-//    
-//                             $.ajax({
-//                                url:"toEditEmployee.php",
-//                                type:"POST",
-//                                enctype: "multipart/form-data",
-//                                data: dataInputted,
-//                                contentType: false,
-//                                cache: false,
-//                                processData: false,
-//                                success:function(data)
-//                                {
-//                                    alert("Changes Saved.");
-//                                    $( "#empInfo" ).load(window.location.href + " #empInfo" );
-////                                    alert(data);
-//                                }
-//                            });
-//                    }
-//                    
-//                }
-//                else{
-//                    event.preventDefault();
-//                    alert("Check your inputs");
-//                }
+                for(var i=1; i<=childLength;i++){
+                    if(document.getElementById("childsName"+i).value!=""){
+                        if(document.getElementById("childsBday"+i).value==""){
+                            validChild=false;
+                        }else{
+                            validChild=true;
+                        }
+                    }
+                }
+                
+                if(validFName==false || validMName==false || validLName==false || validcivStatus==false || validNationality==false  || validReligion==false  || validPlaceOfBirth==false  || validnumber==false || validemail==false){
+                    
+                        event.preventDefault();
+                        alert("Please check all your inputs");
+                }
+                else{
+                    if(validChild==true){
+                        document.getElementById("selectCMHome").disabled = false;
+                        document.getElementById("selectBrgyHome").disabled = false;
+                        document.getElementById("selectCMPer").disabled = false;
+                        document.getElementById("selectBrgyPer").disabled = false;
+                        if (confirm("Are you sure you want to save changes?")) {
+                            event.preventDefault();
+                            var form = document.forms.editInfoForm;
+                            var dataInputted = new FormData(form);
+
+                                 $.ajax({
+                                    url:"toEditEmployee.php",
+                                    type:"POST",
+                                    enctype: "multipart/form-data",
+                                    data: dataInputted,
+                                    contentType: false,
+                                    cache: false,
+                                    processData: false,
+                                    success:function(data)
+                                    {
+                                        alert("Changes Saved.");
+//                                        alert(data);
+                                        $( "#empInfo" ).load(window.location.href + " #empInfo" );
+                                    }
+                                });
+                        }
+
+                    }else{
+                        alert("Please check inputs on child's name and birthday");
+                        event.preventDefault();
+                    }
+                }
             }
             
             
@@ -864,13 +1029,11 @@ $empno = $_GET["id"];
             
             
             function addRecordSubmit(event){
-                var err = 0;
                 let serDateInput = document.getElementById("serdate").value;
                 let serPosInput = document.getElementById("position").value;
-                let serInfoInput = document.getElementById("info").value;
+                let serDeployedInput = document.getElementById("deployed").value;
                 
-                if (serDateInput == "" || serPosInput == "" || serInfoInput == "" ){
-                    err++;
+                if (serDateInput == "" || serPosInput == "" || serDeployedInput == "" ){
                     alert("Please complete the fields");
                     event.preventDefault();
                 }else{
@@ -949,6 +1112,70 @@ $empno = $_GET["id"];
                         }
                     });
                 }
+            }
+            
+//            MEMO
+            
+            function addMemo(){
+                var empno = document.getElementById("empnoMemo").innerHTML;
+                xml = new XMLHttpRequest();
+                xml.onreadystatechange = function() {
+                    if(xml.readyState==4 && xml.status==200) {
+                        document.getElementById("addMemoDisp").innerHTML = xml.responseText;
+                    }
+                };
+
+                xml.open("GET","modalAddMemo.php?id="+empno,true);
+                xml.send();
+//                alert(empno);
+            }
+            
+            function addMemoSubmit(event){
+                var memodate = document.getElementById("memodate").value;
+                var memo = document.getElementsByTagName("textarea")[0].value;
+//                
+                if (memodate == "" || memo == "" ){
+                    alert("Please complete the fields");
+                    event.preventDefault();
+                }else{
+                    
+                    if (confirm("Are you sure you want to add this memo?")) {
+                        event.preventDefault();
+                        var form = document.forms.addMemoForm;
+                        var dataInputted = new FormData(form);
+                        $.ajax({
+                            url:"toAddMemo.php",
+                            type:"POST",
+                            enctype: "multipart/form-data",
+                            data: dataInputted,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success:function(data)
+                            {
+                                alert("Memo added into the database.");
+                                document.getElementById("closeAddM").click();                                
+                                $( "#tableEmployeeDiv3" ).load(window.location.href + " #tableEmployeeDiv3" );
+
+                            }
+                        });
+                    }                    
+                }
+            }
+            
+            function deleteMemo(id) {
+                 if (confirm("Do you want to delete this memo?")) {
+                    var xml = new XMLHttpRequest();
+                    xml.onreadystatechange = function() {
+                        if (xml.readyState == 4 && xml.status == 200) {
+                            alert("Memo sucessfully deleted.");
+                            $( "#tableEmployeeDiv3" ).load(window.location.href + " #tableEmployeeDiv3" );
+                        }
+                    };
+                    xml.open("get", "toRemoveMemo.php?i=" + id, true);
+                    xml.send();
+                    return false;
+                  }
             }
         </script>
     </body>

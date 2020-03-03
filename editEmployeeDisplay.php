@@ -120,16 +120,6 @@ if(mysqli_num_rows($result)>0)
     }
 }
 
-$select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
-$result = mysqli_query($con,$select);
-if(mysqli_num_rows($result)>0)
-{
-    while($row = mysqli_fetch_array($result))  
-    { 
-        $childsName = $row["empChild_name"];
-        $childsBday = $row["empChild_bday"];
-    }
-}
 ?>
   <body>
         <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
@@ -140,8 +130,8 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">First Name</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $fname;?>" value="<?php echo $fname;?>" name="fname" id="fname" autocomplete="off" >
-                    <span class="error" id="fnameError">Letters and white spaces only!</span>
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $fname;?>" value="<?php echo $fname;?>" name="fname" id="fname" autocomplete="off" onchange="fnameValidation(this.value)">
+                    <span class="error" id="fnameError">Letters and white spaces only are allowed.</span>
                 </div> 
             </div>
             
@@ -150,8 +140,8 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Middle Name</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $mname;?>" value="<?php echo $mname;?>" name="mname" id="mname" autocomplete="off" >
-                    <span class="error"  id="mnameError">Letters and white spaces only!</span>
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $mname;?>" value="<?php echo $mname;?>" name="mname" id="mname" autocomplete="off" onchange="mnameValidation(this.value)">
+                    <span class="error"  id="mnameError">Letters and white spaces only are allowed.</span>
                 </div> 
             </div>
             
@@ -160,8 +150,8 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Last Name</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $lname;?>" value="<?php echo $lname;?>" name="lname" id="lname" autocomplete="off" >
-                    <span class="error"  id="lnameError">Letters and white spaces only!</span>
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $lname;?>" value="<?php echo $lname;?>" name="lname" id="lname" autocomplete="off" onchange="lnameValidation(this.value)">
+                    <span class="error"  id="lnameError">Letters and white spaces only are allowed.</span>
                 </div> 
             </div>
             
@@ -210,7 +200,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Civil Status</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $civilStatus;?>" value="<?php echo $civilStatus;?>" name="civilStatus" id="civilStatus" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $civilStatus;?>" value="<?php echo $civilStatus;?>" name="civilStatus" id="civilStatus" autocomplete="off" onchange="civilStatusValidation(this.value)"><span class="error"  id="civilStatusError">Letters and white spaces only are allowed.</span>
                 </div>   
             </div>
             
@@ -219,7 +209,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Nationality</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $nationality;?>" value="<?php echo $nationality;?>" name="nationality" id="nationality" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $nationality;?>" value="<?php echo $nationality;?>" name="nationality" id="nationality" autocomplete="off" onchange="nationalityValidation(this.value)"><span class="error"  id="nationalityError">Letters and white spaces only are allowed.</span>
                 </div>                                
             </div>
             
@@ -228,7 +218,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Religion</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $religion;?>" value="<?php echo $religion;?>" name="religion" id="religion" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $religion;?>" value="<?php echo $religion;?>" name="religion" id="religion" autocomplete="off" onchange="religionValidation(this.value)"><span class="error"  id="religionError">Letters and white spaces only are allowed.</span>
                 </div>                                
             </div>
             
@@ -237,7 +227,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Place of Birth</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $placeOfBirth;?>" value="<?php echo $placeOfBirth;?>" name="placeOfBirth" id="placeOfBirth" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $placeOfBirth;?>" value="<?php echo $placeOfBirth;?>" name="placeOfBirth" id="placeOfBirth" autocomplete="off" onchange="placeOfBirthValidation(this.value)"><span class="error"  id="placeOfBirthError">Letters and white spaces only are allowed.</span>
                 </div>                                
             </div>
             
@@ -376,7 +366,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Mobile no.</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $mobileNo;?>" value="<?php echo $mobileNo;?>" name="mobileNo" id="mobileNo" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="9XXXXXXXXX" value="<?php echo $mobileNo;?>" name="mobileNo" id="mobileNo" autocomplete="off" onchange="mobNoValidation(this.value)"><span class="error" id="mobNoError">Invalid number!</span>
                 </div>   
             </div>
             
@@ -394,7 +384,7 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Email Address</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $emailAdd;?>" value="<?php echo $emailAdd;?>" name="emailAdd" id="emailAdd" autocomplete="off" >
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $emailAdd;?>" value="<?php echo $emailAdd;?>" name="emailAdd" id="emailAdd" autocomplete="off" onchange="emailValidation(this.value)"><span class="error" id="emailError">Invalid email format!</span>
                 </div>                               
             </div>
             
@@ -444,14 +434,7 @@ if(mysqli_num_rows($result)>0)
             </div>
             
             
-            <div>
-                <?php
-                    
-                    $childArr = explode ("/", $childsName); 
-                    $childBdayArr = explode ("/", $childsBday); 
-                    $childLength = count($childArr)-1;
-                ?>
-                
+            <div>                
                 <table id="childTable">
                     <thead>
                         <tr>
@@ -460,16 +443,31 @@ if(mysqli_num_rows($result)>0)
                         </tr>
                     </thead>
                     <tbody id="childsbody">
+                        
                         <?php
-                        $i=1;
-                            for($x=0; $x<$childLength; $x++){
-                                echo ' <tr>
-                                        <td><input type="text" name="childsName'.$i.'" id="childsName'.$i.'" class="detailInfoEdit actived cname" placeholder="'.$childArr[$x].'" autocomplete="off" ></td>
-                                        <td><input type="date" name="childsBday'.$i.'" id="childsBday'.$i.'" class="detailInfoEdit actived" value="'.$childBdayArr[$x].'" autocomplete="off" ></td>
+                        
+                             $i=0;
+                            $select = "SELECT * FROM `employeechildren` WHERE `emp_no` = '$empno'";
+                            $result = mysqli_query($con,$select);
+                            if(mysqli_num_rows($result)>0)
+                            {
+                                while($row = mysqli_fetch_array($result))  
+                                { 
+                                    $i++;
+                                    $childsName = $row["empChild_name"];
+                                    $childsBday = $row["empChild_bday"];
+                                    echo ' <tr>
+                                        <td><input type="text" name="childsName'.$i.'" id="childsName'.$i.'" class="detailInfoEdit actived cname" placeholder="'.$childsName.'" value="'.$childsName.'" autocomplete="off" ></td>
+                                        <td><input type="date" name="childsBday'.$i.'" id="childsBday'.$i.'" class="detailInfoEdit actived" value="'.$childsBday.'" autocomplete="off" ></td>
                                     </tr>';
-                                $i++;
+                                     
+                                }
                             }
-                        echo '<input type="text" id="childCount" value='.$childLength.' style="display:none">';
+                        
+                            
+                             echo '<input type="text" id="childCount" value='.$i.' style="display:none">';
+                        
+                       
                         ?>
                     </tbody>
                     
@@ -548,7 +546,7 @@ if(mysqli_num_rows($result)>0)
                     <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $atmNo;?>" value="<?php echo $atmNo;?>" name="atmNo" id="atmNo" autocomplete="off" >
                 </div>
             </div>
-            <input type="text" id="childLength" style="display:none">
+            <input type="text" id="childLength" name="childLength" style="display:none">
             <input type="submit" value="Save" id="btnSave">
             <button type="button" id="btnCancel" onclick="editCancel()">Cancel</button>
         </form>
