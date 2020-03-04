@@ -91,39 +91,12 @@ $tinNo = $_POST["tinNo"];
 $atmNo = $_POST["atmNo"];
 $childLength = $_POST["childLength"];
 
-if($fname==""){
-    $fname = $curfname;
-}
-if($mname==""){
-    $mname = $curmname;
-}
-if($lname==""){
-    $lname = $curlname;
-}
-if($suffix==""){
-    $suffix = $cursuffix;
-}
-if($bdate==""){
-    $bdate = $curbdate;
-}
+
 if($_POST["sex"]==""){
     $sex = $cursex;
 }else{
     $sex = $_POST["sex"];
 }
-if($civilStatus==""){
-    $civilStatus = $curcivilStatus;
-}
-if($nationality==""){
-    $nationality = $curnationality;
-}
-if($religion==""){
-    $religion = $curreligion;
-}
-if($placeOfBirth==""){
-    $placeOfBirth = $curplaceOfBirth;
-}
-
 //HOME
 if($_POST["selectProvHome"]==$curhomeProvCode){
     $selectProvHome = $curhomeProvCode;
@@ -209,54 +182,7 @@ if($_POST["selectBrgyPer"]==$curperBrgyCode){
     }
 }
 
-if($mobileNo==""){
-    $mobileNo = $curmobileNo;
-}
-if($telNo==""){
-    $telNo = $telNo;
-}
-if($emailAdd==""){
-    $emailAdd = $curemailAdd;
-}
-if($educBg==""){
-    $educBg = $cureducBg;
-}
-if($fathersName==""){
-    $fathersName = $curfathersName;
-}
-if($mothersName==""){
-    $mothersName = $curmothersName;
-}
-if($spouseName==""){
-    $spouseName = $curspouseName;
-}
-if($spouseBdate==""){
-    $spouseBdate = $curspouseBdate;
-}
-if($weight==""){
-    $weight = $curweight;
-}
-if($height==""){
-    $height = $curheight;
-}
-if($bloodType==""){
-    $bloodType = $curbloodType;
-}
-if($sssNo==""){
-    $sssNo = $cursssNo;
-}
-if($philNo==""){
-    $philNo = $curphilNo;
-}
-if($hdmfNo==""){
-    $hdmfNo = $curhdmfNo;
-}
-if($tinNo==""){
-    $tinNo = $curtinNo;
-}
-if($atmNo==""){
-    $atmNo = $curatmNo;
-}
+
 
 
 $update = "UPDATE `employeeinfo` SET `emp_fname` = '$fname', `emp_mname` = '$mname', `emp_lname` = '$lname', `emp_suffix` = '$suffix', `emp_bday` = '$bdate', `emp_sex` = '$sex', `emp_civilStatus` = '$civilStatus', `emp_nationality` = '$nationality', `emp_religion` = '$religion', `emp_placeOfBirth` = '$placeOfBirth', `emp_homeProvCode` = '$selectProvHome', `emp_homeCityMunCode` = '$cmCodeHome', `emp_homeBrgyCode` = '$brgyCodeHome', `emp_homeDetailedAdd` = '$homeDetailedAdd', `emp_perProvCode` = '$selectProvPer', `emp_perCityMunCode` = '$cmCodePer', `emp_perBrgyCode` = '$brgyCodePer', `emp_perDetailedAdd` = '$perDetailedAdd', `emp_mobileNo` = '$mobileNo', `emp_telNo` = '$telNo', `emp_emailAdd` = '$emailAdd', `emp_educBg` = '$educBg', `emp_fathersName` = '$fathersName', `emp_mothersName` = '$mothersName', `emp_spouseName` = '$spouseName', `emp_spouseBdate` = '$spouseBdate', `emp_height` = '$height', `emp_weight` = '$weight', `emp_bloodType` = '$bloodType', `emp_sssNo` = '$sssNo', `emp_philNo` = '$philNo', `emp_hdmfNo` = '$hdmfNo', `emp_tinNo` = '$tinNo', `emp_atmNo` = '$atmNo' WHERE `emp_no` = '$empno' ";

@@ -315,7 +315,13 @@ $empno = $_GET["id"];
                                     <label class="detailLabel">Telephone no.</label>
                                 </div> 
                                 <div class="col-4">
-                                    <label class="detailInfo"><?php echo $telNo?></label>
+                                    <label class="detailInfo">
+                                        <?php
+                                            if ($telNo!=0){
+                                                echo $telNo;
+                                            }
+                                        ?>
+                                    </label>
                                 </div>   
                             </div>
                             

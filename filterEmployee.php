@@ -4,69 +4,7 @@ session_start();
 
 $action = $_GET["action"];
 
-if($action=="show"){   
-    
-    echo '<select id="filterDep" name="filterDep" class="custom-select dark-grey-text">
-            <option selected disabled>--Select--</option>';
-    
-    $select = "SELECT distinct `serrec_deployed`  FROM `servicerecord`";
-    $result = mysqli_query($con,$select);
-    if(mysqli_num_rows($result)>0)
-    {
-        while($row = mysqli_fetch_array($result))  
-        {  
-            echo '<option>'.$row['serrec_deployed'].'</option>';
-        }
-    }
-    echo '</select>';
-}else if($action=="Deployed"){
-        echo'        <table id="employeeTable" class="table table-striped table-bordered table-sm"> 
-                    <thead>  
-                    <tr>    
-                    <th class="sorting">EMPLOYEE NAME</th> 
-                    <th>DEPLOYED</th>
-                    <th>ACTION</th>
-                    </tr>  
-                    </thead>';
-                        $empno="";
-                        $select = "SELECT *  FROM `employeeInfo`";
-                        $result = mysqli_query($con,$select);
-                        if(mysqli_num_rows($result)>0)
-                        {
-                            while($row = mysqli_fetch_array($result))  
-                            {  
-
-                                $empno = $row["emp_no"];
-                                $select2 = "SELECT *  FROM `servicerecord` where `emp_no`='$empno'";
-                                $result2 = mysqli_query($con,$select2);
-                                if(mysqli_num_rows($result2)>0)
-                                {
-                                    while($row2 = mysqli_fetch_array($result2))  
-                                    {  
-                                        echo '<tr>';
-                                        echo '<td>'. ucwords($row["emp_fname"]) . ' ' . ucwords($row["emp_lname"]).'</td>';
-                                        echo '<td>'.$row2["serrec_deployed"].'</td>';
-                                        echo '<td><a href="employeeDetails.php?id='.$empno.'"><button id="viewEmpBtn">View</button></a>';
-                                        echo '<button type="button" id="delEmpBtn" onclick="deleteEmployee(\''.$row["emp_no"].'\')" >Delete</button></td>';
-
-                                        echo '</tr>';
-                                    }
-                                }
-                                
-                            
-                            }
-
-                        }else{
-                            echo '<tr><td style="text-align: center" colspan="2">No results found</td></tr>';
-                        }
-
-    echo '            </table>';
-
-
-
-
-
-}else{
+if($action=="bmonth"){
     $b = $_GET["b"];
     $none=0;
     
@@ -110,6 +48,50 @@ if($action=="show"){
         echo '<tr><td style="text-align: center" colspan="3">No celebrant for the month of '.$b.'</td></tr>';
     }
     echo '            </table>';
+}
+else{
+    $d = $_GET["d"];
+    echo'<table id="employeeTable" class="table table-striped table-bordered table-sm"> 
+            <thead>  
+            <tr>    
+            <th class="sorting">EMPLOYEE NAME</th> 
+            <th>DEPLOYED</th>
+            <th>ACTION</th>
+            </tr>  
+            </thead>';
+                $empno="";
+                $select = "SELECT *  FROM `employeeInfo`";
+                $result = mysqli_query($con,$select);
+                if(mysqli_num_rows($result)>0)
+                {
+                    while($row = mysqli_fetch_array($result))  
+                    {  
+
+                        $empno = $row["emp_no"];
+                        $select2 = "SELECT *  FROM `servicerecord` where `emp_no`='$empno' and `serrec_deployed` ='$d'";
+                        $result2 = mysqli_query($con,$select2);
+                        if(mysqli_num_rows($result2)>0)
+                        {
+                            while($row2 = mysqli_fetch_array($result2))  
+                            {  
+                                echo '<tr>';
+                                echo '<td>'. ucwords($row["emp_fname"]) . ' ' . ucwords($row["emp_lname"]).'</td>';
+                                echo '<td>'.$row2["serrec_deployed"].'</td>';
+                                echo '<td><a href="employeeDetails.php?id='.$empno.'"><button id="viewEmpBtn">View</button></a>';
+                                echo '<button type="button" id="delEmpBtn" onclick="deleteEmployee(\''.$row["emp_no"].'\')" >Delete</button></td>';
+
+                                echo '</tr>';
+                            }
+                        }
+
+
+                    }
+
+                }else{
+                    echo '<tr><td style="text-align: center" colspan="2">No results found</td></tr>';
+                }
+
+echo '            </table>';
 }
 
 

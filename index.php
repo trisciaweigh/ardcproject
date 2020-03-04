@@ -78,6 +78,24 @@
                                     <option>November</option>
                                     <option>December</option>
                                 </select>
+                                
+                                <select id="filterDep" name="filterDep" class="custom-select dark-grey-text" style="display:none">
+                                    <option selected disabled>--Select--</option>
+                                    <?php
+    
+                                $select = "SELECT distinct `serrec_deployed`  FROM `servicerecord`";
+                                $result = mysqli_query($con,$select);
+                                if(mysqli_num_rows($result)>0)
+                                {
+                                    while($row = mysqli_fetch_array($result))  
+                                    {  
+                                        echo '<option>'.$row['serrec_deployed'].'</option>';
+                                    }
+                                }
+                                    
+                                    ?>
+                                </select>
+                                
                             </div>
                         </div>
                     </div>
@@ -98,31 +116,13 @@
                 $("#filterEmp").on("change", function(){
                     c = $(this).val();
                     
-                    if(c=="Deployed"){
-                        var xml = new XMLHttpRequest();
-                        xml.onreadystatechange = function() {
-                           if (this.readyState == 4 && this.status == 200) {
-//                                document.getElementById("employeeTable").innerHTML =  this.responseText;                           document.getElementById("filterForm").reset();
-//                                document.getElementById("closeFilter").click(); 
-//                               
-//                                document.getElementById("filterBmonth").style.display="none";
-                               
-                               document.getElementById("selects").innerHTML=this.responseText;
-                               
-                               
-                            }
-                        };
-                        xml.open("get", "filterEmployee.php?action=show" , true);
-                        xml.send();
-                        return false;
+                    if(c=="Deployed"){                        
+                        document.getElementById("filterBmonth").style.display="none";
+                        document.getElementById("filterDep").style.display="inline-block";
                     }else{
+                        document.getElementById("filterDep").style.display="none";
                         document.getElementById("filterBmonth").style.display="inline-block";
                     }
-                })
-                
-                $("#filterDep").on("change", function(){
-                     var d = $(this).val();
-                    alert("ok");
                 })
                 
                 $("#filterBmonth").on("change", function(){
@@ -132,12 +132,29 @@
                        if (this.readyState == 4 && this.status == 200) {
                             document.getElementById("employeeTable").innerHTML =  this.responseText;       
                             document.getElementById("filterForm").reset();
-                            document.getElementById("closeFilter").click(); 
-                           
+                            document.getElementById("closeFilter").click();                            
                             document.getElementById("filterBmonth").style.display="none";
+                            document.getElementById("filterBmonth").reset();
                         }
                     };
-                    xml.open("get", "filterEmployee.php?action=Birthmonth & b="+b, true);
+                    xml.open("get", "filterEmployee.php?action=bmonth&b="+b, true);
+                    xml.send();
+                    return false;
+                })
+                
+                $("#filterDep").on("change", function(){
+                    d = $(this).val();
+                    var xml = new XMLHttpRequest();
+                    xml.onreadystatechange = function() {
+                       if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("employeeTable").innerHTML =  this.responseText;       
+                            document.getElementById("filterForm").reset();
+                            document.getElementById("closeFilter").click();                            
+                            document.getElementById("filterDep").style.display="none";
+                            document.getElementById("filterDep").reset();
+                        }
+                    };
+                    xml.open("get", "filterEmployee.php?action=dep&d="+d, true);
                     xml.send();
                     return false;
                 })

@@ -375,8 +375,14 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Telephone no.</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $telNo;?>" value="<?php echo $telNo;?>" name="telNo" id="telNo" autocomplete="off" >
-                </div>   
+                    <?php
+                        if ($telNo!=0){
+                            echo '<input class="detailInfoEdit actived" type="text" placeholder="'.$telNo.'" value="'.$telNo.'" name="telNo" id="telNo" autocomplete="off" >';
+                        }else{
+                            echo '<input class="detailInfoEdit actived" type="text" placeholder="" value="" name="telNo" id="telNo" autocomplete="off" >';
+                        }
+                    ?>
+                </div>
             </div>
             
             <div class="row">
