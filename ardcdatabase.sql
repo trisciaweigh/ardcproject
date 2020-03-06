@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2020 at 08:46 AM
+-- Generation Time: Mar 06, 2020 at 09:10 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -27,20 +27,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `employeechildren` (
-  `empChild_no` int(11) NOT NULL,
+  `empChild_no` bigint(11) NOT NULL,
   `emp_no` varchar(25) NOT NULL,
   `empChild_name` varchar(255) NOT NULL,
   `empChild_bday` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `employeechildren`
---
-
-INSERT INTO `employeechildren` (`empChild_no`, `emp_no`, `empChild_name`, `empChild_bday`) VALUES
-(1, 'emp', 'chil', '2020-03-05'),
-(2, 'emp111', 'ayescia leigh', '2016-07-02'),
-(4, 'gfsd', 'te/x/s/d/rtrt/hrhtrh/', '2020-03-10/2020-02-27/2020-03-04/2020-03-20/2020-02-26/2020-04-02/');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -50,6 +41,7 @@ INSERT INTO `employeechildren` (`empChild_no`, `emp_no`, `empChild_name`, `empCh
 
 CREATE TABLE IF NOT EXISTS `employeeinfo` (
   `emp_no` varchar(25) NOT NULL,
+  `emp_id` varchar(50) NOT NULL,
   `emp_fname` varchar(50) NOT NULL,
   `emp_mname` varchar(50) NOT NULL,
   `emp_lname` varchar(50) NOT NULL,
@@ -68,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `employeeinfo` (
   `emp_perCityMunCode` varchar(255) NOT NULL,
   `emp_perBrgyCode` varchar(255) NOT NULL,
   `emp_perDetailedAdd` varchar(255) NOT NULL,
-  `emp_mobileNo` int(11) NOT NULL,
-  `emp_telNo` int(11) NOT NULL,
+  `emp_mobileNo` varchar(25) NOT NULL,
+  `emp_telNo` varchar(50) NOT NULL,
   `emp_emailAdd` varchar(100) NOT NULL,
   `emp_educBg` varchar(100) NOT NULL,
   `emp_fathersName` varchar(255) NOT NULL,
@@ -90,10 +82,51 @@ CREATE TABLE IF NOT EXISTS `employeeinfo` (
 -- Dumping data for table `employeeinfo`
 --
 
-INSERT INTO `employeeinfo` (`emp_no`, `emp_fname`, `emp_mname`, `emp_lname`, `emp_suffix`, `emp_bday`, `emp_sex`, `emp_civilStatus`, `emp_nationality`, `emp_religion`, `emp_placeOfBirth`, `emp_homeProvCode`, `emp_homeCityMunCode`, `emp_homeBrgyCode`, `emp_homeDetailedAdd`, `emp_perProvCode`, `emp_perCityMunCode`, `emp_perBrgyCode`, `emp_perDetailedAdd`, `emp_mobileNo`, `emp_telNo`, `emp_emailAdd`, `emp_educBg`, `emp_fathersName`, `emp_mothersName`, `emp_spouseName`, `emp_spouseBdate`, `emp_height`, `emp_weight`, `emp_bloodType`, `emp_sssNo`, `emp_philNo`, `emp_hdmfNo`, `emp_tinNo`, `emp_atmNo`) VALUES
-('emp', 'firsta', 'mida', 'lasta', 'suffixa', '2020-02-28', 'Female', 'civa', 'a', 'a', 'pbirtha', '0215', '021506', '021506006', 'qqqqqqq', '0133', '013304', '013304005', 'bbbbbbbbbbbbbbbbb', 123, 134, 'emaila', 'educa', 'fathrea', 'motha', 'spoa', '2020-02-28', 'ha', 'wa', 'ba', 'sssa', 'pha', 'hda', 'tina', 'attma'),
-('emp111', 'triscia', 't', 'salonga', '', '1999-07-15', 'Female', 'single', 'filipino', 'catholic', 'bocaue', '0314', '031408', '031408015', 'san agustin st.', '0314', '031408', '031408015', 'san agustin st.', 12345, 12345, 'iyawey@gmail.com', 'college', '', 'citadel', '', '0000-00-00', '', '', '', '', '', '', '', ''),
-('gfsd', 'w', '', 'eg', 'wf', '2020-03-04', 'Female', 'wf', 'fw', 'fw', '', '0209', '020902', '020902008', 'fwf', '0369', '036913', '036913010', 'fw', 1111111111, 0, 'a@v.com', '', '', '', '', '0000-00-00', '', '', '', 'hrth', 'gr', 'gdfs', 'dfs', '');
+INSERT INTO `employeeinfo` (`emp_no`, `emp_id`, `emp_fname`, `emp_mname`, `emp_lname`, `emp_suffix`, `emp_bday`, `emp_sex`, `emp_civilStatus`, `emp_nationality`, `emp_religion`, `emp_placeOfBirth`, `emp_homeProvCode`, `emp_homeCityMunCode`, `emp_homeBrgyCode`, `emp_homeDetailedAdd`, `emp_perProvCode`, `emp_perCityMunCode`, `emp_perBrgyCode`, `emp_perDetailedAdd`, `emp_mobileNo`, `emp_telNo`, `emp_emailAdd`, `emp_educBg`, `emp_fathersName`, `emp_mothersName`, `emp_spouseName`, `emp_spouseBdate`, `emp_height`, `emp_weight`, `emp_bloodType`, `emp_sssNo`, `emp_philNo`, `emp_hdmfNo`, `emp_tinNo`, `emp_atmNo`) VALUES
+('emp202036104518837', 'a', 'Evangelina', 'Mananghaya', 'Roque', '', '1955-09-28', 'Female', '', 'Filipino', 'INC', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '03-9757622-1', '0705-0104-1643', '1410-0014-7666', '117-905-763-000', ''),
+('emp20203611185659', 'b', 'Susana', 'Reyes', 'Ravago', '', '1968-01-02', 'Female', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '03-9962606-9', '0705-0230-0057', '1410-0014-7677', '185-508-371-000', ''),
+('emp202036112139840', 'c', 'Erica Jane', 'Canasa', 'Francisco', '', '1983-03-08', 'Female', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-8209045-0', '0705-0469-8635', '1410-0012-4775', '235-686-774-000', ''),
+('emp202036112514466', 'd', 'Feby Ann', 'Madangsakay', 'Aniag', '', '1981-12-09', 'Female', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-7234733-3', '0705-0338-2820', '1210-5180-1477', '219-754-408-000', ''),
+('emp202036112858916', 'e', 'Jayson', 'Pangilinan', 'Pineda', '', '1983-10-25', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-8802636-3', '0705-0472-3567', '1410-0012-8247', '244-446-635-000', ''),
+('emp202036113125157', 'f', 'Christine', 'Landayan', 'Dela Cruz', '', '1986-03-03', 'Female', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-1502155-8', '2105-0022-6697', '1211-0175-0721', '270-577-749-000', ''),
+('emp20203611334518', 'g', 'Claudette', 'Gutierrez', 'Dawal', '', '1984-04-15', 'Female', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-8037853-0', '0720-0740-0676', '1210-8249-6864', '213-286-621-000', ''),
+('emp20203611389721', 'h', 'Josie', 'Beatriz', 'Maclang', '', '1980-09-04', 'Female', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '05-0536515-6', '0702-5361-2175', '1210-5212-7267', '413-972-541-000', ''),
+('emp202036115219270', 'i', 'Jaime', 'Cortez', 'Dela PeÃ±a', 'Jr', '1975-04-06', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-2981565-6', '0705-0248-6509', '1211-4494-0416', '189-120-865-000', ''),
+('emp202036115442820', 'j', 'Raul', 'Merez', 'Morilla', '', '1975-05-26', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-3979373-9', '0705-0104-1759', '1410-0011-9822', '218-038-410-000', ''),
+('emp202036115832531', 'k', 'Wilson', 'Ramos', 'Perote', '', '1969-01-27', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-6672711-8', '0705-0231-2802', '1410-0012-0823', '225-104-810-000', ''),
+('emp2020361311023', 'n', 'Ray Bernard', 'Manuel', 'Galamgam', '', '1980-12-28', 'Male', '', 'Fiipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-7283260-2', '0705-0469-8627', '141-000-129-570', '211-222-715-000', ''),
+('emp202036131717251', 'o', 'Juan Emmanuel', 'Surio', 'Dayao', '', '1988-08-26', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-2063467-1', '0105-1173-6337', '1211-0171-1053', '400-049-665-000', ''),
+('emp202036131936333', 'p', 'Redenell', 'Poloyapoy', 'Julian', '', '1972-11-17', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-6470388-8', '0705-0282-7713', '1410-0012-6562', '206-879-823-000', ''),
+('emp20203613226763', 'q', 'Jimmy', 'Cruz', 'Maclang', '', '1980-02-26', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-4990236-1', '0705-0270-7726', '1410-0013-9448', '920-180-347-000', ''),
+('emp202036132417119', 'r', 'Stephen', 'Alongalay', 'Ruivivar', '', '1978-03-06', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9046036-0', '0705-0377-5083', '1210-7377-4008', '235-398-869-000', ''),
+('emp202036132734607', 's', 'Richard', 'Paculan', 'Conde', '', '1982-03-11', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-8039586-9', '0705-0469-8600', '1410-0012-9135', '253-881-687-000', ''),
+('emp20203613306225', 't', 'Mark Vincent', 'Testing', 'Clavio', '', '0000-00-00', 'Male', 'Single', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-6033517-6', '2105-0242-4763', '1211-7388-9856', '', ''),
+('emp202036133143185', 'u', 'Miguelito', 'Pingol', 'Dela Cruz', '', '1968-05-21', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '03-8374623-0', '2105-0014-1748', '1210-1731-5317', '220-543-678-000', ''),
+('emp202036133915534', 'v', 'Raymond', 'Dela Cruz', 'Crispo', '', '1990-02-20', 'Male', 'Single', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-3091156-2', '2105-0218-7036', '1211-5358-6107', '324-343-943-000', ''),
+('emp202036134437889', 'w', 'Renee', 'Flores', 'Serrano', '', '1978-01-26', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '04-3470756-8', '2120-0057-6872', '1211-7230-4691', '237-821-832-000', ''),
+('emp202036134711566', 'x', 'Mark James', 'Chan', 'Galang', '', '1982-09-16', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9045606-0', '1705-0546-9842', '1211-7839-2594', '256-541-048-000', ''),
+('emp202036134915142', 'y', 'Paterno', 'Edroso', 'Sytamco', '', '1968-02-21', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-3513026-0', '2105-0173-0011', '1211-9867-2457', '117-937-803-000', ''),
+('emp202036135237163', 'z', 'Daren Kay', 'Manahan', 'Maglente', '', '1985-09-16', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-2446562-6', '0105-0290-6769', '1210-8839-9982', '404-317-585-000', ''),
+('emp202036135453746', 'aa', 'Enrique', 'Garcia', 'Concepcion', '', '1970-07-25', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-1475089-4', '1905-2162-3806', '1210-3777-3849', '132-620-328-000', ''),
+('emp20203613549879', 'l', 'Blas', 'Velasco', 'Francisco', '', '1966-02-03', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '03-7778523-6', '0702-5196-5984', '1210-5113-9010', '154-810-303-000', ''),
+('emp202036135647776', 'ab', 'Euginio', 'Jose', 'Macapagal', '', '1974-06-02', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-2794221-7', '2120-0001-9884', '1211-0178-4981', '177-229-937-000', ''),
+('emp202036135829655', 'ac', 'Marcel', 'D', 'Silva', '', '1982-09-21', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-2451260-5', '2120-0020-2344', '1211-6000-6938', '404-965-318-000', ''),
+('emp20203613851784', 'm', 'Marielle Anjelika', 'Aballa', 'Tonog', '', '1989-09-04', 'Female', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-0863973-7', '2105-0228-0354', '1211-6895-9050', '284-755-016-000', ''),
+('emp202036141053687', 'ah', 'Roderick', 'Roseos', 'Puno', '', '1977-09-12', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-5686696-6', '2105-0160-3249', '1210-9687-2837', '439-775-642-000', ''),
+('emp202036141245596', 'ai', 'Cornelio', 'Cordero', 'Cortez', 'Jr', '1991-10-18', 'Male', 'Single', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-4103786-2', '2105-0160-3362', '1210-9664-7506', '314-844-009-000', ''),
+('emp202036141455117', 'aj', 'Angelo', 'Godoy', 'Tisoy', '', '1984-08-21', 'Male', ' ', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-4088539-0', '1005-0139-7606', '1210-9641-5031', '417-277-187-000', ''),
+('emp202036141644453', 'ak', 'Celso', 'Camua', 'Santos', '', '1986-06-25', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9337237-4', '2105-0179-7108', '1312-2659-9604', '271-915-297-000', ''),
+('emp202036141823698', 'al', 'Raffy', 'Domingo', 'Lipardo', '', '1993-08-02', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-5337339-4', '2105-0218-7001', '1211-7007-6500', '', ''),
+('emp20203614207228', 'am', 'Rowel', 'Cruz', 'Dela Cruz', '', '1981-04-18', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9334759-0', '2105-0179-7094', '1211-7373-6680', '461-081-420-000', ''),
+('emp202036142220784', 'an', 'Jei Anthony', 'Placio', 'AvendaÃ±o', '', '1984-06-29', 'Male', 'SIngle', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-4392821-2', '2105-0173-0003', '1211-1256-4187', '316-950-026-000', ''),
+('emp202036142351486', 'ao', 'Aristeo', 'Dimafeles', 'Mendoza', '', '1976-09-03', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-4417919-9', '2102-5063-9060', '1211-7839-5009', '', ''),
+('emp202036142559225', 'ap', 'Arrel', 'Diaz', 'Del Rosario', '', '1985-03-10', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9024245-2', '0705-0365-9199', '1210-4822-3674', '', ''),
+('emp202036143326312', 'aq', 'Ryan', 'Cruz', 'Andres', '', '0000-00-00', 'Male', 'Married', 'Filipino', 'Christian', 'Malolos City', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', ''),
+('emp20203614355753', 'ad', 'Michael', 'Sagiud', 'Gregorio', '', '1978-05-18', 'Male', '', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-4204179-5', '2105-0090-6345', '1211-4869-8584', '211-940-310-000', ''),
+('emp202036144114378', 'ar', 'Djay', 'Cruz', 'Andres', '', '1982-02-27', 'Male', 'Married', 'Filipino', 'Christian', 'Malolos City', '0314', '031410', '031410055', 'Block 10 Lot 7 Sta. Teresa Street St. Agatha Homes Phase 2', '0314', '031410', '031410055', 'Block 10 Lot 7 Sta. Teresa Street St. Agatha Homes Phase 2', '9178008471', '0', 'djayandres@archer-realty.com', '', 'DEXTER ACOBA ANDRES', 'LUZ CRUZ CRUZ', 'KATHRINA M. ANDRES', '0000-00-00', '5''6''''', '220 lbs', 'O', '', '', '', '', ''),
+('emp20203614552268', 'ae', 'Marjun', 'Roque', 'Santos', '', '1980-06-02', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-9043189-4', '0720-0617-8562', '1210-9646-8418', '439-776-026-000', ''),
+('emp20203614732229', 'af', 'Warlie', 'Manalad', 'Cruz', '', '1980-02-18', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '34-3444135-5', '2300-1766-1073', '1210-9690-8710', '433-710-799-000', ''),
+('emp20203614919198', 'ag', 'Manuel', 'Santiago', 'Dela Cruz', '', '1968-01-08', 'Male', 'Married', 'Filipino', 'Catholic', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', '', '0000-00-00', '', '', '', '33-2794316-4', '1908-9324-1144', '1210-9781-1298', '217-693-082-000', '');
 
 -- --------------------------------------------------------
 
@@ -44038,7 +44071,55 @@ CREATE TABLE IF NOT EXISTS `servicerecord` (
   `serrec_rate` float NOT NULL,
   `serrec_allowance` float NOT NULL,
   `serrec_gross` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `servicerecord`
+--
+
+INSERT INTO `servicerecord` (`serrec_no`, `emp_no`, `serrec_date`, `serrec_position`, `serrec_info`, `serrec_yrsOfService`, `serrec_deployed`, `serrec_basic`, `serrec_rate`, `serrec_allowance`, `serrec_gross`) VALUES
+(2, 'emp202036104518837', '0000-00-00', 'General Manager', '', 0, 'ARDC', 0, 0, 0, 0),
+(3, 'emp20203611185659', '0000-00-00', 'Liaison Head', '', 0, 'ARDC', 0, 0, 0, 0),
+(4, 'emp202036112514466', '0000-00-00', 'Marketing Supervisor/ Loan Liaison', '', 0, 'ARDC', 0, 0, 0, 0),
+(5, 'emp202036112139840', '0000-00-00', 'Bookkeeper/ Accountant', '', 0, 'ARDC', 0, 0, 0, 0),
+(6, 'emp202036112858916', '0000-00-00', 'Assistant Bookkeeper', '', 0, 'ARDC', 0, 0, 0, 0),
+(7, 'emp202036113125157', '0000-00-00', 'Marketing Documentation Assistant', '', 0, 'ARDC', 0, 0, 0, 0),
+(8, 'emp20203611334518', '0000-00-00', 'Cashier', '', 0, 'ARDC', 0, 0, 0, 0),
+(9, 'emp20203611389721', '0000-00-00', 'Cashier', '', 0, 'ARDC', 0, 0, 0, 0),
+(10, 'emp202036115219270', '0000-00-00', 'I.R CLERK', '', 0, 'ARDC', 0, 0, 0, 0),
+(11, 'emp202036115442820', '0000-00-00', 'Messenger/Janitor', '', 0, 'ARDC', 0, 0, 0, 0),
+(12, 'emp202036115832531', '0000-00-00', 'Messenger/Janitor', '', 0, 'ARDC', 0, 0, 0, 0),
+(13, 'emp20203613549879', '0000-00-00', 'Driver', '', 0, 'ARDC', 0, 0, 0, 0),
+(14, 'emp20203613851784', '0000-00-00', 'Marketing Encoder', '', 0, 'ARDC', 0, 0, 0, 0),
+(15, 'emp2020361311023', '0000-00-00', 'Project Manager', '', 0, 'ARDC', 0, 0, 0, 0),
+(16, 'emp202036131717251', '0000-00-00', 'Architecture Drafting & Design, CAD', '', 0, 'ARDC', 0, 0, 0, 0),
+(17, 'emp202036131936333', '0000-00-00', 'Quality Control Engineer/Cost Engineer', '', 0, 'ARDC', 0, 0, 0, 0),
+(18, 'emp20203613226763', '0000-00-00', 'S.O/L.O', '', 0, 'ARDC', 0, 0, 0, 0),
+(19, 'emp202036132417119', '0000-00-00', 'Quantity Surveyor/Cost Engineer', '', 0, 'ARDC', 0, 0, 0, 0),
+(20, 'emp202036132734607', '0000-00-00', 'Instrument Man/Surveying', '', 0, '', 0, 0, 0, 0),
+(21, 'emp202036133143185', '0000-00-00', 'Electrician', '', 0, 'ARDC', 0, 0, 0, 0),
+(22, 'emp202036133915534', '0000-00-00', 'Plumber', '', 0, 'ARDC', 0, 0, 0, 0),
+(23, 'emp202036134437889', '0000-00-00', 'Company Guard', '', 0, 'ARDC', 0, 0, 0, 0),
+(24, 'emp202036134711566', '0000-00-00', 'Electrician/Plumber', '', 0, 'ARDC', 0, 0, 0, 0),
+(25, 'emp202036134915142', '0000-00-00', 'Site Engineer', '', 0, 'ARDC', 0, 0, 0, 0),
+(26, 'emp202036135237163', '0000-00-00', 'Purchase Officer', '', 0, 'ARDC', 0, 0, 0, 0),
+(27, 'emp202036135453746', '0000-00-00', 'Warehouse Supervisor', '', 0, 'ARDC', 0, 0, 0, 0),
+(28, 'emp202036135647776', '0000-00-00', 'Site Safety Officer', '', 0, 'ARDC', 0, 0, 0, 0),
+(29, 'emp202036135829655', '0000-00-00', 'Warehousemen', '', 0, 'ARDC', 0, 0, 0, 0),
+(30, 'emp20203614355753', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(32, 'emp20203614552268', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(33, 'emp20203614732229', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(34, 'emp20203614919198', '0000-00-00', 'Grass Cutter', '', 0, 'ARDC', 0, 0, 0, 0),
+(35, 'emp202036141053687', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(36, 'emp202036141245596', '0000-00-00', 'Grass Cutter', '', 0, 'ARDC', 0, 0, 0, 0),
+(37, 'emp202036141455117', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(38, 'emp202036141644453', '0000-00-00', 'Time Keeper', '', 0, 'ARDC', 0, 0, 0, 0),
+(39, 'emp202036141823698', '0000-00-00', 'Street Sweeper', '', 0, 'ARDC', 0, 0, 0, 0),
+(40, 'emp20203614207228', '0000-00-00', 'Warehousemen', '', 0, 'ARDC', 0, 0, 0, 0),
+(41, 'emp202036142220784', '0000-00-00', 'Warehousemen', '', 0, 'ARDC', 0, 0, 0, 0),
+(42, 'emp202036142351486', '0000-00-00', 'Street Sweeper', '', 0, 'ARDC', 0, 0, 0, 0),
+(43, 'emp202036142559225', '0000-00-00', 'Maintenance', '', 0, 'ARDC', 0, 0, 0, 0),
+(44, 'emp202036144114378', '0000-00-00', 'Human Resource', '', 0, 'ARDC', 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -44100,7 +44181,7 @@ ALTER TABLE `servicerecord`
 -- AUTO_INCREMENT for table `employeechildren`
 --
 ALTER TABLE `employeechildren`
-  MODIFY `empChild_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `empChild_no` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `memo`
 --
@@ -44130,7 +44211,7 @@ ALTER TABLE `refregion`
 -- AUTO_INCREMENT for table `servicerecord`
 --
 ALTER TABLE `servicerecord`
-  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 -- Constraints for dumped tables
 --

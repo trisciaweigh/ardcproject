@@ -62,6 +62,7 @@ else{
 }
 
 
+$empid = $_POST["empid"];
 $fname = $_POST["fname"];
 $mname = $_POST["mname"];
 $lname = $_POST["lname"];
@@ -71,8 +72,8 @@ $civilStatus = $_POST["civilStatus"];
 $nationality = $_POST["nationality"];
 $religion = $_POST["religion"];
 $placeOfBirth = $_POST["placeOfBirth"];
-$homeDetailedAdd = $_POST["homeDetailedAdd"];
-$perDetailedAdd = $_POST["perDetailedAdd"];
+$homeDetailedAdd = mysqli_real_escape_string($con,$_POST["homeDetailedAdd"]);
+$perDetailedAdd = mysqli_real_escape_string($con,$_POST["perDetailedAdd"]);
 $mobileNo = $_POST["mobileNo"];
 $telNo = $_POST["telNo"];
 $emailAdd = $_POST["emailAdd"];
@@ -81,7 +82,7 @@ $fathersName = $_POST["fathersName"];
 $mothersName = $_POST["mothersName"];
 $spouseName = $_POST["spouseName"];
 $spouseBdate = $_POST["spouseBdate"];
-$height = $_POST["height"];
+$height = mysqli_real_escape_string($con,$_POST["height"]);
 $weight = $_POST["weight"];
 $bloodType = $_POST["bloodType"];
 $sssNo = $_POST["sssNo"];
@@ -100,9 +101,13 @@ if($_POST["sex"]==""){
 //HOME
 if($_POST["selectProvHome"]==$curhomeProvCode){
     $selectProvHome = $curhomeProvCode;
-}else{
+}else if($_POST["selectProvHome"]=="--Select Province--"){
+    $selectProvHome="";
+}
+else{
     $selectProvHome = $_POST["selectProvHome"];
 }
+
 
 if($_POST["selectCMHome"]==$curhomeCityMunCode){
     $cmCodeHome = $curhomeCityMunCode;
@@ -139,15 +144,18 @@ if($homeDetailedAdd==""){
     $homeDetailedAdd = $curhomeDetailedAdd;
 }
 
-
-//echo "home".$_POST["selectCMHome"];
+//echo $selectProvHome.$cmCodeHome.$brgyCodeHome.$homeDetailedAdd;
 //PERMANENT
 if($perDetailedAdd==""){
     $perDetailedAdd = $curperDetailedAdd;
 }
 if($_POST["selectProvPer"]==$curperProvCode){
     $selectProvPer = $curperProvCode;
-}else{
+}
+else if($_POST["selectProvPer"]=="--Select Province--"){
+    $selectProvPer="";
+}
+else{
     $selectProvPer = $_POST["selectProvPer"];
 }
 if($_POST["selectCMPer"]==$curperCityMunCode){
@@ -182,10 +190,9 @@ if($_POST["selectBrgyPer"]==$curperBrgyCode){
     }
 }
 
+echo $mobileNo;
 
-
-
-$update = "UPDATE `employeeinfo` SET `emp_fname` = '$fname', `emp_mname` = '$mname', `emp_lname` = '$lname', `emp_suffix` = '$suffix', `emp_bday` = '$bdate', `emp_sex` = '$sex', `emp_civilStatus` = '$civilStatus', `emp_nationality` = '$nationality', `emp_religion` = '$religion', `emp_placeOfBirth` = '$placeOfBirth', `emp_homeProvCode` = '$selectProvHome', `emp_homeCityMunCode` = '$cmCodeHome', `emp_homeBrgyCode` = '$brgyCodeHome', `emp_homeDetailedAdd` = '$homeDetailedAdd', `emp_perProvCode` = '$selectProvPer', `emp_perCityMunCode` = '$cmCodePer', `emp_perBrgyCode` = '$brgyCodePer', `emp_perDetailedAdd` = '$perDetailedAdd', `emp_mobileNo` = '$mobileNo', `emp_telNo` = '$telNo', `emp_emailAdd` = '$emailAdd', `emp_educBg` = '$educBg', `emp_fathersName` = '$fathersName', `emp_mothersName` = '$mothersName', `emp_spouseName` = '$spouseName', `emp_spouseBdate` = '$spouseBdate', `emp_height` = '$height', `emp_weight` = '$weight', `emp_bloodType` = '$bloodType', `emp_sssNo` = '$sssNo', `emp_philNo` = '$philNo', `emp_hdmfNo` = '$hdmfNo', `emp_tinNo` = '$tinNo', `emp_atmNo` = '$atmNo' WHERE `emp_no` = '$empno' ";
+$update = "UPDATE `employeeinfo` SET `emp_id` = '$empid', `emp_fname` = '$fname', `emp_mname` = '$mname', `emp_lname` = '$lname', `emp_suffix` = '$suffix', `emp_bday` = '$bdate', `emp_sex` = '$sex', `emp_civilStatus` = '$civilStatus', `emp_nationality` = '$nationality', `emp_religion` = '$religion', `emp_placeOfBirth` = '$placeOfBirth', `emp_homeProvCode` = '$selectProvHome', `emp_homeCityMunCode` = '$cmCodeHome', `emp_homeBrgyCode` = '$brgyCodeHome', `emp_homeDetailedAdd` = '$homeDetailedAdd', `emp_perProvCode` = '$selectProvPer', `emp_perCityMunCode` = '$cmCodePer', `emp_perBrgyCode` = '$brgyCodePer', `emp_perDetailedAdd` = '$perDetailedAdd', `emp_mobileNo` = '$mobileNo', `emp_telNo` = '$telNo', `emp_emailAdd` = '$emailAdd', `emp_educBg` = '$educBg', `emp_fathersName` = '$fathersName', `emp_mothersName` = '$mothersName', `emp_spouseName` = '$spouseName', `emp_spouseBdate` = '$spouseBdate', `emp_height` = '$height', `emp_weight` = '$weight', `emp_bloodType` = '$bloodType', `emp_sssNo` = '$sssNo', `emp_philNo` = '$philNo', `emp_hdmfNo` = '$hdmfNo', `emp_tinNo` = '$tinNo', `emp_atmNo` = '$atmNo' WHERE `emp_no` = '$empno' ";
 
 if (mysqli_query($con,$update))
 {

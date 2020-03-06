@@ -19,7 +19,7 @@
 include 'connect.php';
 
 $empno = $_GET["e"];
-$fname = ""; $mname = "";   $lname = "";    $suffix = "";   $bdate = "";    $sex = "";  $civilStatus = "";  $nationality = "";
+$empid=""; $fname = ""; $mname = "";   $lname = "";    $suffix = "";   $bdate = "";    $sex = "";  $civilStatus = "";  $nationality = "";
 $religion = ""; $placeOfBirth = ""; $homeProvCode = ""; $homeCityMunCode = "";  $homeBrgyCode= "";  $homeDetailedAdd = "";
 $perProvCode = "";  $perCityMunCode= "";    $perBrgyCode = "";  $perDetailedAdd = "";   $mobileNo = ""; $telNo = "";    $emailAdd = "";
 $educBg = "";   $fathersName = "";  $mothersName = "";  $spouseName = "";   $spouseBdate = "";  $height = "";   $weight = "";   $bloodType = "";
@@ -33,6 +33,7 @@ if(mysqli_num_rows($result)>0)
 {
     while($row = mysqli_fetch_array($result))  
     { 
+        $empid = $row["emp_id"];
         $fname = $row["emp_fname"];
         $mname = $row["emp_mname"];
         $lname = $row["emp_lname"];
@@ -67,11 +68,6 @@ if(mysqli_num_rows($result)>0)
         $hdmfNo = $row["emp_hdmfNo"];
         $tinNo = $row["emp_tinNo"];
         $atmNo = $row["emp_atmNo"];
-//        $deployed = $row["emp_deployed"];
-//        $basic = $row["emp_basic"];
-//        $rate = $row["emp_rate"];
-//        $allowance = $row["emp_allowance"];
-//        $gross = $row["emp_gross"];
     }
 }
 else{
@@ -124,6 +120,15 @@ if(mysqli_num_rows($result)>0)
   <body>
         <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
             <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
+            
+            <div class="row">
+                <div class="col-5">
+                    <label class="detailLabel">Employee ID No.</label>
+                </div> 
+                <div class="col-7">
+                    <input class="detailInfoEdit actived" type="text" placeholder="<?php echo $empid;?>" value="<?php echo $empid;?>" name="empid" id="empid" autocomplete="off">
+                </div> 
+            </div>
 
             <div class="row">
                 <div class="col-5">
@@ -242,15 +247,25 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectProvHome" name="selectProvHome" onchange="chooseCMHome(this.value)" placeholder="<?php echo $homeProvDesc;?>" class="custom-select detailInfoEdit actived dark-grey-text">
-                        <option value="<?php echo $homeProvCode ?>" selected><?php echo $homeProvDesc; ?> </option>
                         <?php
-                            $provCode = "";
-                            $select = mysqli_query($con,"SELECT * FROM `refprovince` ");
-                            while($row = mysqli_fetch_array($select))  
-                            {  
-                                $provCode=$row["provCode"];
-                                echo "<option value='".$provCode."'>".$row["provDesc"]."</option>";
+                            if($homeProvCode==""){
+                                echo '<option selected>--Select Province--</option>';
+                            }else{
+                                echo '<option value="'.$homeProvCode.'" selected>'.$homeProvDesc.'</option>';
                             }
+                            $provCode = "";
+                        
+                            $select = "SELECT * FROM `refprovince`";
+                            $result = mysqli_query($con,$select);
+                            if(mysqli_num_rows($result)>0)
+                            {
+                                while($row = mysqli_fetch_array($result))  
+                                { 
+                                    $provCode=$row["provCode"];
+                                    echo '<option value="'.$provCode.'">'.$row["provDesc"].'</option>';
+                                }
+                            }  
+                        
                         ?>
                     </select>
 
@@ -262,7 +277,14 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectCMHome" name="selectCMHome" onchange="chooseBrgyHome(this.value)" class="custom-select detailInfoEdit actived dark-grey-text" disabled>
-                        <option value="<?php echo $homeCityMunCode ?>" selected><?php echo $homeCityMunDesc; ?>  </option>
+                        <?php
+                            if($homeCityMunCode==""){
+                                echo '<option selected>--Select City/Municipality--</option>';
+                            }else{
+                                echo '<option value="'.$homeCityMunCode.'" selected>'.$homeCityMunDesc.'</option>';
+                            }
+                        
+                        ?>
                     </select>
                 </div> 
                 <div class="col-3">
@@ -272,7 +294,11 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectBrgyHome" name="selectBrgyHome" class="custom-select detailInfoEdit actived dark-grey-text" disabled>
-                        <?php
+                         <?php
+                            if($homeBrgyCode==""){
+                                echo '<option selected>--Select Barangay--</option>';
+                            }
+                        
                             $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$homeBrgyCode'";
                             $result = mysqli_query($con,$select);
                             if(mysqli_num_rows($result)>0)
@@ -306,15 +332,25 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectProvPer" name="selectProvPer" onchange="chooseCMPerm(this.value)" placeholder="<?php echo $perProvDesc;?>" class="custom-select detailInfoEdit actived dark-grey-text">
-                        <option value="<?php echo $perProvCode ?>" selected><?php echo $perProvDesc; ?> </option>
                         <?php
-                            $provCode = "";
-                            $select = mysqli_query($con,"SELECT * FROM `refprovince` ");
-                            while($row = mysqli_fetch_array($select))  
-                            {  
-                                $provCode=$row["provCode"];
-                                echo "<option value='".$provCode."'>".$row["provDesc"]."</option>";
+                            if($perProvCode==""){
+                                echo '<option selected>--Select Province--</option>';
+                            }else{
+                                echo '<option value="'.$perProvCode.'" selected>'.$perProvDesc.'</option>';
                             }
+                        
+                            $provCode = "";
+                            $select = "SELECT * FROM `refprovince`";
+                            $result = mysqli_query($con,$select);
+                            if(mysqli_num_rows($result)>0)
+                            {
+                                while($row = mysqli_fetch_array($result))  
+                                { 
+                                    $provCode=$row["provCode"];
+                                    echo "<option value='".$provCode."'>".$row["provDesc"]."</option>";
+                                }
+                            }  
+                        
                         ?>
                     </select>
 
@@ -326,7 +362,14 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectCMPer" name="selectCMPer" onchange="chooseBrgyPerm(this.value)"class="custom-select detailInfoEdit actived dark-grey-text" disabled>
-                        <option value="<?php echo $perCityMunCode ?>" selected><?php echo $perCityMunDesc; ?>  </option>
+                        <?php
+                            if($perCityMunCode==""){
+                                echo '<option selected>--Select City/Municipality--</option>';
+                            }else{
+                                echo '<option value="'.$perCityMunCode.'" selected>'.$perCityMunDesc.'</option>';
+                            }
+                        
+                        ?>
                     </select>
                 </div> 
                 <div class="col-3">
@@ -336,19 +379,21 @@ if(mysqli_num_rows($result)>0)
                 </div>
                 <div class="col-7">
                     <select id="selectBrgyPer" name="selectBrgyPer" class="custom-select detailInfoEdit actived dark-grey-text" disabled>
-                        <option value="<?php echo $perBrgyCode ?>" selected>
                         <?php
+                            if($perBrgyCode==""){
+                                echo '<option selected>--Select Barangay--</option>';
+                            }
+                        
                             $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$perBrgyCode'";
                             $result = mysqli_query($con,$select);
                             if(mysqli_num_rows($result)>0)
                             {
                                 while($row = mysqli_fetch_array($result))  
                                 { 
-                                    echo $row["brgyDesc"];
+                                    echo '<option value="'.$perBrgyCode.'" selected>'.ucfirst($row["brgyDesc"]).'</option>';
                                 }
                             }                                        
                         ?>
-                        </option>
                     </select>
                     </div> 
                 <div class="col-3">
@@ -366,7 +411,14 @@ if(mysqli_num_rows($result)>0)
                     <label class="detailLabel">Mobile no.</label>
                 </div> 
                 <div class="col-7">
-                    <input class="detailInfoEdit actived" type="text" placeholder="9XXXXXXXXX" value="<?php echo $mobileNo;?>" name="mobileNo" id="mobileNo" autocomplete="off" onchange="mobNoValidation(this.value)"><span class="error" id="mobNoError">Invalid number!</span>
+                    <?php
+                        if ($mobileNo!=0){
+                            echo '<input class="detailInfoEdit actived" type="text" placeholder="9XXXXXXXXX" value="'. $mobileNo.'" name="mobileNo" id="mobileNo" autocomplete="off" onchange="mobNoValidation(this.value)"><span class="error" id="mobNoError">Invalid number!</span>';
+                        }else{
+                            echo ' <input class="detailInfoEdit actived" type="text" placeholder="9XXXXXXXXX" value="" name="mobileNo" id="mobileNo" autocomplete="off" onchange="mobNoValidation(this.value)"><span class="error" id="mobNoError">Invalid number!</span>';
+                        }
+                    ?>
+                   
                 </div>   
             </div>
             
@@ -478,7 +530,7 @@ if(mysqli_num_rows($result)>0)
                     </tbody>
                     
                 </table>
-                <button type="button" onclick="addChild()">add</button>
+                <button type="button" onclick="addChild()" class="btnAddChild">add</button>
             </div>
             
             <div class="row">

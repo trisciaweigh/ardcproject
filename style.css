@@ -1,6 +1,9 @@
 *{
-    font-family: 'Overpass', sans-serif;
-    
+    font-family: 'Overpass', sans-serif;    
+}
+
+body{
+    margin: 0px
 }
 #headerCompanyName{
     display: flex;
@@ -12,6 +15,7 @@
 }
 
 #bodyDetailsDiv{
+    margin-top: 5rem;
     padding: 1% 1% 1% 1%;
     height: auto;
 }
@@ -119,24 +123,10 @@ input.actived[type=text],input.actived[type=date], select.actived{
     width: 50%;
 }
 
-.custom-select{
-    width: 80%;
-    font-size: 16px;
-    margin: 1% 16%;
-}
-
-select.actived{
-    margin: 1% 0;
-}
-
-.custom-select:disabled {
-    background-color: transparent;
-}
-
 #btnSave,#btnEdit,#btnCancel,#backBtn,#addRecordButton,#addMemoButton,.submitAdd,#addEmployeeButton{
     float: right;
     border-style: hidden;
-    background-color: #cc3333;
+    background-color: #40c4ff;
     color: white;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -154,7 +144,7 @@ select.actived{
 
 #viewEmpBtn, #delEmpBtn, #editRecBtn,#delRecBtn{
     border-style: hidden;
-    background-color: #cc3333;
+    background-color: #40c4ff;
     color: white;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -167,9 +157,24 @@ select.actived{
 
 }
 
+.btnAddChild{
+    border-style: hidden;
+    background-color: #40c4ff;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    outline: none;
+    padding: 0.5% 1%;
+    cursor: pointer;
+    margin-left: 85%;
+    text-decoration: none;
+}
+
+
 .filt{
     border-style: hidden;
-    background-color: #cc3333;
+    background-color: #40c4ff;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -183,12 +188,12 @@ select.actived{
 }
 
 .filt:hover{
-    background-color:#c90202;
+    background-color:#0091ea ;
     color: white
 }
 
 #btnSave:hover,#btnEdit:hover,#addRecordButton:hover,#addMemoButton:hover,.submitAdd:hover,#addEmployeeButton:hover,#viewEmpBtn:hover,#editRecBtn:hover{
-    background-color:#c90202;
+    background-color:#0091ea ;
 }
 
 #btnCancel,#backBtn,#delEmpBtn,#delRecBtn{
@@ -273,9 +278,214 @@ select.actived{
 
 .row{
     margin-bottom: 2.5rem;
+    display: flex;
+    flex-wrap: wrap
 }
 
+
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-1 {
+    -ms-flex: 0 0 8.333333%;
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+}
+.col-2 {
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+}
+.col-3 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+.col-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-5 {
+    -ms-flex: 0 0 41.666667%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.col-7 {
+    -ms-flex: 0 0 58.333333%;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+}
+.col-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+.col-9 {
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+}
+.col-10 {
+    -ms-flex: 0 0 83.333333%;
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+}
+.col-11 {
+    -ms-flex: 0 0 91.666667%;
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+}
+.col-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.custom-control-label::before, .custom-file-label, .custom-select {
+    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.custom-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem 1.75rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: 
+#495057;
+vertical-align: middle;
+background:
+#fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px;
+border: 1px solid
+    #ced4da;
+        border-bottom-color: rgb(206, 212, 218);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select {
+    word-wrap: normal;
+}
 .btnsSerRec{
     width: 100%;
     margin: 0.5rem 0;
+}
+
+.custom-select{
+    width: 80%;
+    font-size: 16px;
+    margin: 1% 16%;
+}
+
+select.actived{
+    margin: 1% 0;
+}
+
+th {
+    text-align: center;
+    font-size: 14px;
+}
+
+/*MODAL*/
+.modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: none;
+}
+
+.modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+        margin-top: -1rem;
+}
+[type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+
+.modal-dialog-centered {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+.footer {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.5rem;
+    margin-top: 10rem;
+    line-height: 50px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.socials{
+    background-color: #fafafa;
+}
+
+.searchProduct{
+    border: none;
+    padding: 0.5rem
+}
+
+.fa-search{
+    color: #40c4ff;
 }

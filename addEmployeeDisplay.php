@@ -7,14 +7,14 @@ include 'connect.php';
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="stylesheets/jquery/3.4.1/jquery.min.js"></script>
+    <script src="stylesheets/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">     
     <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
-    <title>ARDC Add Employee</title>
+    <title>HRD Add Employee</title>
     
     <style>
         th{
@@ -41,13 +41,14 @@ include 'connect.php';
         <h2>ADD EMPLOYEE</h2>
         
         <form method="post"  enctype="multipart/form-data" onsubmit="addEmployeeSubmit(event)" id="addEmpForm">
+            <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" style="display:none" autocomplete="off" > 
             
             <div class="lblInputEmp addEmp">
-                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Employee No.</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Employee ID No.</label>
             </div> 
              <div class="addEmpInput">
-                 <input type="text" name="empno" id="empno" class="addEmpClass addEmpIndent" autocomplete="off" > <i class="far fa-check-circle" id="empCheck"></i>
-                 <span class="errorAddEmp" id="empError">Employee no. already exist!</span>
+                 <input type="text" name="empidno" id="empidno" class="addEmpClass addEmpIndent" autocomplete="off" > <i class="far fa-check-circle" id="empCheck"></i>
+                 <span class="errorAddEmp" id="empError">Employee id no. already exist!</span>
             </div> 
             
             <div class="lblInputEmp addEmp">
@@ -55,7 +56,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="fname" id="fname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="fnameCheck"></i>
-                 <span class="errorAddEmp" id="fnameError">Letters and white spaces only are allowed.</span>
+                 <span class="errorAddEmp" id="fnameError">Invalid!</span>
             </div>             
             
             <div class="lblInputEmp addEmp">
@@ -63,7 +64,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="mname" id="mname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="mnameCheck"></i>
-                 <span class="errorAddEmp" id="mnameError">Letters and white spaces only are allowed.</span>
+                 <span class="errorAddEmp" id="mnameError">Invalid!</span>
             </div> 
             
             <div class="lblInputEmp addEmp">
@@ -71,7 +72,7 @@ include 'connect.php';
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="lname" id="lname" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="lnameCheck"></i>
-                 <span class="errorAddEmp" id="lnameError">Letters and white spaces only are allowed.</span>
+                 <span class="errorAddEmp" id="lnameError">Invalid!</span>
             </div>
             
             <div class="lblInputEmp addEmp">
@@ -119,7 +120,7 @@ include 'connect.php';
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Religion</label>
+                <label>Religion</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="religion" id="religion" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="religionCheck"></i>
@@ -273,7 +274,7 @@ include 'connect.php';
                     </tbody>
                     
                 </table>
-                <button type="button" onclick="addChild()">add</button>
+                <button type="button" onclick="addChild()" class="btnAddChild">add</button>
             </div>
             <hr id="line1">
 
@@ -339,6 +340,12 @@ include 'connect.php';
             <input type="submit" value="Submit" class="submitAdd">
         </form>
         
+    </div>
+    <div class="socials">
+        <footer class="footer">
+            © 2020 Copyright: Developer 
+            <a href="https://www.facebook.com/triscia.ayescia215"> Triscia Weigh</a>
+        </footer>
     </div>
 
     <script>        
@@ -493,23 +500,23 @@ include 'connect.php';
                 $(this).css("border-bottom", "2px solid dimgray");
             });
 
-            $("#empno").on("change",function(){
-                var e = $(this).val();                    
+            $("#empidno").on("change",function(){
+                var e = $(this).val();   
                 $.post("toValidateEmployeeNo.php", {   
                     e:e,
                 },
                 function (data) {
                     if(data === "e"){                            
-                        $("#empno").css("border-bottom", "2px solid red");                            
+                        $("#empidno").css("border-bottom", "2px solid red");                            
                         document.getElementById("empError").style.display = "inline-block";
                             document.getElementById("empCheck").style.display = "none";
                         validEmpNo = false;
                     }
                     else{
-                        if (e.length >25){          
+                        if (e.length >=50){          
                             document.getElementById("empError").style.display = "inline-block";
                             document.getElementById("empCheck").style.display = "none";
-                            document.getElementById("empError").innerHTML = "Length maximum number is 25."
+                            document.getElementById("empError").innerHTML = "Length maximum number is 50."
                             validEmpNo = false;
                         }else{                                  
                             document.getElementById("empError").style.display = "none";
@@ -521,7 +528,7 @@ include 'connect.php';
             });
 
             $("#fname").on("change",function(){
-                if(isString($(this).val()) == true){                                          
+                if(isNumber($(this).val()) == false){                                          
                     document.getElementById("fnameError").style.display = "none";
                     document.getElementById("fnameCheck").style.display = "inline-block";
                     validFName = true;
@@ -534,7 +541,7 @@ include 'connect.php';
 
             $("#mname").on("change",function(){
                 if( $(this).val() !=""){
-                    if(isString($(this).val()) == true){                                             
+                    if(isNumber($(this).val()) == false){                                             
                         document.getElementById("mnameError").style.display = "none";
                         document.getElementById("mnameCheck").style.display = "inline-block";
                         validMname = true;
@@ -550,7 +557,7 @@ include 'connect.php';
             });
 
             $("#lname").on("change",function(){
-                if(isString($(this).val()) == true){                                    
+                if(isNumber($(this).val()) == false){                                    
                     document.getElementById("lnameError").style.display = "none";
                     document.getElementById("lnameCheck").style.display = "inline-block";
                     validLname = true;
@@ -586,14 +593,18 @@ include 'connect.php';
             });
             
             $("#religion").on("change",function(){
-                if(isString($(this).val()) == true){                                             
-                    document.getElementById("religionError").style.display = "none";
-                    document.getElementById("religionCheck").style.display = "inline-block";
+                if( $(this).val() !=""){
+                    if(isString($(this).val()) == true){                                             
+                        document.getElementById("religionError").style.display = "none";
+                        document.getElementById("religionCheck").style.display = "inline-block";
+                        validReligion = true;
+                    }else{                                    
+                        document.getElementById("religionCheck").style.display = "none";
+                        document.getElementById("religionError").style.display = "inline-block";
+                        validReligion = false;
+                    }
+                }else{
                     validReligion = true;
-                }else{                                    
-                    document.getElementById("religionCheck").style.display = "none";
-                    document.getElementById("religionError").style.display = "inline-block";
-                    validReligion = false;
                 }
             });
             
@@ -672,6 +683,18 @@ include 'connect.php';
             var cmp = document.getElementById("selectCMPerm").selectedIndex;
             var bp = document.getElementById("selectBrgyPerm").selectedIndex;
             var dp = document.getElementById("detailedAddPerm").value;
+            
+            var date = new Date();
+            var year = date.getFullYear().toString();
+            var month = date.getMonth()+1;
+            var mon = month.toString();
+            var day = date.getDate().toString();
+            var hrs = date.getHours().toString();
+            var mins = date.getMinutes().toString();
+            var sec = date.getSeconds().toString();
+            var ms = date.getMilliseconds().toString();
+            var empno = "emp"+year+mon+day+hrs+mins+sec+ms;
+            $("#empno").val(empno);
 
             var childLength = document.querySelectorAll("input.cname").length;
             document.getElementById("childLength").value=childLength;
@@ -699,9 +722,9 @@ include 'connect.php';
             if(checkSex!=0){
                 validSex = true;
             }
+//            || validcivStatus==false|| validnumber==false || validemail==false|| ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp=="" || tin=="" || bday==""|| sss=="" || philhealth=="" || hdmf=="" 
             
-            
-            if(validEmpNo==false || validFName==false || validLname==false || bday=="" || validSex==false || validcivStatus==false || validNationality==false  || validReligion==false  || validnumber==false || validemail==false || sss=="" || philhealth=="" || hdmf==""  || tin=="" || ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp==""){
+            if(validEmpNo==false || validFName==false || validLname==false || validSex==false || validNationality==false  || validReligion==false ){
                 alert("Please check all your inputs");                
                 event.preventDefault();
             }else{
@@ -711,7 +734,7 @@ include 'connect.php';
                 }else{
                     
                     if(validChild==true){
-                        if (confirm("Are you sure you want to save changes?")) {
+                        if (confirm("Are you sure you want to add this employee?")) {
                             event.preventDefault();
                             var form = document.forms.addEmpForm;
                             var dataInputted = new FormData(form);
@@ -726,7 +749,8 @@ include 'connect.php';
                                 processData: false,
                                 success:function(data)
                                 {
-    //                                alert(data);
+//                                    alert(data);
+//                                    event.preventDefault();
                                     alert("Employee added into the database.")
                                     window.location.href="index.php";
                                 }

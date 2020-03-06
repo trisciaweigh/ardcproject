@@ -2,9 +2,9 @@
 
 include 'connect.php';
 
-$empno = $_POST["e"];
+$empid = $_POST["e"];
 
-$select = "SELECT * FROM employeeinfo WHERE `emp_no` = '$empno'";
+$select = "SELECT * FROM employeeinfo WHERE `emp_id` = '$empid'";
 $result = mysqli_query($con,$select);
 
 if(mysqli_num_rows($result)>0)

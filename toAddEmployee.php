@@ -4,6 +4,7 @@ include 'connect.php';
 
 $childLength = $_POST["childLength"];
 $empno = $_POST["empno"];
+$empidno = $_POST["empidno"];
 $fname = $_POST["fname"];
 $mname = $_POST["mname"];
 $lname = $_POST["lname"];
@@ -17,11 +18,11 @@ $placeOfBirth = $_POST["placeOfBirth"];
 $selectProvHome = $_POST["selectProvHome"];
 $selectCMHome = $_POST["selectCMHome"];
 $selectBrgyHome = $_POST["selectBrgyHome"];
-$detailedAddHome = $_POST["detailedAddHome"];
+$detailedAddHome = mysqli_real_escape_string($con,$_POST["detailedAddHome"]);
 $selectProvPerm = $_POST["selectProvPerm"];
 $selectCMPerm = $_POST["selectCMPerm"];
 $selectBrgyPerm = $_POST["selectBrgyPerm"];
-$detailedAddPerm = $_POST["detailedAddPerm"];
+$detailedAddPerm = mysqli_real_escape_string($con,$_POST["detailedAddPerm"]);
 $mobNo = $_POST["mobNo"];
 $telNo = $_POST["telNo"];
 $email = $_POST["email"];
@@ -32,7 +33,7 @@ $spouseName = $_POST["spouseName"];
 $spouseBday = $_POST["spouseBday"];
 $childsName = "";
 $childsBday = "";
-$height = $_POST["height"];
+$height =  mysqli_real_escape_string($con,$_POST["height"]);
 $weight = $_POST["weight"];
 $blood = $_POST["blood"];
 $sss = $_POST["sss"];
@@ -92,7 +93,7 @@ while($row = mysqli_fetch_array($select))
 }
 
 // INSERT
-$insert = "INSERT INTO `employeeinfo` VALUES ('$empno','$fname','$mname','$lname','$suffix','$bdate','$sex','$civStatus','$nationality','$religion','$placeOfBirth','$selectProvHome','$cmCodeHome','$brgyCodeHome','$detailedAddHome','$selectProvPerm','$cmCodePerm','$brgyCodePerm','$detailedAddPerm','$mobNo','$telNo','$email','$educ','$father','$mother','$spouseName','$spouseBday','$height','$weight','$blood','$sss','$philhealth','$hdmf','$tin','$atm')";      
+$insert = "INSERT INTO `employeeinfo` VALUES ('$empno','$empidno','$fname','$mname','$lname','$suffix','$bdate','$sex','$civStatus','$nationality','$religion','$placeOfBirth','$selectProvHome','$cmCodeHome','$brgyCodeHome','$detailedAddHome','$selectProvPerm','$cmCodePerm','$brgyCodePerm','$detailedAddPerm','$mobNo','$telNo','$email','$educ','$father','$mother','$spouseName','$spouseBday','$height','$weight','$blood','$sss','$philhealth','$hdmf','$tin','$atm')";      
 if (mysqli_query($con,$insert))
 {            
     for($x=1; $x <= $childLength; $x++){
@@ -108,7 +109,7 @@ if (mysqli_query($con,$insert))
         }
     }
 
-    
+    echo 'added';
 }
 else{
      echo  mysqli_error($con);

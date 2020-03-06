@@ -10,37 +10,25 @@ $empno = $_GET["id"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="style.css" />
-<!--
-    <script src="bootstrap-4.0.0-dist/css/bootstrap-grid.css"></script>
-    <script src="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css"></script>
-    <script src="bootstrap-4.0.0-dist/css/bootstrap-reboot.css"></script>
-    <script src="bootstrap-4.0.0-dist/css/bootstrap-reboot.min.css"></script>
-    <script src="bootstrap-4.0.0-dist/css/bootstrap.css"></script>
-    <script src="bootstrap-4.0.0-dist/css/bootstrap.min.css"></script>
--->
     
-<!--    <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  
+    <link rel="stylesheet" href="stylesheets/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="stylesheets/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="stylesheets/jquery/3.4.1/jquery.min.js"></script>
+    <script src="stylesheets/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="stylesheets/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/_code.scss">
+    <link rel="stylesheet" href="stylesheets/_grid.scss">
+    <link rel="stylesheet" href="stylesheets/_reboot.scss">
+    <link rel="stylesheet" href="stylesheets/_root.scss">
+    <link rel="stylesheet" href="stylesheets/bootstrap.scss">
+    <link rel="stylesheet" href="stylesheets/bs.css">
+    <link rel="stylesheet" href="stylesheets/grid-framework.less">
+    <link rel="stylesheet" href="stylesheets/grid.less">
+    <link rel="stylesheet" href="stylesheets/grid2.less">
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
     
     <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
-
-        <!-- <link href="stylesheets/css/all.css" rel="stylesheet" />
-    <link rel="stylesheet" href="stylesheets/bootstrap.css">
-
-    <link href="stylesheets/jquery.growl.css" rel="stylesheet" />
-    <link href="stylesheets/jquery-confirm.min.css" rel="stylesheet" />
-    <!-- Bootstrap core CSS -->
-    <!-- Material Design Bootstrap -->
-    <!-- <link href="mdbootstrap/css/mdb.css" rel="stylesheet">
-    <link href="stylesheets/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.min.css">
-    <link href="stylesheets/sweetalert2.min.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-datepicker.css"> -->
 
     <title>EMPLOYEE'S Details</title>
 </head>
@@ -63,7 +51,7 @@ $empno = $_GET["id"];
 <!--                EMPLOYEE'S INFORMATION TAB-->
                 <div id="empInfo" class="tab-pane fade in active">
                     <?php
-                        $fname = ""; $mname = "";   $lname = "";    $suffix = "";   $bdate = "";    $sex = "";  $civilStatus = "";  $nationality = "";
+                        $empid=""; $fname = ""; $mname = "";   $lname = "";    $suffix = "";   $bdate = "";    $sex = "";  $civilStatus = "";  $nationality = "";
                         $religion = ""; $placeOfBirth = ""; $homeProvCode = ""; $homeCityMunCode = "";  $homeBrgyCode= "";  $homeDetailedAdd = "";
                         $perProvCode = "";  $perCityMunCode= "";    $perBrgyCode = "";  $perDetailedAdd = "";   $mobileNo = ""; $telNo = "";    $emailAdd = "";
                         $educBg = "";   $fathersName = "";  $mothersName = "";  $spouseName = "";   $spouseBdate = "";  $height = "";   $weight = "";   $bloodType = "";
@@ -76,6 +64,7 @@ $empno = $_GET["id"];
                         {
                             while($row = mysqli_fetch_array($result))  
                             { 
+                                $empid= $row["emp_id"];
                                 $fname = $row["emp_fname"];
                                 $mname = $row["emp_mname"];
                                 $lname = $row["emp_lname"];
@@ -178,6 +167,15 @@ $empno = $_GET["id"];
                     <div id="infoDetails">
                         <br><br>
                             <input type="text" value="<?php echo $empno?>" name="empno" id="empno" style="display:none;">
+                        
+                        <div class="row">
+                                <div class="col-2">
+                                    <label class="detailLabel">Employee ID No.</label>
+                                </div> 
+                                <div class="col-4">
+                                    <label class="detailInfo"><?php echo $empid;?></label>
+                                </div> 
+                        </div>
 
                             <div class="row">
                                 <div class="col-2">
@@ -261,7 +259,7 @@ $empno = $_GET["id"];
                                 </div> 
                                 <div class="col-8">
                                     <label class="detailInfo">
-                                    <?php
+                                    <?php 
 
                                         $select = "SELECT * FROM `refbrgy` WHERE `brgyCode` = '$homeBrgyCode'";
                                         $result = mysqli_query($con,$select);
@@ -271,9 +269,26 @@ $empno = $_GET["id"];
                                             { 
                                                 $homeBrgyDesc =  ucfirst($row["brgyDesc"]);
                                             }
-                                        }           
+                                        }        
                                         
-                                        echo $homeDetailedAdd . ' '. $homeBrgyDesc .', '. ucfirst($homeCityMunDesc). ', ' .ucfirst($homeProvDesc)
+                                        echo $homeDetailedAdd . ' ';
+                                        if ($homeBrgyCode==""){
+                                            $homeBrgyDesc="";
+                                        }else{
+                                            echo ucfirst($homeBrgyDesc) .', ';
+                                        }
+                                        
+                                        if ($homeCityMunCode==""){
+                                            $homeCityMunDesc="";
+                                        }else{
+                                            echo ucfirst($homeCityMunDesc) .', ';
+                                        }
+                                        
+                                        if ($homeProvCode==""){
+                                            $homeProvDesc="";
+                                        }else{
+                                            echo ucfirst($homeProvDesc);
+                                        }
                                      ?>
                                      </label>
                                 </div>      
@@ -297,7 +312,24 @@ $empno = $_GET["id"];
                                             }
                                         }           
                                         
-                                        echo $perDetailedAdd . ' '. $perBrgyDesc .', '. ucfirst($perCityMunDesc). ', ' .ucfirst($perProvDesc)
+                                        echo $perDetailedAdd . ' ';
+                                        if ($perBrgyCode==""){
+                                            $perBrgyDesc="";
+                                        }else{
+                                            echo ucfirst($perBrgyDesc) .', ';
+                                        }
+                                        
+                                        if ($perCityMunCode==""){
+                                            $perCityMunDesc="";
+                                        }else{
+                                            echo ucfirst($perCityMunDesc) .', ';
+                                        }
+                                        
+                                        if ($perProvCode==""){
+                                            $perProvDesc="";
+                                        }else{
+                                            echo ucfirst($perProvDesc);
+                                        }
                                      ?>
                                      </label>
                                 </div>   
@@ -309,7 +341,13 @@ $empno = $_GET["id"];
                                     <label class="detailLabel">Mobile no.</label>
                                 </div> 
                                 <div class="col-4">
-                                    <label class="detailInfo"><?php echo $mobileNo?></label>
+                                    <label class="detailInfo">
+                                        <?php 
+                                            if ($mobileNo!=0){
+                                                echo $mobileNo;
+                                            }
+                                        ?>
+                                    </label>
                                 </div>   
                                 <div class="col-2">
                                     <label class="detailLabel">Telephone no.</label>
@@ -552,7 +590,12 @@ $empno = $_GET["id"];
                                         echo '<td>'. $row["serrec_gross"] .'</td>';
                                     }
                                     echo '<td>'. $row["serrec_info"] .'</td>';
-                                    echo '<td>'. $row["serrec_yrsOfService"] .'</td>';
+                                    
+                                    if($row["serrec_yrsOfService"]==0){
+                                        echo '<td></td>';
+                                    }else{
+                                        echo '<td>'. $row["serrec_yrsOfService"] .'</td>';
+                                    }
                                     echo '<td><button type="button" id="editRecBtn" data-toggle="modal" data-target="#editRecordModal" class="btnsSerRec" onclick="editRecord('.$serrecno.')">Edit</button>
                                         <button type="button" class="btnsSerRec" id="delRecBtn" onclick="deleteRecord('.$serrecno.')">Delete</button></td>';
                                     echo '</tr>';
@@ -721,7 +764,7 @@ $empno = $_GET["id"];
                 });
                 $("input").blur(function(){
                     $(this).css("border-bottom", "2px solid dimgray");
-                });               
+                });        
             })
             
             function fnameValidation(v){
@@ -779,13 +822,16 @@ $empno = $_GET["id"];
             }
             
             function religionValidation(v){
-                if(isString(v) == true){                              
+                if (v!=""){
+                    if(isString(v) == true){                              
                     document.getElementById("religionError").style.display = "none";
                     validReligion = true;
-                }else{                                    
-                    document.getElementById("religionError").style.display = "inline-block";
-                    validReligion = false;
+                    }else{                                    
+                        document.getElementById("religionError").style.display = "inline-block";
+                        validReligion = false;
+                    }
                 }
+                
             }
             
             function placeOfBirthValidation(v){
@@ -1002,9 +1048,10 @@ $empno = $_GET["id"];
                                     processData: false,
                                     success:function(data)
                                     {
-                                        alert("Changes Saved.");
-//                                        alert(data);
-                                        $( "#empInfo" ).load(window.location.href + " #empInfo" );
+//                                        alert("Changes Saved.");
+                                        alert(data);
+                                        event.preventDefault();
+//                                        $( "#empInfo" ).load(window.location.href + " #empInfo" );
                                     }
                                 });
                         }
@@ -1038,8 +1085,8 @@ $empno = $_GET["id"];
                 let serDateInput = document.getElementById("serdate").value;
                 let serPosInput = document.getElementById("position").value;
                 let serDeployedInput = document.getElementById("deployed").value;
-                
-                if (serDateInput == "" || serPosInput == "" || serDeployedInput == "" ){
+//                serDateInput == "" ||  || serDeployedInput == ""
+                if (serPosInput == "" ){
                     alert("Please complete the fields");
                     event.preventDefault();
                 }else{
@@ -1184,5 +1231,11 @@ $empno = $_GET["id"];
                   }
             }
         </script>
+        <div class="socials">
+            <footer class="footer">
+                © 2020 Copyright: Developer 
+                <a href="https://www.facebook.com/triscia.ayescia215"> Triscia Weigh</a>
+            </footer>
+        </div>
     </body>
 </html>
