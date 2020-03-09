@@ -68,6 +68,7 @@ if(mysqli_num_rows($result)>0)
         $hdmfNo = $row["emp_hdmfNo"];
         $tinNo = $row["emp_tinNo"];
         $atmNo = $row["emp_atmNo"];
+        $imageDir = $row["emp_picture"];
     }
 }
 else{
@@ -118,7 +119,25 @@ if(mysqli_num_rows($result)>0)
 
 ?>
   <body>
+      <div id="pic">
+      <?php
+                        
+            if ($imageDir==""){
+                    if($sex=="Male"){                                        
+                        echo '<button type="button" id="btnViewPic" data-toggle="modal" data-target="#modalEditPic" onclick="getIdForEditDP(\''. $empno .'\')"><img class="img-fluid" src="employeePictures/male.png"/></button>';
+                    }else{
+                        echo '<button type="button" id="btnViewPic" data-toggle="modal" data-target="#modalEditPic" onclick="getIdForEditDP(\''. $empno .'\')"><img class="img-fluid" src="employeePictures/female.jpg"/></button>';
+                    }
+                }else{                                    
+                    echo '<button type="button" id="btnViewPic" data-toggle="modal" data-target="#modalEditPic" onclick="getIdForEditDP(\''. $empno .'\')"><img class="img-fluid" src="'.$imageDir.'"/></button>';
+                }
+                echo '<h2 id="nameDisp">'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';
+
+        ?>
+      </div>
         <form id="editInfoForm"  method="post"  enctype="multipart/form-data" onsubmit="editEmployeeSubmit(event)">
+             
+            <br><br>
             <input type="text" value="<?php echo $empno?>" name="id" style="display:none;">
             
             <div class="row">

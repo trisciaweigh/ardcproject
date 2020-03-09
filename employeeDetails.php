@@ -99,7 +99,7 @@ $empno = $_GET["id"];
                                 $hdmfNo = $row["emp_hdmfNo"];
                                 $tinNo = $row["emp_tinNo"];
                                 $atmNo = $row["emp_atmNo"];
-                                echo '<h2>'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';
+                                $imageDir = $row["emp_picture"];                                
                             }
                         }
                         else{
@@ -165,6 +165,20 @@ $empno = $_GET["id"];
                     
                     
                     <div id="infoDetails">
+                        <?php
+                        
+                            if ($imageDir==""){
+                                    if($sex=="Male"){                                        
+                                        echo '<img class="img-fluid nopic" src="employeePictures/male.png"/>';
+                                    }else{
+                                        echo '<img class="img-fluid nopic" src="employeePictures/female.jpg"/>';
+                                    }
+                                }else{                                    
+                                    echo '<button type="button" id="btnViewPic" data-toggle="modal" data-target="#modalViewPic" onclick="showPic(\''. $imageDir .'\')"><img class="img-fluid" src="'.$imageDir.'"/></button>';
+                                }
+                                echo '<h2 id="nameDisp">'.ucfirst($fname) . ' ' . ucfirst($mname) .' '.ucfirst($lname) .' '.ucwords($suffix).'</h2>';
+                        
+                        ?>
                         <br><br>
                             <input type="text" value="<?php echo $empno?>" name="empno" id="empno" style="display:none;">
                         
@@ -692,11 +706,13 @@ $empno = $_GET["id"];
             </div>
         </div>
         
-                <div class="modal fade" id="addMemoModal" role="dialog">
+        
+<!--        MODAL ADD MEMO-->
+        <div class="modal fade" id="addMemoModal" role="dialog">
             <div class="modal-dialog">
 
               <!-- Modal content-->
-              <div class="modal-content">
+      <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Memo</h4>
                   <button type="button" class="close" id="closeAddM" data-dismiss="modal">&times;</button>
@@ -710,10 +726,64 @@ $empno = $_GET["id"];
             </div>
         </div>
         
+        <!-- Image Modal -->
+        <div class="modal fade" id="modalViewPic" role="dialog">
+            <div class="modal-dialog" id="showImageDialog">
+              <div class="modal-content" id="showPicBody">
+              </div>
+            </div>
+        </div>
+        <!-- Image Modal -->
+        <div class="modal" id="modalEditPic">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Change Picture</h4>
+                  <button type="button" id = "closeModal" class="close" data-dismiss="modal">&times;</button>
+                </div>
+    <!--               Modal body -->
+                <div class="modal-body">
+                    <form method="post" onsubmit="return modalshowedit(this)" id="formPic">
+                        <input type="text" name="imageId" id="imageId" style="display: none"/>
+                        <br>
+                        <input type="file" name="imageEdit" id="imageEdit"/>
+                        <br>
+
+                        <input type="submit" class="submitAdd" value="SAVE">  
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        
         
 <!--        SCRIPTS-->
         <script>
+            function getIdForEditDP(id){
+                document.getElementById("imageId").value = id;
+
+             }
             
+            function modalshowedit(form){
+                event.preventDefault();
+                FormData = new FormData(form);
+                var xml = new XMLHttpRequest();
+                xml.onreadystatechange = function() {
+                    if (xml.readyState == 4 && xml.status == 200) {
+                        a = this.responseText;
+                        alert(a);
+                        document.getElementById("closeModal").click(); 
+                        document.getElementById("formPic").reset(); 
+                        
+                        $( "#empInfo" ).load(window.location.href + " #empInfo" );
+                    }
+                };
+                xml.open("POST","toChangePic.php?", true);
+                xml.send(FormData);
+                return false;
+
+            }
 //            EMPLOYEE INFORMATION CRIPTS
             function isString(name) {
                 var regex = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/;
@@ -1062,6 +1132,18 @@ $empno = $_GET["id"];
                     }
                 }
             }
+            
+        function showPic(a){
+            xml = new XMLHttpRequest();
+            xml.onreadystatechange = function() {
+                if(xml.readyState==4 && xml.status==200) {
+                    document.getElementById("showPicBody").innerHTML = xml.responseText;
+                }
+            };
+
+            xml.open("GET","modalShowPic.php?p="+a,true);
+            xml.send();
+        }
             
             
 //           SERVICE RECORD SCRIPTS       

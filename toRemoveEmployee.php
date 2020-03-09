@@ -96,7 +96,7 @@ if(mysqli_num_rows($result)>0)
     }
 }
 
-if ($deleted == 3){
+if ($deleted != 0){
     echo 'deleted';
 }
 

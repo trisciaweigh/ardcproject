@@ -335,6 +335,15 @@ include 'connect.php';
                  <input type="text" name="atm" id="atm" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" >
             </div> 
             
+            <div class="lblInputEmp addEmp">
+                <label>Upload Picture</label>
+            </div> 
+             <div class="addEmpInput">
+                 <input type="file" class="addEmpClass addEmpIndent"  name="imageUpload" id="imageUpload"/>
+            </div> 
+            
+             
+            
             <input type="text" id="childLength" name="childLength" style="display:none">
             <br>
             <input type="submit" value="Submit" class="submitAdd">
@@ -724,6 +733,8 @@ include 'connect.php';
                 validSex = true;
             }
             
+            var imgUpload = document.getElementById("imageUpload").value;
+            
             
             if(validEmpNo==false || validFName==false || validLname==false || validSex==false || validNationality==false  || validReligion==false || validcivStatus==false|| validnumber==false || validemail==false|| ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp=="" || tin=="" || bday==""|| sss=="" || philhealth=="" || hdmf=="" ){
                 alert("Please check all your inputs");                
@@ -733,7 +744,7 @@ include 'connect.php';
                     alert("There is an error");
                      event.preventDefault();
                 }else{
-                    
+//                    
                     if(validChild==true){
                         if (confirm("Are you sure you want to add this employee?")) {
                             event.preventDefault();
@@ -764,7 +775,7 @@ include 'connect.php';
                     
                 }
             }
-//   
+   
                
            }
      

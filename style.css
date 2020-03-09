@@ -110,11 +110,11 @@ input.RecInput[type=text],input.RecInput[type=date]{
     width: 100%
 }
 
-input.addEmpClass[type=text],input.addEmpClass[type=date],input.RecInput[type=text],input.RecInput[type=date]{
+input.addEmpClass[type=text],input.addEmpClass[type=file],input.addEmpClass[type=date],input.RecInput[type=text],input.RecInput[type=date]{
     width: 70%
 }
 
-input.addEmpIndent[type=text],input.addEmpIndent[type=date]{
+input.addEmpIndent[type=text],input.addEmpIndent[type=date],input.addEmpIndent[type=file]{
     width: 80%;
     margin-left: 10rem;
 }
@@ -488,4 +488,28 @@ th {
 
 .fa-search{
     color: #40c4ff;
+}
+
+.img-fluid{
+    border-radius: 50%;
+    width: 100%;
+    display: inline-block;
+}
+#nameDisp{
+    display: inline-block
+}
+
+#btnViewPic{
+    border-style: hidden;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    width:20%; 
+    margin-right: 5rem;
+}
+
+.nopic{
+    width:15%;
+    
+    margin-right: 5rem;
 }
