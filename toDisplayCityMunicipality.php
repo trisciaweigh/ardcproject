@@ -10,7 +10,7 @@
   while($row = mysqli_fetch_array($select))  
   {       
       // echo "<option>".$row["citymunDesc"]."</option>";
-      $citymunDesc = $citymunDesc . $row["citymunDesc"] . ',';
+      $citymunDesc = $citymunDesc . mysqli_real_escape_string($con,$row["citymunDesc"]) . ',';
   }
   echo $citymunDesc;
 ?>

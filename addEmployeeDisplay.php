@@ -12,7 +12,7 @@ include 'connect.php';
     <link rel="stylesheet" href="stylesheets/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="stylesheets/jquery/3.4.1/jquery.min.js"></script>
     <script src="stylesheets/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">     
+        <link href="stylesheets/font.css" rel="stylesheet">      
     <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
     <title>HRD Add Employee</title>
     
@@ -120,7 +120,7 @@ include 'connect.php';
             </div> 
 
             <div class="lblInputEmp addEmp">
-                <label>Religion</label>
+                <label><i class="fas fa-asterisk" id="faAsterisk"></i> Religion</label>
             </div> 
              <div class="addEmpInput">
                  <input type="text" name="religion" id="religion" class="addEmpClass addEmpIndent" placeholder="" autocomplete="off" ><i class="far fa-check-circle" id="religionCheck"></i>
@@ -402,6 +402,7 @@ include 'connect.php';
                 },
                 function (data) {
                     var dataLength = data.split(",");
+                    var len = dataLength.length-1;
                     var select = $('#selectCMHome');
                     if(select.prop) {
                     var options = select.prop('options');
@@ -722,9 +723,9 @@ include 'connect.php';
             if(checkSex!=0){
                 validSex = true;
             }
-//            || validcivStatus==false|| validnumber==false || validemail==false|| ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp=="" || tin=="" || bday==""|| sss=="" || philhealth=="" || hdmf=="" 
             
-            if(validEmpNo==false || validFName==false || validLname==false || validSex==false || validNationality==false  || validReligion==false ){
+            
+            if(validEmpNo==false || validFName==false || validLname==false || validSex==false || validNationality==false  || validReligion==false || validcivStatus==false|| validnumber==false || validemail==false|| ph=="0" || cmh=="0" || bh=="0" || dh=="" || pp=="0" || cmp=="0" || bp=="0" || dp=="" || tin=="" || bday==""|| sss=="" || philhealth=="" || hdmf=="" ){
                 alert("Please check all your inputs");                
                 event.preventDefault();
             }else{

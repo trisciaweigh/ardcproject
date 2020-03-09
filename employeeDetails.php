@@ -26,7 +26,7 @@ $empno = $_GET["id"];
     <link rel="stylesheet" href="stylesheets/grid.less">
     <link rel="stylesheet" href="stylesheets/grid2.less">
     
-    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+    <link href="stylesheets/font.css" rel="stylesheet"> 
     
     <script type="text/javascript" src="fontawesome-free-5.11.2-web/js/all.min.js"></script>
 
@@ -1085,8 +1085,8 @@ $empno = $_GET["id"];
                 let serDateInput = document.getElementById("serdate").value;
                 let serPosInput = document.getElementById("position").value;
                 let serDeployedInput = document.getElementById("deployed").value;
-//                serDateInput == "" ||  || serDeployedInput == ""
-                if (serPosInput == "" ){
+                
+                if (serDateInput == "" || serDeployedInput == "" || serPosInput == "" ){
                     alert("Please complete the fields");
                     event.preventDefault();
                 }else{

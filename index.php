@@ -16,7 +16,7 @@
         <script src="stylesheets/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet"> 
+        <link href="stylesheets/font.css" rel="stylesheet"> 
 		<title>HUMAN RESOURCE DEPARTMENT</title>
         
          <script type="text/javascript">
@@ -111,38 +111,51 @@
                                 <select id="filterPos" name="filterPos" class="custom-select dark-grey-text" style="display:none">
                                     <option selected disabled>--Select Position--</option>
                                     <?php
-                                    $pos2=[];
-                                    $select = "SELECT distinct `serrec_position`  FROM `servicerecord` order by `serrec_position`";
-                                    $result = mysqli_query($con,$select);
-                                    if(mysqli_num_rows($result)>0)
-                                    {
-                                        while($row = mysqli_fetch_array($result))  
-                                        {  
-                                            $pos = $row['serrec_position'];
-                                            
-                                            $posArr = explode ("/", $pos); 
-                                            if (count($posArr)==1){
-                                                array_push($pos2,$posArr[0]);
-                                                echo '<option>'.$posArr[0].'</option>';
-                                            }else{
-                                                for($x=0; $x<count($posArr); $x++){
-                                                    array_push($pos2,$posArr[$x]);
-                                                    echo '<option>'.$posArr[$x].'</option>';
+                                        $pos2=[];
+                                        $select = "SELECT distinct `serrec_position`  FROM `servicerecord` order by `serrec_position`";
+                                        $result = mysqli_query($con,$select);
+                                        if(mysqli_num_rows($result)>0)
+                                        {
+                                            while($row = mysqli_fetch_array($result))  
+                                            {  
+                                                $pos = $row['serrec_position'];
+
+                                                $posArr = explode ("/", $pos); 
+                                                if (count($posArr)==1){
+                                                    array_push($pos2,trim($posArr[0]));
+                                                }else{
+                                                    for($x=0; $x<count($posArr); $x++){
+                                                        array_push($pos2,trim($posArr[$x]));
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    echo "<option>".print_r($pos2)."</option>";
+                                    
+                                        $finalPosList=[];
+                                        $unique=[];
+                                        foreach($pos2 as $value){
+                                            if (isset($unique[$value])) {
+                                            }
+                                            else{
+                                                array_push($finalPosList,$value);
+                                            }
+                                           $unique[$value] = '';
+                                        }
+                                    
+                                        sort($finalPosList);
+                                        for($x = 0; $x < count($finalPosList); $x++) {
+                                            echo '<option>' . $finalPosList[$x] . '</option>';
+                                        }
                                     ?>
                                 </select>
                                 
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
         <div class="socials">
             <footer class="footer">
                 © 2020 Copyright: Developer 
@@ -208,7 +221,7 @@
                 })
                 
                 $("#filterPos").on("change", function(){
-                    p = $(this).val();
+                    p = encodeURIComponent($(this).val());
                     var xml = new XMLHttpRequest();
                     xml.onreadystatechange = function() {
                        if (this.readyState == 4 && this.status == 200) {
@@ -222,6 +235,7 @@
                     xml.open("get", "filterEmployee.php?action=pos&p="+p, true);
                     xml.send();
                     return false;
+//                    alert("filterEmployee.php?action=pos&p="+p)
                 })
             })
             

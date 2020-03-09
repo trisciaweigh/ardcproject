@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2020 at 09:10 AM
+-- Generation Time: Mar 09, 2020 at 06:12 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -44071,7 +44071,7 @@ CREATE TABLE IF NOT EXISTS `servicerecord` (
   `serrec_rate` float NOT NULL,
   `serrec_allowance` float NOT NULL,
   `serrec_gross` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `servicerecord`
@@ -44092,7 +44092,7 @@ INSERT INTO `servicerecord` (`serrec_no`, `emp_no`, `serrec_date`, `serrec_posit
 (13, 'emp20203613549879', '0000-00-00', 'Driver', '', 0, 'ARDC', 0, 0, 0, 0),
 (14, 'emp20203613851784', '0000-00-00', 'Marketing Encoder', '', 0, 'ARDC', 0, 0, 0, 0),
 (15, 'emp2020361311023', '0000-00-00', 'Project Manager', '', 0, 'ARDC', 0, 0, 0, 0),
-(16, 'emp202036131717251', '0000-00-00', 'Architecture Drafting & Design, CAD', '', 0, 'ARDC', 0, 0, 0, 0),
+(16, 'emp202036131717251', '0000-00-00', 'Architecture Drafting & Design', '', 0, 'ARDC', 0, 0, 0, 0),
 (17, 'emp202036131936333', '0000-00-00', 'Quality Control Engineer/Cost Engineer', '', 0, 'ARDC', 0, 0, 0, 0),
 (18, 'emp20203613226763', '0000-00-00', 'S.O/L.O', '', 0, 'ARDC', 0, 0, 0, 0),
 (19, 'emp202036132417119', '0000-00-00', 'Quantity Surveyor/Cost Engineer', '', 0, 'ARDC', 0, 0, 0, 0),
@@ -44211,7 +44211,7 @@ ALTER TABLE `refregion`
 -- AUTO_INCREMENT for table `servicerecord`
 --
 ALTER TABLE `servicerecord`
-  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+  MODIFY `serrec_no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
 --
 -- Constraints for dumped tables
 --

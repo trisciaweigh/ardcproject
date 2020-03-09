@@ -71,7 +71,7 @@ else if($action=="pos"){
                     {  
 
                         $empno = $row["emp_no"];
-                        $select2 = "SELECT *  FROM `servicerecord` where `emp_no`='$empno' and `serrec_position` ='$p'";
+                        $select2 = "SELECT *  FROM `servicerecord` where `emp_no`='$empno' and `serrec_position` like '%$p%'";
                         $result2 = mysqli_query($con,$select2);
                         if(mysqli_num_rows($result2)>0)
                         {
